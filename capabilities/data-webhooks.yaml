@@ -1,0 +1,129 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Lever Data API — Webhooks
+  description: 'Lever Data API — Webhooks. Create, update, and delete outbound webhook subscriptions across the 10
+    candidate, interview, application, and contact lifecycle events.'
+  tags:
+  - Lever
+  - Webhooks
+  - Events
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    LEVER_API_KEY: LEVER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-webhooks
+    baseUri: https://api.lever.co/v1
+    description: Lever Data API — Webhooks.
+    resources:
+    - name: webhooks
+      path: /webhooks
+      operations:
+      - name: listWebhooks
+        method: GET
+        description: List Webhooks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createWebhook
+        method: POST
+        description: Create A Webhook
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: webhook
+      path: /webhooks/{id}
+      operations:
+      - name: updateWebhook
+        method: PUT
+        description: Update A Webhook
+        outputRawFormat: json
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteWebhook
+        method: DELETE
+        description: Delete A Webhook
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.LEVER_API_KEY}}'
+      password: ''
+  exposes:
+  - type: mcp
+    namespace: data-webhooks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Lever Webhooks.
+    tools:
+    - name: lever-list-webhooks
+      description: List Webhooks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-webhooks.listWebhooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: lever-create-webhook
+      description: Create A Webhook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-webhooks.createWebhook
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: lever-update-webhook
+      description: Update A Webhook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: data-webhooks.updateWebhook
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: lever-delete-webhook
+      description: Delete A Webhook
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: data-webhooks.deleteWebhook
+      with:
+        id: tools.id

@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/lever-co/main/json-schema/lever-posting-schema.json",
+  "title": "Lever Posting",
+  "description": "A job posting in Lever. Postings appear on the public careers site when `state` is `published` and can be the target of applications submitted via the Postings API.",
+  "type": "object",
+  "required": ["id", "text"],
+  "properties": {
+    "id": { "type": "string" },
+    "text": {
+      "type": "string",
+      "description": "Title / role text of the posting."
+    },
+    "state": {
+      "type": "string",
+      "enum": ["draft", "internal", "published", "pending", "closed", "rejected"]
+    },
+    "categories": {
+      "type": "object",
+      "properties": {
+        "commitment": { "type": "string" },
+        "department": { "type": "string" },
+        "level": { "type": "string" },
+        "location": { "type": "string" },
+        "team": { "type": "string" },
+        "allLocations": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "country": { "type": "string" },
+    "createdAt": { "type": "integer", "format": "int64" },
+    "updatedAt": { "type": "integer", "format": "int64" },
+    "user": {
+      "type": "string",
+      "description": "ID of the user who owns the posting."
+    },
+    "owner": { "type": "string" },
+    "hiringManager": { "type": "string" },
+    "confidentiality": {
+      "type": "string",
+      "enum": ["non-confidential", "confidential"]
+    },
+    "description": {
+      "type": "string",
+      "description": "HTML description of the role."
+    },
+    "descriptionPlain": { "type": "string" },
+    "lists": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": { "type": "string" },
+          "content": { "type": "string" }
+        }
+      }
+    },
+    "additional": { "type": "string" },
+    "additionalPlain": { "type": "string" },
+    "urls": {
+      "type": "object",
+      "properties": {
+        "list": { "type": "string", "format": "uri" },
+        "show": { "type": "string", "format": "uri" },
+        "apply": { "type": "string", "format": "uri" }
+      }
+    },
+    "applyUrl": { "type": "string", "format": "uri" },
+    "hostedUrl": { "type": "string", "format": "uri" },
+    "workplaceType": {
+      "type": "string",
+      "enum": ["on-site", "hybrid", "remote", "unspecified"]
+    },
+    "salaryRange": {
+      "type": "object",
+      "properties": {
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "currency": { "type": "string" },
+        "interval": {
+          "type": "string",
+          "enum": ["per-year-salary", "per-hour-wage", "per-month", "per-day", "one-time"]
+        }
+      }
+    },
+    "salaryDescription": { "type": "string" }
+  }
+}

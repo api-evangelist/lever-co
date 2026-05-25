@@ -1,0 +1,46 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Lever
+providerId: lever-co
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - Rate Limiting
+  - Quotas
+  - ATS
+description: Reconciled rate limits for the Lever Data API and the public Lever Postings API. Token-bucket
+  enforcement on the Data API; per-second cap on application POSTs against the public Postings API.
+sources:
+  - https://hire.lever.co/developer/documentation
+  - https://github.com/lever/postings-api
+algorithm: token-bucket
+responseCodes:
+  throttled: 429
+  quotaExceeded: 429
+headers:
+  retryAfter: retry-after
+limits:
+  - api: Lever Data API
+    scope: per-api-key
+    rps: 10
+    burst: 20
+    notes: 10 requests/second steady-state per API key with a token-bucket burst allowance up to 20 req/s.
+      Applies across all v1 endpoints.
+  - api: Lever Postings API
+    scope: per-site
+    endpoint: POST /v0/postings/{site}/{postingId}
+    rps: 2
+    notes: Application submissions are capped at 2 POSTs per second per site. Excess requests return HTTP
+      429.
+  - api: Lever Postings API
+    scope: per-site
+    endpoint: GET /v0/postings/{site}
+    rps: unspecified
+    notes: GET on public postings has no published per-second limit; CORS is restricted to the site's own
+      domain and subdomains.
+recommendations:
+  - Honor 429 responses with exponential back-off; the Data API token-bucket refills at 10 tokens/second.
+  - Avoid hot-looping listing endpoints; use webhooks for change notification where possible.
+  - When mirroring postings to a careers site, cache list responses for at least 60s.

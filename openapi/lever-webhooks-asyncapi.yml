@@ -1,0 +1,154 @@
+asyncapi: 3.0.0
+info:
+  title: Lever Webhooks
+  version: "1.0.0"
+  description: |
+    Lever publishes outbound webhook events covering the candidate and interview lifecycle. Receivers
+    must serve an HTTPS endpoint and verify the `Lever-Signature` HMAC-SHA256 of the request body using
+    the webhook secret.
+  contact:
+    name: Lever
+    url: https://hire.lever.co/developer/documentation
+defaultContentType: application/json
+servers:
+  receiver:
+    host: '{customerEndpoint}'
+    protocol: https
+    description: Customer-provided HTTPS webhook endpoint.
+    variables:
+      customerEndpoint:
+        default: example.com/webhooks/lever
+channels:
+  applicationCreated:
+    address: applicationCreated
+    messages:
+      ApplicationCreated:
+        $ref: '#/components/messages/ApplicationCreated'
+  candidateHired:
+    address: candidateHired
+    messages:
+      CandidateHired:
+        $ref: '#/components/messages/LifecycleEvent'
+  candidateStageChange:
+    address: candidateStageChange
+    messages:
+      CandidateStageChange:
+        $ref: '#/components/messages/LifecycleEvent'
+  candidateArchiveChange:
+    address: candidateArchiveChange
+    messages:
+      CandidateArchiveChange:
+        $ref: '#/components/messages/LifecycleEvent'
+  candidateDeleted:
+    address: candidateDeleted
+    messages:
+      CandidateDeleted:
+        $ref: '#/components/messages/LifecycleEvent'
+  interviewCreated:
+    address: interviewCreated
+    messages:
+      InterviewCreated:
+        $ref: '#/components/messages/InterviewEvent'
+  interviewUpdated:
+    address: interviewUpdated
+    messages:
+      InterviewUpdated:
+        $ref: '#/components/messages/InterviewEvent'
+  interviewDeleted:
+    address: interviewDeleted
+    messages:
+      InterviewDeleted:
+        $ref: '#/components/messages/InterviewEvent'
+  contactCreated:
+    address: contactCreated
+    messages:
+      ContactCreated:
+        $ref: '#/components/messages/ContactEvent'
+  contactUpdated:
+    address: contactUpdated
+    messages:
+      ContactUpdated:
+        $ref: '#/components/messages/ContactEvent'
+operations:
+  receiveApplicationCreated:
+    action: receive
+    channel:
+      $ref: '#/channels/applicationCreated'
+  receiveCandidateHired:
+    action: receive
+    channel:
+      $ref: '#/channels/candidateHired'
+  receiveCandidateStageChange:
+    action: receive
+    channel:
+      $ref: '#/channels/candidateStageChange'
+  receiveCandidateArchiveChange:
+    action: receive
+    channel:
+      $ref: '#/channels/candidateArchiveChange'
+  receiveCandidateDeleted:
+    action: receive
+    channel:
+      $ref: '#/channels/candidateDeleted'
+  receiveInterviewCreated:
+    action: receive
+    channel:
+      $ref: '#/channels/interviewCreated'
+  receiveInterviewUpdated:
+    action: receive
+    channel:
+      $ref: '#/channels/interviewUpdated'
+  receiveInterviewDeleted:
+    action: receive
+    channel:
+      $ref: '#/channels/interviewDeleted'
+  receiveContactCreated:
+    action: receive
+    channel:
+      $ref: '#/channels/contactCreated'
+  receiveContactUpdated:
+    action: receive
+    channel:
+      $ref: '#/channels/contactUpdated'
+components:
+  messages:
+    ApplicationCreated:
+      name: applicationCreated
+      title: Application Created
+      summary: A candidate submitted an application against a posting.
+      payload:
+        $ref: '#/components/schemas/WebhookEnvelope'
+    LifecycleEvent:
+      name: lifecycleEvent
+      title: Candidate Lifecycle Event
+      summary: candidateHired / candidateStageChange / candidateArchiveChange / candidateDeleted.
+      payload:
+        $ref: '#/components/schemas/WebhookEnvelope'
+    InterviewEvent:
+      name: interviewEvent
+      title: Interview Lifecycle Event
+      summary: interviewCreated / interviewUpdated / interviewDeleted.
+      payload:
+        $ref: '#/components/schemas/WebhookEnvelope'
+    ContactEvent:
+      name: contactEvent
+      title: Contact Lifecycle Event
+      summary: contactCreated / contactUpdated.
+      payload:
+        $ref: '#/components/schemas/WebhookEnvelope'
+  schemas:
+    WebhookEnvelope:
+      type: object
+      properties:
+        event:
+          type: string
+        triggeredAt:
+          type: integer
+          format: int64
+        signatureToken:
+          type: string
+        signature:
+          type: string
+          description: HMAC-SHA256 of the body using the webhook secret.
+        data:
+          type: object

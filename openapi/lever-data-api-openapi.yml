@@ -1,0 +1,842 @@
+openapi: 3.1.0
+info:
+  title: Lever Data API
+  description: |
+    The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at
+    `https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,
+    Applications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,
+    EEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or
+    OAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state
+    per key with a burst of 20 req/s.
+  version: "1.0.0"
+  contact:
+    name: Lever
+    url: https://hire.lever.co/developer
+  license:
+    name: Lever Terms of Service
+    url: https://www.lever.co/legal/terms-of-service
+servers:
+  - url: https://api.lever.co/v1
+    description: Lever Data API production
+security:
+  - BasicAuth: []
+  - OAuth2: []
+tags:
+  - name: Opportunities
+    description: Opportunities are the unified record for a candidate at a posting (replaces legacy Candidates).
+  - name: Postings
+    description: Job postings published to the company careers site.
+  - name: Applications
+    description: A candidate's application to a specific posting on an opportunity.
+  - name: Interviews
+    description: Scheduled interviews on an opportunity.
+  - name: Feedback
+    description: Structured interview feedback from interviewers.
+  - name: Notes
+    description: Free-form notes captured on an opportunity.
+  - name: Offers
+    description: Offer records associated with hired candidates.
+  - name: Requisitions
+    description: Headcount-tracking job requisitions backing postings.
+  - name: Stages
+    description: Pipeline stages (lead, applicant, phone screen, on-site, offer, hired, archived).
+  - name: Sources
+    description: How candidates entered the pipeline (referral, agency, job board, sourced, etc).
+  - name: Tags
+    description: Free-form tags applied to opportunities.
+  - name: Files
+    description: Resumes and other attachments on an opportunity.
+  - name: Users
+    description: Lever users (recruiters, hiring managers, interviewers, admins).
+  - name: Panels
+    description: Interview panels comprising multiple interviewers.
+  - name: Archive Reasons
+    description: Reasons candidates are archived (rejected, withdrew, hired, etc).
+  - name: Audit Events
+    description: Audit log of admin and security-relevant actions.
+  - name: EEO Responses
+    description: Equal Employment Opportunity survey responses.
+  - name: Webhooks
+    description: Outbound event subscriptions.
+paths:
+  /opportunities:
+    get:
+      tags: [Opportunities]
+      summary: List Opportunities
+      description: List all opportunities (candidate records) visible to the API key.
+      operationId: listOpportunities
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+        - $ref: '#/components/parameters/Expand'
+      responses:
+        '200':
+          description: A page of opportunities.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpportunityList'
+    post:
+      tags: [Opportunities]
+      summary: Create An Opportunity
+      description: Create a new opportunity for a candidate, optionally associating it with one or more postings.
+      operationId: createOpportunity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpportunityCreate'
+      responses:
+        '201':
+          description: Opportunity created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Opportunity'
+  /opportunities/{id}:
+    parameters:
+      - $ref: '#/components/parameters/OpportunityId'
+    get:
+      tags: [Opportunities]
+      summary: Retrieve An Opportunity
+      operationId: getOpportunity
+      responses:
+        '200':
+          description: The opportunity.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Opportunity'
+    put:
+      tags: [Opportunities]
+      summary: Update An Opportunity
+      operationId: updateOpportunity
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpportunityUpdate'
+      responses:
+        '200':
+          description: Opportunity updated.
+  /opportunities/{id}/applications:
+    parameters:
+      - $ref: '#/components/parameters/OpportunityId'
+    get:
+      tags: [Applications]
+      summary: List Applications For An Opportunity
+      operationId: listApplications
+      responses:
+        '200':
+          description: Applications for the opportunity.
+  /opportunities/{id}/interviews:
+    parameters:
+      - $ref: '#/components/parameters/OpportunityId'
+    get:
+      tags: [Interviews]
+      summary: List Interviews
+      operationId: listInterviews
+      responses:
+        '200':
+          description: Interviews on the opportunity.
+    post:
+      tags: [Interviews]
+      summary: Create An Interview
+      operationId: createInterview
+      responses:
+        '201':
+          description: Interview created.
+  /opportunities/{id}/interviews/{interviewId}:
+    parameters:
+      - $ref: '#/components/parameters/OpportunityId'
+      - name: interviewId
+        in: path
+        required: true
+        schema:
+          type: string
+    put:
+      tags: [Interviews]
+      summary: Update An Interview
+      operationId: updateInterview
+      responses:
+        '200':
+          description: Interview updated.
+    delete:
+      tags: [Interviews]
+      summary: Delete An Interview
+      operationId: deleteInterview
+      responses:
+        '204':
+          description: Interview deleted.
+  /opportunities/{id}/feedback:
+    parameters:
+      - $ref: '#/components/parameters/OpportunityId'
+    get:
+      tags: [Feedback]
+      summary: List Feedback
+      operationId: listFeedback
+      responses:
+        '200':
+          description: Feedback on the opportunity.
+    post:
+      tags: [Feedback]
+      summary: Create Feedback
+      operationId: createFeedback
+      responses:
+        '201':
+          description: Feedback created.
+  /opportunities/{id}/notes:
+    parameters:
+      - $ref: '#/components/parameters/OpportunityId'
+    get:
+      tags: [Notes]
+      summary: List Notes
+      operationId: listNotes
+      responses:
+        '200':
+          description: Notes on the opportunity.
+    post:
+      tags: [Notes]
+      summary: Create A Note
+      operationId: createNote
+      responses:
+        '201':
+          description: Note created.
+  /postings:
+    get:
+      tags: [Postings]
+      summary: List Postings
+      operationId: listPostings
+      parameters:
+        - $ref: '#/components/parameters/Limit'
+        - $ref: '#/components/parameters/Offset'
+      responses:
+        '200':
+          description: A page of postings.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostingList'
+    post:
+      tags: [Postings]
+      summary: Create A Posting
+      operationId: createPosting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostingCreate'
+      responses:
+        '201':
+          description: Posting created.
+  /postings/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Postings]
+      summary: Retrieve A Posting
+      operationId: getPosting
+      responses:
+        '200':
+          description: The posting.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Posting'
+    put:
+      tags: [Postings]
+      summary: Update A Posting
+      operationId: updatePosting
+      responses:
+        '200':
+          description: Posting updated.
+  /requisitions:
+    get:
+      tags: [Requisitions]
+      summary: List Requisitions
+      operationId: listRequisitions
+      responses:
+        '200':
+          description: Requisitions.
+    post:
+      tags: [Requisitions]
+      summary: Create A Requisition
+      operationId: createRequisition
+      responses:
+        '201':
+          description: Requisition created.
+  /requisitions/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    put:
+      tags: [Requisitions]
+      summary: Update A Requisition
+      operationId: updateRequisition
+      responses:
+        '200':
+          description: Requisition updated.
+    delete:
+      tags: [Requisitions]
+      summary: Delete A Requisition
+      operationId: deleteRequisition
+      responses:
+        '204':
+          description: Requisition deleted.
+  /offers:
+    get:
+      tags: [Offers]
+      summary: List Offers
+      operationId: listOffers
+      responses:
+        '200':
+          description: Offers.
+  /stages:
+    get:
+      tags: [Stages]
+      summary: List Stages
+      operationId: listStages
+      responses:
+        '200':
+          description: Stages.
+  /stages/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Stages]
+      summary: Retrieve A Stage
+      operationId: getStage
+      responses:
+        '200':
+          description: The stage.
+  /archive_reasons:
+    get:
+      tags: [Archive Reasons]
+      summary: List Archive Reasons
+      operationId: listArchiveReasons
+      responses:
+        '200':
+          description: Archive reasons.
+  /archive_reasons/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Archive Reasons]
+      summary: Retrieve An Archive Reason
+      operationId: getArchiveReason
+      responses:
+        '200':
+          description: The archive reason.
+  /sources:
+    get:
+      tags: [Sources]
+      summary: List Sources
+      operationId: listSources
+      responses:
+        '200':
+          description: Sources.
+  /tags:
+    get:
+      tags: [Tags]
+      summary: List Tags
+      operationId: listTags
+      responses:
+        '200':
+          description: Tags.
+  /files:
+    get:
+      tags: [Files]
+      summary: List Files
+      operationId: listFiles
+      responses:
+        '200':
+          description: Files.
+    post:
+      tags: [Files]
+      summary: Upload A File
+      operationId: uploadFile
+      responses:
+        '201':
+          description: File uploaded.
+  /files/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Files]
+      summary: Retrieve A File
+      operationId: getFile
+      responses:
+        '200':
+          description: The file.
+    delete:
+      tags: [Files]
+      summary: Delete A File
+      operationId: deleteFile
+      responses:
+        '204':
+          description: File deleted.
+  /users:
+    get:
+      tags: [Users]
+      summary: List Users
+      operationId: listUsers
+      responses:
+        '200':
+          description: Users.
+    post:
+      tags: [Users]
+      summary: Create A User
+      operationId: createUser
+      responses:
+        '201':
+          description: User created.
+  /users/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Users]
+      summary: Retrieve A User
+      operationId: getUser
+      responses:
+        '200':
+          description: The user.
+    put:
+      tags: [Users]
+      summary: Update A User
+      operationId: updateUser
+      responses:
+        '200':
+          description: User updated.
+  /panels:
+    get:
+      tags: [Panels]
+      summary: List Panels
+      operationId: listPanels
+      responses:
+        '200':
+          description: Panels.
+    post:
+      tags: [Panels]
+      summary: Create A Panel
+      operationId: createPanel
+      responses:
+        '201':
+          description: Panel created.
+  /panels/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    put:
+      tags: [Panels]
+      summary: Update A Panel
+      operationId: updatePanel
+      responses:
+        '200':
+          description: Panel updated.
+    delete:
+      tags: [Panels]
+      summary: Delete A Panel
+      operationId: deletePanel
+      responses:
+        '204':
+          description: Panel deleted.
+  /contacts/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Opportunities]
+      summary: Retrieve A Contact
+      operationId: getContact
+      responses:
+        '200':
+          description: The contact (the person across all opportunities).
+    put:
+      tags: [Opportunities]
+      summary: Update A Contact
+      operationId: updateContact
+      responses:
+        '200':
+          description: Contact updated.
+  /referrals:
+    get:
+      tags: [Opportunities]
+      summary: List Referrals
+      operationId: listReferrals
+      responses:
+        '200':
+          description: Referrals.
+  /eeo/responses:
+    get:
+      tags: [EEO Responses]
+      summary: List EEO Responses
+      operationId: listEeoResponses
+      responses:
+        '200':
+          description: EEO survey responses.
+  /eeo/responses/pii:
+    get:
+      tags: [EEO Responses]
+      summary: List EEO Responses With PII
+      operationId: listEeoResponsesPii
+      responses:
+        '200':
+          description: EEO survey responses including PII (requires elevated scope).
+  /audit_events:
+    get:
+      tags: [Audit Events]
+      summary: List Audit Events
+      operationId: listAuditEvents
+      responses:
+        '200':
+          description: Audit events.
+  /webhooks:
+    get:
+      tags: [Webhooks]
+      summary: List Webhooks
+      operationId: listWebhooks
+      responses:
+        '200':
+          description: Webhook subscriptions.
+    post:
+      tags: [Webhooks]
+      summary: Create A Webhook
+      operationId: createWebhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookCreate'
+      responses:
+        '201':
+          description: Webhook created.
+  /webhooks/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    put:
+      tags: [Webhooks]
+      summary: Update A Webhook
+      operationId: updateWebhook
+      responses:
+        '200':
+          description: Webhook updated.
+    delete:
+      tags: [Webhooks]
+      summary: Delete A Webhook
+      operationId: deleteWebhook
+      responses:
+        '204':
+          description: Webhook deleted.
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using a Lever API key as the username and an empty password.
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.lever.co/authorize
+          tokenUrl: https://auth.lever.co/oauth/token
+          scopes:
+            offline_access: Issue refresh tokens.
+            opportunities:read:admin: Read opportunities.
+            opportunities:write:admin: Write opportunities.
+            postings:read:admin: Read postings.
+            postings:write:admin: Write postings.
+            interviews:read:admin: Read interviews.
+            interviews:write:admin: Write interviews.
+            feedback:read:admin: Read feedback.
+            feedback:write:admin: Write feedback.
+            users:read:admin: Read users.
+            users:write:admin: Write users.
+            requisitions:read:admin: Read requisitions.
+            requisitions:write:admin: Write requisitions.
+            offers:read:admin: Read offers.
+            files:read:admin: Read files.
+            files:write:admin: Write files.
+            webhooks:read:admin: Read webhook subscriptions.
+            webhooks:write:admin: Write webhook subscriptions.
+            audit_events:read:admin: Read audit log events.
+            eeo_responses:read:admin: Read EEO survey responses.
+            eeo_responses_pii:read:admin: Read EEO survey responses with PII.
+            confidential:access:admin: Access confidential records.
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Number of records to return (1-100, default 100).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+    Offset:
+      name: offset
+      in: query
+      description: Opaque cursor returned in the previous response's `next` field.
+      schema:
+        type: string
+    Expand:
+      name: expand
+      in: query
+      description: Comma-separated list of nested fields to expand inline (e.g. `applications,owner,stage`).
+      schema:
+        type: string
+    OpportunityId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    Opportunity:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        contact:
+          type: string
+        headline:
+          type: string
+        stage:
+          type: string
+        location:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+        phones:
+          type: array
+          items:
+            type: object
+        archived:
+          type: object
+          properties:
+            archivedAt:
+              type: integer
+              format: int64
+            reason:
+              type: string
+        createdAt:
+          type: integer
+          format: int64
+        updatedAt:
+          type: integer
+          format: int64
+        applications:
+          type: array
+          items:
+            type: string
+        sources:
+          type: array
+          items:
+            type: string
+        origin:
+          type: string
+        owner:
+          type: string
+        followers:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+    OpportunityCreate:
+      type: object
+      required: [name, emails]
+      properties:
+        name:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+        headline:
+          type: string
+        location:
+          type: string
+        postings:
+          type: array
+          items:
+            type: string
+        owner:
+          type: string
+        sources:
+          type: array
+          items:
+            type: string
+    OpportunityUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        headline:
+          type: string
+        location:
+          type: string
+        owner:
+          type: string
+        followers:
+          type: array
+          items:
+            type: string
+    OpportunityList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Opportunity'
+        hasNext:
+          type: boolean
+        next:
+          type: string
+    Posting:
+      type: object
+      properties:
+        id:
+          type: string
+        text:
+          type: string
+        state:
+          type: string
+          enum: [draft, internal, published, closed]
+        categories:
+          type: object
+          properties:
+            commitment:
+              type: string
+            location:
+              type: string
+            team:
+              type: string
+            department:
+              type: string
+            level:
+              type: string
+        country:
+          type: string
+        createdAt:
+          type: integer
+          format: int64
+        updatedAt:
+          type: integer
+          format: int64
+        hostedUrl:
+          type: string
+          format: uri
+        applyUrl:
+          type: string
+          format: uri
+        workplaceType:
+          type: string
+          enum: [on-site, hybrid, remote, unspecified]
+        salaryRange:
+          type: object
+          properties:
+            min:
+              type: number
+            max:
+              type: number
+            currency:
+              type: string
+            interval:
+              type: string
+        owner:
+          type: string
+    PostingCreate:
+      type: object
+      required: [text]
+      properties:
+        text:
+          type: string
+        state:
+          type: string
+        categories:
+          type: object
+        owner:
+          type: string
+    PostingList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Posting'
+        hasNext:
+          type: boolean
+        next:
+          type: string
+    WebhookCreate:
+      type: object
+      required: [event, url]
+      properties:
+        event:
+          type: string
+          enum:
+            - applicationCreated
+            - candidateHired
+            - candidateStageChange
+            - candidateArchiveChange
+            - candidateDeleted
+            - interviewCreated
+            - interviewUpdated
+            - interviewDeleted
+            - contactCreated
+            - contactUpdated
+        url:
+          type: string
+          format: uri
+        configuration:
+          type: object
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string

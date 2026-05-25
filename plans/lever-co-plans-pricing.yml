@@ -1,0 +1,60 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Lever
+providerId: lever-co
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - ATS
+  - CRM
+  - Recruiting
+description: Lever does not publish a public price list. Pricing is contact-sales and tailored to organization
+  size and hiring needs. The single visible plan ("Lever") bundles ATS, CRM, reporting, and integrations, with
+  Candidate Insights, AI Screening by VONQ, and Onboarding sold as add-ons. The Data API and Postings API are
+  included with the platform — there is no per-call API charge — but request rate is governed by published
+  rate limits (see rate-limits/).
+sources:
+  - https://www.lever.co/pricing
+  - https://hire.lever.co/developer/documentation
+plans:
+  - id: lever
+    name: Lever
+    type: contact-sales
+    description: Single Lever subscription with custom pricing per customer. Includes ATS, CRM, advanced
+      reporting and analytics, partner integrations, and access to the Data and Postings APIs.
+    entries:
+      - label: Subscription
+        name: subscription
+        type: contact
+        metric: organization
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: 'Call'
+        userMultiplied: false
+    elements:
+      - name: Applicant Tracking System (ATS)
+      - name: Candidate Relationship Management (CRM)
+      - name: Advanced reporting and analytics
+      - name: Partner and HRIS integrations
+      - name: Lever Data API access (rate-limited, no per-call fee)
+      - name: Lever Postings API access
+      - name: Webhooks
+addOns:
+  - id: candidate-insights
+    name: Candidate Insights
+    description: Optional add-on; contact sales for pricing.
+  - id: ai-screening-vonq
+    name: AI Screening by VONQ
+    description: AI-powered screening add-on; contact sales for pricing.
+  - id: onboarding
+    name: Onboarding
+    description: Optional onboarding add-on; contact sales for pricing.
+notes:
+  - Lever is owned by Employ Inc., which also operates JazzHR and Jobvite. Cross-product bundles may be offered.
+  - The Data API is not metered per call. Throughput is governed by a token-bucket of 10 req/s steady-state
+    with a 20 req/s burst per API key.
+  - The Postings API (public) is throttled at 2 application POSTs per second per site.

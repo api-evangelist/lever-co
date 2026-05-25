@@ -1,0 +1,133 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Lever Data API — Postings
+  description: 'Lever Data API — Postings. List, create, retrieve, and update job postings on a Lever account.'
+  tags:
+  - Lever
+  - Postings
+  - Jobs
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    LEVER_API_KEY: LEVER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-postings
+    baseUri: https://api.lever.co/v1
+    description: Lever Data API — Postings.
+    resources:
+    - name: postings
+      path: /postings
+      operations:
+      - name: listPostings
+        method: GET
+        description: List Postings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createPosting
+        method: POST
+        description: Create A Posting
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: posting
+      path: /postings/{id}
+      operations:
+      - name: getPosting
+        method: GET
+        description: Retrieve A Posting
+        outputRawFormat: json
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatePosting
+        method: PUT
+        description: Update A Posting
+        outputRawFormat: json
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          required: true
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.LEVER_API_KEY}}'
+      password: ''
+  exposes:
+  - type: rest
+    namespace: data-postings-rest
+    port: 8080
+    description: REST adapter for Lever Postings.
+    resources:
+    - path: /v1/postings
+      name: postings
+      operations:
+      - method: GET
+        name: listPostings
+        call: data-postings.listPostings
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createPosting
+        call: data-postings.createPosting
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-postings-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Lever Postings.
+    tools:
+    - name: lever-list-postings
+      description: List Postings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-postings.listPostings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: lever-create-posting
+      description: Create A Posting
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-postings.createPosting
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

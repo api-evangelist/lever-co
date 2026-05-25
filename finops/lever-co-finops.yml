@@ -1,0 +1,79 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Lever
+providerId: lever-co
+created: '2026-05-25'
+modified: '2026-05-25'
+reconciled: true
+tags:
+  - FinOps
+  - Cost Management
+  - FOCUS
+  - ATS
+  - SaaS
+description: FOCUS-aligned FinOps definition for Lever. Lever is a contact-sales SaaS subscription with no
+  public per-unit price list and no metered API usage charges; cost attribution centers on subscription seats,
+  product editions, and add-ons rather than runtime consumption.
+sources:
+  - https://www.lever.co/pricing
+  - https://hire.lever.co/developer/documentation
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Lever (Employ Inc.)
+serviceCategory: Human Resources
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Annual
+  billingCurrency: USD
+  chargeCategories:
+    - Usage
+    - Purchase
+    - Tax
+    - Credit
+    - Adjustment
+  primaryUnit: seat
+  secondaryUnits:
+    - organization
+    - add_on
+focusColumns:
+  ServiceName: Lever
+  ServiceCategory: Human Resources
+  ProviderName: Lever
+  PublisherName: Employ Inc.
+  InvoiceIssuerName: Employ Inc.
+  PricingCategory: Subscription
+  PricingUnit: seat
+  BillingCurrency: USD
+meters:
+  - name: subscription_seats
+    unit: seat
+    aggregation: max
+    dimensions:
+      - product_edition
+      - role
+  - name: add_on_candidate_insights
+    unit: subscription
+    aggregation: max
+  - name: add_on_ai_screening_vonq
+    unit: subscription
+    aggregation: max
+  - name: add_on_onboarding
+    unit: subscription
+    aggregation: max
+allocation:
+  recommendedTags:
+    - cost_center
+    - hiring_team
+    - department
+    - business_unit
+notes:
+  - The Lever Data API and Postings API are bundled with the platform subscription; there is no per-call charge.
+    Capacity is governed by rate limits rather than billing meters.
+  - Lever is owned by Employ Inc., which also bills JazzHR and Jobvite under the same publisher; allocation may
+    cross product lines in FOCUS exports.
+  - Multi-year and tiered seat pricing are common — surface effective per-seat cost as a derived metric.

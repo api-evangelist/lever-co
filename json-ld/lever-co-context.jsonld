@@ -1,0 +1,132 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "lever": "https://api.lever.co/v1/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Opportunity": {
+      "@id": "lever:Opportunity",
+      "@context": {
+        "id": { "@id": "lever:Opportunity/id", "@type": "xsd:string" },
+        "name": { "@id": "schema:name" },
+        "contact": { "@id": "lever:Opportunity/contact", "@type": "@id" },
+        "headline": { "@id": "schema:description" },
+        "stage": { "@id": "lever:Opportunity/stage", "@type": "@id" },
+        "location": { "@id": "schema:address" },
+        "emails": { "@id": "schema:email", "@container": "@list" },
+        "phones": { "@id": "schema:telephone", "@container": "@list" },
+        "createdAt": { "@id": "schema:dateCreated", "@type": "xsd:long" },
+        "updatedAt": { "@id": "schema:dateModified", "@type": "xsd:long" },
+        "applications": { "@id": "lever:Opportunity/applications", "@container": "@list" },
+        "sources": { "@id": "lever:Opportunity/sources", "@container": "@list" },
+        "origin": { "@id": "lever:Opportunity/origin", "@type": "xsd:string" },
+        "owner": { "@id": "lever:Opportunity/owner", "@type": "@id" },
+        "tags": { "@id": "schema:keywords", "@container": "@list" }
+      }
+    },
+
+    "Posting": {
+      "@id": "lever:Posting",
+      "@type": "schema:JobPosting",
+      "@context": {
+        "id": { "@id": "lever:Posting/id", "@type": "xsd:string" },
+        "text": { "@id": "schema:title" },
+        "description": { "@id": "schema:description" },
+        "state": { "@id": "lever:Posting/state", "@type": "xsd:string" },
+        "country": { "@id": "schema:jobLocation" },
+        "createdAt": { "@id": "schema:datePosted", "@type": "xsd:long" },
+        "updatedAt": { "@id": "schema:dateModified", "@type": "xsd:long" },
+        "hostedUrl": { "@id": "schema:url", "@type": "@id" },
+        "applyUrl": { "@id": "schema:url", "@type": "@id" },
+        "workplaceType": { "@id": "lever:Posting/workplaceType", "@type": "xsd:string" },
+        "salaryRange": { "@id": "schema:baseSalary" },
+        "categories": { "@id": "lever:Posting/categories" }
+      }
+    },
+
+    "Application": {
+      "@id": "lever:Application",
+      "@type": "schema:JobApplication",
+      "@context": {
+        "id": { "@id": "lever:Application/id", "@type": "xsd:string" },
+        "candidateId": { "@id": "lever:Application/candidateId", "@type": "@id" },
+        "opportunityId": { "@id": "lever:Application/opportunityId", "@type": "@id" },
+        "posting": { "@id": "lever:Application/posting", "@type": "@id" },
+        "type": { "@id": "schema:applicationCategory" },
+        "createdAt": { "@id": "schema:dateCreated", "@type": "xsd:long" }
+      }
+    },
+
+    "Interview": {
+      "@id": "lever:Interview",
+      "@type": "schema:Event",
+      "@context": {
+        "id": { "@id": "lever:Interview/id", "@type": "xsd:string" },
+        "panel": { "@id": "lever:Interview/panel", "@type": "@id" },
+        "subject": { "@id": "schema:name" },
+        "note": { "@id": "schema:description" },
+        "interviewers": { "@id": "lever:Interview/interviewers", "@container": "@list" },
+        "date": { "@id": "schema:startDate", "@type": "xsd:long" },
+        "duration": { "@id": "schema:duration", "@type": "xsd:int" },
+        "location": { "@id": "schema:location" }
+      }
+    },
+
+    "Feedback": {
+      "@id": "lever:Feedback",
+      "@type": "schema:Review",
+      "@context": {
+        "id": { "@id": "lever:Feedback/id", "@type": "xsd:string" },
+        "user": { "@id": "schema:author", "@type": "@id" },
+        "fields": { "@id": "lever:Feedback/fields", "@container": "@list" },
+        "createdAt": { "@id": "schema:dateCreated", "@type": "xsd:long" }
+      }
+    },
+
+    "Offer": {
+      "@id": "lever:Offer",
+      "@context": {
+        "id": { "@id": "lever:Offer/id", "@type": "xsd:string" },
+        "status": { "@id": "lever:Offer/status", "@type": "xsd:string" },
+        "creator": { "@id": "schema:author", "@type": "@id" },
+        "createdAt": { "@id": "schema:dateCreated", "@type": "xsd:long" }
+      }
+    },
+
+    "Requisition": {
+      "@id": "lever:Requisition",
+      "@context": {
+        "id": { "@id": "lever:Requisition/id", "@type": "xsd:string" },
+        "requisitionCode": { "@id": "lever:Requisition/requisitionCode", "@type": "xsd:string" },
+        "status": { "@id": "lever:Requisition/status", "@type": "xsd:string" },
+        "headcountTotal": { "@id": "lever:Requisition/headcountTotal", "@type": "xsd:int" },
+        "headcountHired": { "@id": "lever:Requisition/headcountHired", "@type": "xsd:int" },
+        "owner": { "@id": "schema:author", "@type": "@id" }
+      }
+    },
+
+    "User": {
+      "@id": "lever:User",
+      "@type": "schema:Person",
+      "@context": {
+        "id": { "@id": "lever:User/id", "@type": "xsd:string" },
+        "name": { "@id": "schema:name" },
+        "email": { "@id": "schema:email" },
+        "accessRole": { "@id": "lever:User/accessRole", "@type": "xsd:string" }
+      }
+    },
+
+    "WebhookEvent": {
+      "@id": "lever:WebhookEvent",
+      "@context": {
+        "event": { "@id": "lever:WebhookEvent/event", "@type": "xsd:string" },
+        "triggeredAt": { "@id": "schema:dateCreated", "@type": "xsd:long" },
+        "signature": { "@id": "lever:WebhookEvent/signature", "@type": "xsd:string" },
+        "data": { "@id": "lever:WebhookEvent/data" }
+      }
+    }
+  }
+}

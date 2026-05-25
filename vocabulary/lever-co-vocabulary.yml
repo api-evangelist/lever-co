@@ -1,0 +1,66 @@
+vocabulary: API Evangelist Vocabulary
+version: '0.1'
+provider: Lever
+providerId: lever-co
+created: '2026-05-25'
+modified: '2026-05-25'
+description: Operational and capability vocabulary for the Lever ATS/CRM platform.
+domains:
+  - name: Recruiting
+    description: Talent acquisition and applicant tracking.
+  - name: Human Resources
+    description: Workforce planning, hiring, and onboarding.
+concepts:
+  - term: Opportunity
+    description: A candidate (Contact) considered for one or more postings. The unified pipeline record.
+  - term: Contact
+    description: The underlying person identity across all Opportunities.
+  - term: Posting
+    description: A published job role.
+  - term: Application
+    description: A candidate's submission against a specific Posting on an Opportunity.
+  - term: Stage
+    description: A position in the recruiting pipeline (e.g., New Lead, Applicant, Phone Screen, On-site, Offer, Hired).
+  - term: Archive Reason
+    description: Reason a candidate left the active pipeline (rejected, withdrew, hired, etc.).
+  - term: Source
+    description: Origin of a candidate (referral, agency, job board, sourced, university).
+  - term: Requisition
+    description: Headcount-tracking record backing one or more postings.
+  - term: Panel
+    description: An interview panel comprising multiple interviewers.
+  - term: Feedback
+    description: Structured interviewer feedback captured against an interview/template.
+  - term: Offer
+    description: A formal employment offer record associated with hiring.
+  - term: EEO Response
+    description: Equal Employment Opportunity self-identification survey response.
+  - term: Audit Event
+    description: Admin/security log entry recording sensitive actions.
+  - term: Webhook
+    description: Outbound HTTPS subscription delivering signed lifecycle events.
+services:
+  - name: Lever Data API
+    namespace: data
+    description: REST surface for the full ATS/CRM workflow.
+  - name: Lever Postings API
+    namespace: postings-public
+    description: Public REST surface for listing postings and submitting applications.
+  - name: Lever Postings XML Feed
+    namespace: postings-xml
+    description: XML feed of published postings for job-board distribution.
+  - name: Lever Webhooks
+    namespace: webhooks
+    description: Outbound event stream for lifecycle changes.
+tools:
+  - name: Lever Postings API examples
+    url: https://github.com/lever/postings-api
+  - name: Lever Integrator Resources
+    url: https://github.com/lever/integrator-resources
+standards:
+  - name: OAuth 2.0 Authorization Code Grant
+  - name: HTTP Basic Authentication
+  - name: HMAC-SHA256 Webhook Signatures
+  - name: JSON over HTTPS
+  - name: schema.org/JobPosting
+  - name: schema.org/JobApplication

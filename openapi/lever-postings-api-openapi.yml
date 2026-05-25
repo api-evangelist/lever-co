@@ -1,0 +1,202 @@
+openapi: 3.1.0
+info:
+  title: Lever Postings API
+  description: |
+    The public Lever Postings API lets anyone build a custom job site against a company's published Lever
+    postings. Three resources: list postings for a site, retrieve a single posting, and submit an
+    application. Available globally and in the EU region.
+  version: "0.0"
+  contact:
+    name: Lever
+    url: https://github.com/lever/postings-api
+servers:
+  - url: https://api.lever.co/v0/postings
+    description: Lever Postings API (global)
+  - url: https://api.eu.lever.co/v0/postings
+    description: Lever Postings API (EU region)
+tags:
+  - name: Postings
+    description: Public job postings.
+  - name: Applications
+    description: Application submission.
+paths:
+  /{site}:
+    parameters:
+      - name: site
+        in: path
+        required: true
+        description: Lever company site name (e.g. `acmeco`).
+        schema:
+          type: string
+    get:
+      tags: [Postings]
+      summary: List Public Postings
+      description: |
+        Returns a paginated list of published postings for the given Lever site. Supports JSON (default),
+        HTML, and iframe response modes via the `mode` query parameter.
+      operationId: listPublicPostings
+      parameters:
+        - name: skip
+          in: query
+          schema:
+            type: integer
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            maximum: 100
+        - name: location
+          in: query
+          schema:
+            type: string
+        - name: commitment
+          in: query
+          schema:
+            type: string
+        - name: team
+          in: query
+          schema:
+            type: string
+        - name: department
+          in: query
+          schema:
+            type: string
+        - name: level
+          in: query
+          schema:
+            type: string
+        - name: group
+          in: query
+          description: Group results by `location`, `commitment`, `team`, `department`, or `level`.
+          schema:
+            type: string
+        - name: mode
+          in: query
+          description: Response format.
+          schema:
+            type: string
+            enum: [json, html, iframe, xml]
+        - name: css
+          in: query
+          description: Optional URL of a CSS stylesheet to apply when mode is `html` or `iframe`.
+          schema:
+            type: string
+        - name: resize
+          in: query
+          description: Enable iframe auto-resize.
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: A page of postings, or HTML / XML content depending on `mode`.
+  /{site}/{postingId}:
+    parameters:
+      - name: site
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: postingId
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      tags: [Postings]
+      summary: Retrieve A Public Posting
+      description: Returns a single published posting as JSON.
+      operationId: getPublicPosting
+      responses:
+        '200':
+          description: The posting.
+    post:
+      tags: [Applications]
+      summary: Submit An Application
+      description: |
+        Submit an application against a posting. Accepts either JSON or multipart/form-data.
+        Requires a posting-form API key passed via `?key=`.
+      operationId: submitApplication
+      parameters:
+        - name: key
+          in: query
+          required: true
+          description: Posting-form API key.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [name, email]
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                phone:
+                  type: string
+                org:
+                  type: string
+                resume:
+                  type: string
+                  format: binary
+                urls:
+                  type: array
+                  items:
+                    type: string
+                    format: uri
+                comments:
+                  type: string
+                source:
+                  type: string
+                ip:
+                  type: string
+                referer:
+                  type: string
+                consent:
+                  type: object
+          application/json:
+            schema:
+              type: object
+              required: [name, email]
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                phone:
+                  type: string
+                org:
+                  type: string
+                urls:
+                  type: array
+                  items:
+                    type: string
+                    format: uri
+                comments:
+                  type: string
+                silent:
+                  type: boolean
+                source:
+                  type: string
+                ip:
+                  type: string
+                timezone:
+                  type: string
+                userAgent:
+                  type: string
+                acceptLanguage:
+                  type: string
+                referer:
+                  type: string
+                consent:
+                  type: object
+      responses:
+        '201':
+          description: Application submitted.
+        '429':
+          description: Rate-limited (max 2 POST per second per site).

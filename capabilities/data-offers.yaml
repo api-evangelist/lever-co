@@ -1,0 +1,53 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Lever Data API — Offers
+  description: 'Lever Data API — Offers. Read offer records associated with hired candidates.'
+  tags:
+  - Lever
+  - Offers
+  - Hiring
+  created: '2026-05-25'
+  modified: '2026-05-25'
+binds:
+- namespace: env
+  keys:
+    LEVER_API_KEY: LEVER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-offers
+    baseUri: https://api.lever.co/v1
+    description: Lever Data API — Offers.
+    resources:
+    - name: offers
+      path: /offers
+      operations:
+      - name: listOffers
+        method: GET
+        description: List Offers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.LEVER_API_KEY}}'
+      password: ''
+  exposes:
+  - type: mcp
+    namespace: data-offers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Lever Offers.
+    tools:
+    - name: lever-list-offers
+      description: List Offers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-offers.listOffers
+      outputParameters:
+      - type: object
+        mapping: $.
