@@ -1,222 +1,201 @@
 aid: lever-co
 url: https://raw.githubusercontent.com/api-evangelist/lever-co/refs/heads/main/apis.yml
 apis:
-- aid: lever-co:lever-data-api
-  name: Lever Data API
-  tags:
+  - aid: lever-co:lever-data-api
+    name: Lever Data API
+    tags:
+      - Applicant Tracking
+      - ATS
+      - CRM
+      - Recruiting
+      - Hiring
+      - Opportunities
+      - Candidates
+    humanURL: https://hire.lever.co/developer/documentation
+    baseURL: https://api.lever.co/v1
+    properties:
+      - url: https://hire.lever.co/developer/documentation
+        type: Documentation
+      - url: openapi/lever-data-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/lever-opportunity-schema.json
+        type: JSONSchema
+      - url: json-schema/lever-posting-schema.json
+        type: JSONSchema
+      - url: json-ld/lever-co-context.jsonld
+        type: JSONLD
+    description: >-
+      The Lever Data API exposes the full recruiting workflow — Opportunities (candidates), Postings, Applications,
+      Interviews, Feedback, Notes, Offers, Requisitions, Stages, Files, Tags, Sources, Users, Audit Events, EEO
+      Responses, and Webhooks — over a JSON REST surface at api.lever.co/v1. Supports OAuth 2.0 Authorization Code Grant
+      and HTTP Basic with a personal API key, with fine-grained scopes per resource and per read/write action.
+  - aid: lever-co:lever-postings-api
+    name: Lever Postings API
+    tags:
+      - Postings
+      - Jobs
+      - Careers
+      - Recruiting
+    humanURL: https://github.com/lever/postings-api
+    baseURL: https://api.lever.co/v0/postings
+    properties:
+      - url: https://github.com/lever/postings-api
+        type: Documentation
+      - url: https://github.com/lever/postings-api/blob/master/README.md
+        type: Documentation
+      - url: openapi/lever-postings-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/lever-posting-schema.json
+        type: JSONSchema
+    description: >-
+      The public Lever Postings API lets anyone build a custom careers site by listing a company's published jobs at
+      /v0/postings/{site}, fetching a single posting, and submitting applications. Supports JSON, HTML, and iframe
+      response modes, query filters by location/team/department/commitment, and a multipart application submission
+      endpoint. Available globally and in the EU region.
+  - aid: lever-co:lever-postings-xml-feed
+    name: Lever Postings XML Feed
+    tags:
+      - Postings
+      - Jobs
+      - XML
+      - Job Boards
+      - Feeds
+    humanURL: https://hire.lever.co/developer/documentation
+    baseURL: https://api.lever.co/v0/postings
+    properties:
+      - url: https://hire.lever.co/developer/documentation
+        type: Documentation
+      - url: https://api.lever.co/v0/postings/xmlexample?mode=xml
+        type: Sample
+    description: >-
+      XML feed of all published job postings for a Lever site, designed for distribution to third-party job boards.
+      Returned by appending `?mode=xml` to the Postings API list endpoint. Fields include position, description,
+      location, and commitment type.
+  - aid: lever-co:lever-webhooks
+    name: Lever Webhooks
+    tags:
+      - Webhooks
+      - Events
+      - Integrations
+    humanURL: https://hire.lever.co/developer/documentation
+    properties:
+      - url: https://hire.lever.co/developer/documentation
+        type: Documentation
+      - url: openapi/lever-webhooks-asyncapi.yml
+        type: AsyncAPI
+    description: >-
+      Lever publishes ten webhook events covering the application and candidate lifecycle — applicationCreated,
+      candidateHired, candidateStageChange, candidateArchiveChange, candidateDeleted, interviewCreated,
+      interviewUpdated, interviewDeleted, contactCreated, contactUpdated. Endpoints must be HTTPS and verify the
+      HMAC-SHA256 signature on every delivery.
+name: Lever
+tags:
   - Applicant Tracking
   - ATS
   - CRM
   - Recruiting
   - Hiring
-  - Opportunities
-  - Candidates
-  humanURL: https://hire.lever.co/developer/documentation
-  baseURL: https://api.lever.co/v1
-  properties:
-  - url: https://hire.lever.co/developer/documentation
-    type: Documentation
-  - url: openapi/lever-data-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/lever-opportunity-schema.json
-    type: JSONSchema
-  - url: json-schema/lever-posting-schema.json
-    type: JSONSchema
-  - url: json-ld/lever-co-context.jsonld
-    type: JSONLD
-  - type: NaftikoCapability
-    url: capabilities/data-opportunities.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-postings.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-interviews.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-feedback.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-requisitions.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-offers.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-users.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-webhooks.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-files.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-notes.yaml
-  description: The Lever Data API exposes the full recruiting workflow — Opportunities (candidates), Postings,
-    Applications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Files, Tags, Sources, Users,
-    Audit Events, EEO Responses, and Webhooks — over a JSON REST surface at api.lever.co/v1. Supports OAuth
-    2.0 Authorization Code Grant and HTTP Basic with a personal API key, with fine-grained scopes per
-    resource and per read/write action.
-- aid: lever-co:lever-postings-api
-  name: Lever Postings API
-  tags:
+  - Talent Acquisition
+  - Human Resources
+  - HR Tech
   - Postings
-  - Jobs
-  - Careers
-  - Recruiting
-  humanURL: https://github.com/lever/postings-api
-  baseURL: https://api.lever.co/v0/postings
-  properties:
-  - url: https://github.com/lever/postings-api
-    type: Documentation
-  - url: https://github.com/lever/postings-api/blob/master/README.md
-    type: Documentation
-  - url: openapi/lever-postings-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/lever-posting-schema.json
-    type: JSONSchema
-  - type: NaftikoCapability
-    url: capabilities/postings-public.yaml
-  description: The public Lever Postings API lets anyone build a custom careers site by listing a company's
-    published jobs at /v0/postings/{site}, fetching a single posting, and submitting applications. Supports
-    JSON, HTML, and iframe response modes, query filters by location/team/department/commitment, and a
-    multipart application submission endpoint. Available globally and in the EU region.
-- aid: lever-co:lever-postings-xml-feed
-  name: Lever Postings XML Feed
-  tags:
-  - Postings
-  - Jobs
-  - XML
-  - Job Boards
-  - Feeds
-  humanURL: https://hire.lever.co/developer/documentation
-  baseURL: https://api.lever.co/v0/postings
-  properties:
-  - url: https://hire.lever.co/developer/documentation
-    type: Documentation
-  - url: https://api.lever.co/v0/postings/xmlexample?mode=xml
-    type: Sample
-  description: XML feed of all published job postings for a Lever site, designed for distribution to
-    third-party job boards. Returned by appending `?mode=xml` to the Postings API list endpoint. Fields
-    include position, description, location, and commitment type.
-- aid: lever-co:lever-webhooks
-  name: Lever Webhooks
-  tags:
   - Webhooks
-  - Events
-  - Integrations
-  humanURL: https://hire.lever.co/developer/documentation
-  properties:
-  - url: https://hire.lever.co/developer/documentation
-    type: Documentation
-  - url: openapi/lever-webhooks-asyncapi.yml
-    type: AsyncAPI
-  - type: NaftikoCapability
-    url: capabilities/data-webhooks.yaml
-  description: Lever publishes ten webhook events covering the application and candidate lifecycle —
-    applicationCreated, candidateHired, candidateStageChange, candidateArchiveChange, candidateDeleted,
-    interviewCreated, interviewUpdated, interviewDeleted, contactCreated, contactUpdated. Endpoints must
-    be HTTPS and verify the HMAC-SHA256 signature on every delivery.
-name: Lever
-tags:
-- Applicant Tracking
-- ATS
-- CRM
-- Recruiting
-- Hiring
-- Talent Acquisition
-- Human Resources
-- HR Tech
-- Postings
-- Webhooks
-- OAuth
+  - OAuth
 kind: contract
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
-- url: https://www.lever.co/
-  name: Lever Home
-  type: Portal
-- url: https://hire.lever.co/developer
-  name: Lever Developer Portal
-  type: Portal
-- url: https://hire.lever.co/developer/documentation
-  name: Lever Data API Documentation
-  type: Documentation
-- url: https://hire.lever.co/developer/usecases
-  name: Use Cases
-  type: Documentation
-- url: https://hire.lever.co/developer/partner
-  name: Partner Program
-  type: Documentation
-- url: https://github.com/lever
-  name: Lever GitHub Organization
-  type: SourceCode
-- url: https://github.com/lever/postings-api
-  name: Postings API Repo and Examples
-  type: SourceCode
-- url: https://leverpartner.com
-  name: Lever Partner Ecosystem
-  type: Partners
-- url: https://help.lever.co/
-  name: Lever Help Center
-  type: Support
-- url: https://status.lever.co/
-  name: Lever Status
-  type: StatusPage
-- url: https://www.lever.co/blog
-  name: Lever Blog
-  type: Blog
-- url: https://www.lever.co/pricing
-  name: Lever Pricing
-  type: Pricing
-- url: https://www.lever.co/legal/terms-of-service
-  name: Terms of Service
-  type: TermsOfService
-- url: https://www.employinc.com/privacy/
-  name: Privacy Policy
-  type: PrivacyPolicy
-- url: https://www.employinc.com/legal/
-  name: Employ Inc Legal and Security
-  type: Security
-- url: https://www.linkedin.com/company/lever-co
-  name: Lever on LinkedIn
-  type: LinkedIn
-- url: https://www.employinc.com/
-  name: Employ Inc (Parent Company)
-  type: Documentation
-- type: Plans
-  url: https://www.lever.co/pricing
-  name: Plans
-  data:
-  - id: lever
-    name: Lever
-    description: Contact sales for pricing — tailored to organization size and hiring needs.
-    entries:
-    - geo: Global
-      unit: 1
-      label: Organization
-      price: Call
-      metric: organization
-      timeFrame: year
-      description: Custom pricing on request.
-    elements:
-    - name: Applicant Tracking System (ATS)
-    - name: Candidate Relationship Management (CRM)
-    - name: Advanced reporting and analytics
-    - name: Integrations ecosystem
-    - name: Candidate Insights (optional add-on)
-    - name: AI Screening by VONQ (optional add-on)
-    - name: Onboarding (optional add-on)
-- type: RateLimits
-  url: rate-limits/lever-co-rate-limits.yml
-  name: Rate Limits
-- type: Plans
-  url: plans/lever-co-plans-pricing.yml
-  name: API Commons Plans
-- type: FinOps
-  url: finops/lever-co-finops.yml
-  name: FinOps
-- url: https://hire.lever.co/developer/documentation
-  name: OAuth Authentication
-  type: Authentication
+  - url: https://www.lever.co/
+    name: Lever Home
+    type: Portal
+  - url: https://hire.lever.co/developer
+    name: Lever Developer Portal
+    type: Portal
+  - url: https://hire.lever.co/developer/documentation
+    name: Lever Data API Documentation
+    type: Documentation
+  - url: https://hire.lever.co/developer/usecases
+    name: Use Cases
+    type: Documentation
+  - url: https://hire.lever.co/developer/partner
+    name: Partner Program
+    type: Documentation
+  - url: https://github.com/lever
+    name: Lever GitHub Organization
+    type: SourceCode
+  - url: https://github.com/lever/postings-api
+    name: Postings API Repo and Examples
+    type: SourceCode
+  - url: https://leverpartner.com
+    name: Lever Partner Ecosystem
+    type: Partners
+  - url: https://help.lever.co/
+    name: Lever Help Center
+    type: Support
+  - url: https://status.lever.co/
+    name: Lever Status
+    type: StatusPage
+  - url: https://www.lever.co/blog
+    name: Lever Blog
+    type: Blog
+  - url: https://www.lever.co/pricing
+    name: Lever Pricing
+    type: Pricing
+  - url: https://www.lever.co/legal/terms-of-service
+    name: Terms of Service
+    type: TermsOfService
+  - url: https://www.employinc.com/privacy/
+    name: Privacy Policy
+    type: PrivacyPolicy
+  - url: https://www.employinc.com/legal/
+    name: Employ Inc Legal and Security
+    type: Security
+  - url: https://www.linkedin.com/company/lever-co
+    name: Lever on LinkedIn
+    type: LinkedIn
+  - url: https://www.employinc.com/
+    name: Employ Inc (Parent Company)
+    type: Documentation
+  - type: Plans
+    url: https://www.lever.co/pricing
+    name: Plans
+    data:
+      - id: lever
+        name: Lever
+        description: Contact sales for pricing — tailored to organization size and hiring needs.
+        entries:
+          - geo: Global
+            unit: 1
+            label: Organization
+            price: Call
+            metric: organization
+            timeFrame: year
+            description: Custom pricing on request.
+        elements:
+          - name: Applicant Tracking System (ATS)
+          - name: Candidate Relationship Management (CRM)
+          - name: Advanced reporting and analytics
+          - name: Integrations ecosystem
+          - name: Candidate Insights (optional add-on)
+          - name: AI Screening by VONQ (optional add-on)
+          - name: Onboarding (optional add-on)
+  - type: RateLimits
+    url: rate-limits/lever-co-rate-limits.yml
+    name: Rate Limits
+  - type: Plans
+    url: plans/lever-co-plans-pricing.yml
+    name: API Commons Plans
+  - type: FinOps
+    url: finops/lever-co-finops.yml
+    name: FinOps
+  - url: https://hire.lever.co/developer/documentation
+    name: OAuth Authentication
+    type: Authentication
 properties:
-- type: Vocabulary
-  url: vocabulary/lever-co-vocabulary.yml
+  - type: Vocabulary
+    url: vocabulary/lever-co-vocabulary.yml
 include: []
 maintainers:
-- FN: Kin Lane
-  url: https://kinlane.com
-  email: info@apievangelist.com
+  - FN: Kin Lane
+    url: https://kinlane.com
+    email: info@apievangelist.com

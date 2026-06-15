@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lever Postings API",
+    "version": "0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Postings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Public Postings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v0/postings/:site",
+            "params": [
+              {
+                "name": "site",
+                "value": "",
+                "type": "path",
+                "description": "Lever company site name (e.g. `acmeco`)."
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "commitment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "team",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "department",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query",
+                "description": "Group results by `location`, `commitment`, `team`, `department`, or `level`."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Response format."
+              },
+              {
+                "name": "css",
+                "value": "",
+                "type": "query",
+                "description": "Optional URL of a CSS stylesheet to apply when mode is `html` or `iframe`."
+              },
+              {
+                "name": "resize",
+                "value": "",
+                "type": "query",
+                "description": "Enable iframe auto-resize."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of published postings for the given Lever site. Supports JSON (default),\nHTML, and iframe response modes via the `mode` query parameter.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve A Public Posting",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v0/postings/:site/:postingId",
+            "params": [
+              {
+                "name": "site",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "postingId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single published posting as JSON."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Submit An Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lever.co/v0/postings/:site/:postingId",
+            "params": [
+              {
+                "name": "site",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "postingId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Posting-form API key."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an application against a posting. Accepts either JSON or multipart/form-data.\nRequires a posting-form API key passed via `?key=`.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
