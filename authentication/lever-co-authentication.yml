@@ -1,0 +1,26 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/lever-data-api-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+schemes:
+- name: BasicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic authentication using a Lever API key as the username and an empty
+    password.
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.lever.co/authorize
+    tokenUrl: https://auth.lever.co/oauth/token
+    scopes: 22
+  sources:
+  - openapi/lever-data-api-openapi.yml

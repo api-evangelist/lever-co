@@ -105,6 +105,14 @@ kind: contract
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+  - type: TrustCenter
+    url: security/lever-co-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/lever-co-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/lever-co-domain-security.yml
+  - type: Authentication
+    url: authentication/lever-co-authentication.yml
   - type: OAuthScopes
     url: scopes/lever-co-scopes.yml
   - url: https://www.lever.co/
