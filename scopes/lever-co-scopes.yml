@@ -1,0 +1,143 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/lever-data-api-openapi.yml
+schemes:
+- name: OAuth2
+  source: openapi/lever-data-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://auth.lever.co/authorize
+    tokenUrl: https://auth.lever.co/oauth/token
+scopes:
+- scope: audit_events:read:admin
+  description: Read audit log events.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: confidential:access:admin
+  description: Access confidential records.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: eeo_responses:read:admin
+  description: Read EEO survey responses.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: eeo_responses_pii:read:admin
+  description: Read EEO survey responses with PII.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: feedback:read:admin
+  description: Read feedback.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: feedback:write:admin
+  description: Write feedback.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: files:read:admin
+  description: Read files.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: files:write:admin
+  description: Write files.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: interviews:read:admin
+  description: Read interviews.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: interviews:write:admin
+  description: Write interviews.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: offers:read:admin
+  description: Read offers.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: offline_access
+  description: Issue refresh tokens.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: opportunities:read:admin
+  description: Read opportunities.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: opportunities:write:admin
+  description: Write opportunities.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: postings:read:admin
+  description: Read postings.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: postings:write:admin
+  description: Write postings.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: requisitions:read:admin
+  description: Read requisitions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: requisitions:write:admin
+  description: Write requisitions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: users:read:admin
+  description: Read users.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: users:write:admin
+  description: Write users.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: webhooks:read:admin
+  description: Read webhook subscriptions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
+- scope: webhooks:write:admin
+  description: Write webhook subscriptions.
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/lever-data-api-openapi.yml
