@@ -1,93 +1,439 @@
 aid: lever-co
 url: https://raw.githubusercontent.com/api-evangelist/lever-co/refs/heads/main/apis.yml
 apis:
-  - aid: lever-co:lever-data-api
-    name: Lever Data API
-    tags:
-      - Applicant Tracking
-      - ATS
-      - CRM
-      - Recruiting
-      - Hiring
-      - Opportunities
-      - Candidates
-    humanURL: https://hire.lever.co/developer/documentation
-    baseURL: https://api.lever.co/v1
-    properties:
-      - url: https://hire.lever.co/developer/documentation
-        type: Documentation
-      - url: openapi/lever-data-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/lever-opportunity-schema.json
-        type: JSONSchema
-      - url: json-schema/lever-posting-schema.json
-        type: JSONSchema
-      - url: json-ld/lever-co-context.jsonld
-        type: JSONLD
-    description: >-
-      The Lever Data API exposes the full recruiting workflow — Opportunities (candidates), Postings, Applications,
-      Interviews, Feedback, Notes, Offers, Requisitions, Stages, Files, Tags, Sources, Users, Audit Events, EEO
-      Responses, and Webhooks — over a JSON REST surface at api.lever.co/v1. Supports OAuth 2.0 Authorization Code Grant
-      and HTTP Basic with a personal API key, with fine-grained scopes per resource and per read/write action.
-  - aid: lever-co:lever-postings-api
-    name: Lever Postings API
-    tags:
-      - Postings
-      - Jobs
-      - Careers
-      - Recruiting
-    humanURL: https://github.com/lever/postings-api
-    baseURL: https://api.lever.co/v0/postings
-    properties:
-      - url: https://github.com/lever/postings-api
-        type: Documentation
-      - url: https://github.com/lever/postings-api/blob/master/README.md
-        type: Documentation
-      - url: openapi/lever-postings-api-openapi.yml
-        type: OpenAPI
-      - url: json-schema/lever-posting-schema.json
-        type: JSONSchema
-    description: >-
-      The public Lever Postings API lets anyone build a custom careers site by listing a company's published jobs at
-      /v0/postings/{site}, fetching a single posting, and submitting applications. Supports JSON, HTML, and iframe
-      response modes, query filters by location/team/department/commitment, and a multipart application submission
-      endpoint. Available globally and in the EU region.
-  - aid: lever-co:lever-postings-xml-feed
-    name: Lever Postings XML Feed
-    tags:
-      - Postings
-      - Jobs
-      - XML
-      - Job Boards
-      - Feeds
-    humanURL: https://hire.lever.co/developer/documentation
-    baseURL: https://api.lever.co/v0/postings
-    properties:
-      - url: https://hire.lever.co/developer/documentation
-        type: Documentation
-      - url: https://api.lever.co/v0/postings/xmlexample?mode=xml
-        type: Sample
-    description: >-
-      XML feed of all published job postings for a Lever site, designed for distribution to third-party job boards.
-      Returned by appending `?mode=xml` to the Postings API list endpoint. Fields include position, description,
-      location, and commitment type.
-  - aid: lever-co:lever-webhooks
-    name: Lever Webhooks
-    tags:
-      - Webhooks
-      - Events
-      - Integrations
-    humanURL: https://hire.lever.co/developer/documentation
-    properties:
-      - url: https://hire.lever.co/developer/documentation
-        type: Documentation
-      - url: openapi/lever-webhooks-asyncapi.yml
-        type: AsyncAPI
-    description: >-
-      Lever publishes ten webhook events covering the application and candidate lifecycle — applicationCreated,
-      candidateHired, candidateStageChange, candidateArchiveChange, candidateDeleted, interviewCreated,
-      interviewUpdated, interviewDeleted, contactCreated, contactUpdated. Endpoints must be HTTPS and verify the
-      HMAC-SHA256 signature on every delivery.
+- aid: lever-co:lever-postings-xml-feed
+  name: Lever Postings XML Feed
+  tags:
+  - Postings
+  - Jobs
+  - XML
+  - Job Boards
+  - Feeds
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v0/postings
+  properties:
+  - url: https://hire.lever.co/developer/documentation
+    type: Documentation
+  - url: https://api.lever.co/v0/postings/xmlexample?mode=xml
+    type: Sample
+  description: >-
+    XML feed of all published job postings for a Lever site, designed for distribution to third-party
+    job boards. Returned by appending `?mode=xml` to the Postings API list endpoint. Fields include position,
+    description, location, and commitment type.
+- aid: lever-co:lever-webhooks
+  name: Lever Webhooks
+  tags:
+  - Webhooks
+  - Events
+  - Integrations
+  humanURL: https://hire.lever.co/developer/documentation
+  properties:
+  - url: https://hire.lever.co/developer/documentation
+    type: Documentation
+  - url: openapi/lever-webhooks-asyncapi.yml
+    type: AsyncAPI
+  description: >-
+    Lever publishes ten webhook events covering the application and candidate lifecycle — applicationCreated,
+    candidateHired, candidateStageChange, candidateArchiveChange, candidateDeleted, interviewCreated,
+    interviewUpdated, interviewDeleted, contactCreated, contactUpdated. Endpoints must be HTTPS and verify
+    the HMAC-SHA256 signature on every delivery.
+- aid: lever-co:lever-co-applications-api
+  name: Lever Applications API
+  description: A candidate's application to a specific posting on an opportunity.
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-applications-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-archive-reasons-api
+  name: Lever Archive Reasons API
+  description: Reasons candidates are archived (rejected, withdrew, hired, etc).
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Archive Reasons
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-archive-reasons-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-audit-events-api
+  name: Lever Audit Events API
+  description: Audit log of admin and security-relevant actions.
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Audit Events
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-audit-events-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-eeo-responses-api
+  name: Lever EEO Responses API
+  description: Equal Employment Opportunity survey responses.
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - EEO Responses
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-eeo-responses-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-feedback-api
+  name: Lever Feedback API
+  description: Structured interview feedback from interviewers.
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Feedback
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-feedback-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-files-api
+  name: Lever Files API
+  description: Resumes and other attachments on an opportunity.
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-files-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-interviews-api
+  name: Lever Interviews API
+  description: Scheduled interviews on an opportunity.
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Interviews
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-interviews-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-notes-api
+  name: Lever Notes API
+  description: Free-form notes captured on an opportunity.
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Notes
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-notes-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-offers-api
+  name: Lever Offers API
+  description: Offer records associated with hired candidates.
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Offers
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-offers-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-opportunities-api
+  name: Lever Opportunities API
+  description: >-
+    Opportunities are the unified record for a candidate at a posting (replaces legacy Candidates).
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Opportunities
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-opportunities-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-panels-api
+  name: Lever Panels API
+  description: Interview panels comprising multiple interviewers.
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Panels
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-panels-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-postings-api
+  name: Lever Postings API
+  description: Job postings published to the company careers site.
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Postings
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-postings-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-requisitions-api
+  name: Lever Requisitions API
+  description: Headcount-tracking job requisitions backing postings.
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Requisitions
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-requisitions-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-sources-api
+  name: Lever Sources API
+  description: How candidates entered the pipeline (referral, agency, job board, sourced, etc).
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-sources-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-stages-api
+  name: Lever Stages API
+  description: Pipeline stages (lead, applicant, phone screen, on-site, offer, hired, archived).
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Stages
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-stages-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-tags-api
+  name: Lever Tags API
+  description: Free-form tags applied to opportunities.
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-tags-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-users-api
+  name: Lever Users API
+  description: Lever users (recruiters, hiring managers, interviewers, admins).
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-users-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
+- aid: lever-co:lever-co-webhooks-api
+  name: Lever Webhooks API
+  description: Outbound event subscriptions.
+  humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/lever-co-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://hire.lever.co/developer/documentation
+  - type: JSONSchema
+    url: json-schema/lever-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/lever-posting-schema.json
+  - type: JSONLD
+    url: json-ld/lever-co-context.jsonld
+  - type: Documentation
+    url: https://github.com/lever/postings-api
+  - type: Documentation
+    url: https://github.com/lever/postings-api/blob/master/README.md
 name: Lever
 tags:
   - Applicant Tracking
@@ -102,9 +448,24 @@ tags:
   - Webhooks
   - OAuth
 kind: contract
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/lever-co.png
 access: 3rd-Party
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/lever/overview
   - type: AgenticAccess
     url: agentic-access/lever-co-agentic-access.yml
   - type: TrustCenter
