@@ -1,0 +1,315 @@
+{
+  "info": {
+    "_postman_id": "9ea47a0c-50a8-4af4-92ee-dfefa8a91c28",
+    "name": "Lever Data Applications Files API",
+    "description": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:05:58.000Z",
+    "updatedAt": "2026-07-28T02:05:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9ea47a0c-50a8-4af4-92ee-dfefa8a91c28"
+  },
+  "item": [
+    {
+      "name": "files",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve A File",
+              "id": "a92f841d-56b5-4394-a51b-04404df764d9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/files/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "files",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "cd125adc-8307-49ec-aa9c-4ef75a37eecb",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "402c2159-cd42-4312-94cf-8c0f9bc36169",
+                  "name": "The file.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:05:58.000Z",
+                  "updatedAt": "2026-07-28T02:05:58.000Z",
+                  "uid": "35240-402c2159-cd42-4312-94cf-8c0f9bc36169"
+                }
+              ],
+              "createdAt": "2026-07-28T02:05:58.000Z",
+              "updatedAt": "2026-07-28T02:05:58.000Z",
+              "uid": "35240-a92f841d-56b5-4394-a51b-04404df764d9"
+            },
+            {
+              "name": "Delete A File",
+              "id": "b0034a3c-873d-4a0c-aef2-553189d230d3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/files/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "files",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d4bd73fc-1d8f-44a6-adbb-11a5c099bfe6",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "414a5ddc-ccc0-47a1-a1d8-4ce9a33ccd63",
+                  "name": "File deleted.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/files/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "files",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:05:58.000Z",
+                  "updatedAt": "2026-07-28T02:05:58.000Z",
+                  "uid": "35240-414a5ddc-ccc0-47a1-a1d8-4ce9a33ccd63"
+                }
+              ],
+              "createdAt": "2026-07-28T02:05:58.000Z",
+              "updatedAt": "2026-07-28T02:05:58.000Z",
+              "uid": "35240-b0034a3c-873d-4a0c-aef2-553189d230d3"
+            }
+          ],
+          "id": "6a0e91a1-ca72-4df7-aac4-a693e2276c2a",
+          "createdAt": "2026-07-28T02:05:58.000Z",
+          "updatedAt": "2026-07-28T02:05:58.000Z",
+          "uid": "35240-6a0e91a1-ca72-4df7-aac4-a693e2276c2a"
+        },
+        {
+          "name": "List Files",
+          "id": "0f75b746-1628-43dd-aa24-7e11a7b440b2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/files",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "files"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "513cc948-eca0-40ea-96e7-b63ca67306a7",
+              "name": "Files.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/files",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "files"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:05:58.000Z",
+              "updatedAt": "2026-07-28T02:05:58.000Z",
+              "uid": "35240-513cc948-eca0-40ea-96e7-b63ca67306a7"
+            }
+          ],
+          "createdAt": "2026-07-28T02:05:58.000Z",
+          "updatedAt": "2026-07-28T02:05:58.000Z",
+          "uid": "35240-0f75b746-1628-43dd-aa24-7e11a7b440b2"
+        },
+        {
+          "name": "Upload A File",
+          "id": "247dbe97-0f63-4fb6-8771-f260b9148f1a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/files",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "files"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "26516f33-5dc2-491f-8574-2529e118690a",
+              "name": "File uploaded.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/files",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "files"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:05:58.000Z",
+              "updatedAt": "2026-07-28T02:05:58.000Z",
+              "uid": "35240-26516f33-5dc2-491f-8574-2529e118690a"
+            }
+          ],
+          "createdAt": "2026-07-28T02:05:58.000Z",
+          "updatedAt": "2026-07-28T02:05:58.000Z",
+          "uid": "35240-247dbe97-0f63-4fb6-8771-f260b9148f1a"
+        }
+      ],
+      "id": "77d15445-6ecf-48f6-bd84-e10952963cac",
+      "createdAt": "2026-07-28T02:05:58.000Z",
+      "updatedAt": "2026-07-28T02:05:58.000Z",
+      "uid": "35240-77d15445-6ecf-48f6-bd84-e10952963cac"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lever.co/v1"
+    }
+  ]
+}

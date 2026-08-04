@@ -1,0 +1,498 @@
+{
+  "info": {
+    "_postman_id": "a57cab29-aaf6-41b6-82d3-db9840bd52c5",
+    "name": "Lever Data Applications API",
+    "description": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:05:45.000Z",
+    "updatedAt": "2026-07-28T02:05:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a57cab29-aaf6-41b6-82d3-db9840bd52c5"
+  },
+  "item": [
+    {
+      "name": "opportunities",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "applications",
+              "item": [
+                {
+                  "name": "List Applications For An Opportunity",
+                  "id": "ea3fa748-2a50-485a-b0a0-45459b0200c5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/opportunities/:id/applications",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "opportunities",
+                        ":id",
+                        "applications"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d426826e-2861-46ef-bf55-07796f538c83",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "cfe85b11-0dfc-4f09-92de-737913c488fc",
+                      "name": "Applications for the opportunity.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/opportunities/:id/applications",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "opportunities",
+                            ":id",
+                            "applications"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:05:45.000Z",
+                      "updatedAt": "2026-07-28T02:05:45.000Z",
+                      "uid": "35240-cfe85b11-0dfc-4f09-92de-737913c488fc"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:05:45.000Z",
+                  "updatedAt": "2026-07-28T02:05:45.000Z",
+                  "uid": "35240-ea3fa748-2a50-485a-b0a0-45459b0200c5"
+                }
+              ],
+              "id": "e5ba7b0c-278d-4b9c-ba33-2d2e13729b4b",
+              "createdAt": "2026-07-28T02:05:45.000Z",
+              "updatedAt": "2026-07-28T02:05:45.000Z",
+              "uid": "35240-e5ba7b0c-278d-4b9c-ba33-2d2e13729b4b"
+            }
+          ],
+          "id": "b3feb741-589d-4f87-9532-63bab86f89ae",
+          "createdAt": "2026-07-28T02:05:45.000Z",
+          "updatedAt": "2026-07-28T02:05:45.000Z",
+          "uid": "35240-b3feb741-589d-4f87-9532-63bab86f89ae"
+        }
+      ],
+      "id": "cad02b5c-ac13-4edb-bf30-38cbef37f5c3",
+      "createdAt": "2026-07-28T02:05:45.000Z",
+      "updatedAt": "2026-07-28T02:05:45.000Z",
+      "uid": "35240-cad02b5c-ac13-4edb-bf30-38cbef37f5c3"
+    },
+    {
+      "name": "{site}",
+      "item": [
+        {
+          "name": "{postingId}",
+          "item": [
+            {
+              "name": "Submit An Application",
+              "id": "681fbf10-cb60-4145-84d9-1339ed458958",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) ",
+                      "key": "name",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": "(Required) ",
+                      "key": "email",
+                      "value": "<email>",
+                      "type": "text"
+                    },
+                    {
+                      "key": "phone",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "key": "org",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "key": "resume",
+                      "type": "file",
+                      "value": null
+                    },
+                    {
+                      "key": "urls",
+                      "value": "<uri>,<uri>",
+                      "type": "text"
+                    },
+                    {
+                      "key": "comments",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "key": "source",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "key": "ip",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "key": "referer",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "key": "consent",
+                      "value": "[object Object]",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/:site/:postingId?key=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":site",
+                    ":postingId"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Posting-form API key.",
+                      "key": "key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "38570a84-e774-428b-b207-ad62b5a930da",
+                      "key": "site",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    },
+                    {
+                      "id": "ecf10777-435b-4522-8afc-312d5896faf5",
+                      "key": "postingId",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Submit an application against a posting. Accepts either JSON or multipart/form-data.\nRequires a posting-form API key passed via `?key=`.\n"
+              },
+              "response": [
+                {
+                  "id": "0e0bb8b7-21ef-4f87-a352-5d368b1214ce",
+                  "name": "Application submitted.",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) ",
+                          "key": "name",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "email",
+                          "value": "<email>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "phone",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "org",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "resume",
+                          "type": "file"
+                        },
+                        {
+                          "key": "urls",
+                          "value": "<uri>,<uri>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "comments",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "source",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "ip",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "referer",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "consent",
+                          "value": "[object Object]",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:site/:postingId?key=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":site",
+                        ":postingId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Posting-form API key.",
+                          "key": "key",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "site"
+                        },
+                        {
+                          "key": "postingId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:05:45.000Z",
+                  "updatedAt": "2026-07-28T02:05:45.000Z",
+                  "uid": "35240-0e0bb8b7-21ef-4f87-a352-5d368b1214ce"
+                },
+                {
+                  "id": "ef4154cd-3e36-4970-9247-c539e11ad389",
+                  "name": "Rate-limited (max 2 POST per second per site).",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) ",
+                          "key": "name",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "(Required) ",
+                          "key": "email",
+                          "value": "<email>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "phone",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "org",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "resume",
+                          "type": "file"
+                        },
+                        {
+                          "key": "urls",
+                          "value": "<uri>,<uri>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "comments",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "source",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "ip",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "referer",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "key": "consent",
+                          "value": "[object Object]",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:site/:postingId?key=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":site",
+                        ":postingId"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Posting-form API key.",
+                          "key": "key",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "site"
+                        },
+                        {
+                          "key": "postingId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Too Many Requests",
+                  "code": 429,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:05:45.000Z",
+                  "updatedAt": "2026-07-28T02:05:45.000Z",
+                  "uid": "35240-ef4154cd-3e36-4970-9247-c539e11ad389"
+                }
+              ],
+              "createdAt": "2026-07-28T02:05:45.000Z",
+              "updatedAt": "2026-07-28T02:05:45.000Z",
+              "uid": "35240-681fbf10-cb60-4145-84d9-1339ed458958"
+            }
+          ],
+          "id": "b1da6fad-6903-4db5-b8a6-43fd0572e365",
+          "createdAt": "2026-07-28T02:05:45.000Z",
+          "updatedAt": "2026-07-28T02:05:45.000Z",
+          "uid": "35240-b1da6fad-6903-4db5-b8a6-43fd0572e365"
+        }
+      ],
+      "id": "51537777-d4e4-4e8e-9289-2a359185d5db",
+      "createdAt": "2026-07-28T02:05:45.000Z",
+      "updatedAt": "2026-07-28T02:05:45.000Z",
+      "uid": "35240-51537777-d4e4-4e8e-9289-2a359185d5db"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lever.co/v1"
+    }
+  ]
+}

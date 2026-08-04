@@ -1,0 +1,315 @@
+{
+  "info": {
+    "_postman_id": "8271b67f-2a6a-4329-bcc7-83e1f4f335d9",
+    "name": "Lever Data Applications Panels API",
+    "description": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:06:28.000Z",
+    "updatedAt": "2026-07-28T02:06:29.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8271b67f-2a6a-4329-bcc7-83e1f4f335d9"
+  },
+  "item": [
+    {
+      "name": "panels",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Update A Panel",
+              "id": "c3c58044-5615-49ed-b12c-3c15a2dadc8d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/panels/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "panels",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "d2c8ca95-0a83-41a0-b786-12ed37399a99",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "d8f50e10-1288-49a5-b9f4-4b23dbd15299",
+                  "name": "Panel updated.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/panels/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "panels",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:06:29.000Z",
+                  "updatedAt": "2026-07-28T02:06:29.000Z",
+                  "uid": "35240-d8f50e10-1288-49a5-b9f4-4b23dbd15299"
+                }
+              ],
+              "createdAt": "2026-07-28T02:06:29.000Z",
+              "updatedAt": "2026-07-28T02:06:29.000Z",
+              "uid": "35240-c3c58044-5615-49ed-b12c-3c15a2dadc8d"
+            },
+            {
+              "name": "Delete A Panel",
+              "id": "d601059d-cbb7-449a-9ebf-494d58ec0a57",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/panels/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "panels",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3a7dd432-bd53-45db-8342-398f46dee1a9",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "eb1cc689-463c-4bf8-8def-ecce574140a2",
+                  "name": "Panel deleted.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/panels/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "panels",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:06:29.000Z",
+                  "updatedAt": "2026-07-28T02:06:29.000Z",
+                  "uid": "35240-eb1cc689-463c-4bf8-8def-ecce574140a2"
+                }
+              ],
+              "createdAt": "2026-07-28T02:06:29.000Z",
+              "updatedAt": "2026-07-28T02:06:29.000Z",
+              "uid": "35240-d601059d-cbb7-449a-9ebf-494d58ec0a57"
+            }
+          ],
+          "id": "7efa8bc3-93bb-493f-9d75-6d17513e88e6",
+          "createdAt": "2026-07-28T02:06:29.000Z",
+          "updatedAt": "2026-07-28T02:06:29.000Z",
+          "uid": "35240-7efa8bc3-93bb-493f-9d75-6d17513e88e6"
+        },
+        {
+          "name": "List Panels",
+          "id": "6cd0e475-4f9b-49aa-a86c-670007782dce",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/panels",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "panels"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2e6a651d-ca7e-4aaf-96bb-efe42d504422",
+              "name": "Panels.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/panels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "panels"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:06:29.000Z",
+              "updatedAt": "2026-07-28T02:06:29.000Z",
+              "uid": "35240-2e6a651d-ca7e-4aaf-96bb-efe42d504422"
+            }
+          ],
+          "createdAt": "2026-07-28T02:06:29.000Z",
+          "updatedAt": "2026-07-28T02:06:29.000Z",
+          "uid": "35240-6cd0e475-4f9b-49aa-a86c-670007782dce"
+        },
+        {
+          "name": "Create A Panel",
+          "id": "eea2c600-87a9-4767-b073-b70addd56a7d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/panels",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "panels"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "975bd89e-af09-4f53-bd4e-65467da55067",
+              "name": "Panel created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/panels",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "panels"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:06:29.000Z",
+              "updatedAt": "2026-07-28T02:06:29.000Z",
+              "uid": "35240-975bd89e-af09-4f53-bd4e-65467da55067"
+            }
+          ],
+          "createdAt": "2026-07-28T02:06:29.000Z",
+          "updatedAt": "2026-07-28T02:06:29.000Z",
+          "uid": "35240-eea2c600-87a9-4767-b073-b70addd56a7d"
+        }
+      ],
+      "id": "db0a16a3-60d2-43ff-8f2e-2da011690ae1",
+      "createdAt": "2026-07-28T02:06:29.000Z",
+      "updatedAt": "2026-07-28T02:06:29.000Z",
+      "uid": "35240-db0a16a3-60d2-43ff-8f2e-2da011690ae1"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lever.co/v1"
+    }
+  ]
+}

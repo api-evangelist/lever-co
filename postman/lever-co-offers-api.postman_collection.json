@@ -1,0 +1,102 @@
+{
+  "info": {
+    "_postman_id": "94fe64aa-38d4-4e58-a364-9a8096f0b66f",
+    "name": "Lever Data Applications Offers API",
+    "description": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:06:23.000Z",
+    "updatedAt": "2026-07-28T02:06:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-94fe64aa-38d4-4e58-a364-9a8096f0b66f"
+  },
+  "item": [
+    {
+      "name": "offers",
+      "item": [
+        {
+          "name": "List Offers",
+          "id": "be04ba59-6a7a-473f-83bd-207c14ff3263",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/offers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "offers"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9f4e9e5f-277d-47b1-bb02-ea0c33aac7d9",
+              "name": "Offers.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/offers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "offers"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:06:23.000Z",
+              "updatedAt": "2026-07-28T02:06:23.000Z",
+              "uid": "35240-9f4e9e5f-277d-47b1-bb02-ea0c33aac7d9"
+            }
+          ],
+          "createdAt": "2026-07-28T02:06:23.000Z",
+          "updatedAt": "2026-07-28T02:06:23.000Z",
+          "uid": "35240-be04ba59-6a7a-473f-83bd-207c14ff3263"
+        }
+      ],
+      "id": "1e5447bc-ca65-428b-a93d-ad0b8ad8d6d0",
+      "createdAt": "2026-07-28T02:06:23.000Z",
+      "updatedAt": "2026-07-28T02:06:23.000Z",
+      "uid": "35240-1e5447bc-ca65-428b-a93d-ad0b8ad8d6d0"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lever.co/v1"
+    }
+  ]
+}

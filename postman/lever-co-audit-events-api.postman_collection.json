@@ -1,0 +1,102 @@
+{
+  "info": {
+    "_postman_id": "801424c9-3cfa-4b03-b81b-a0605f91a42b",
+    "name": "Lever Data Applications Audit Events API",
+    "description": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:05:52.000Z",
+    "updatedAt": "2026-07-28T02:05:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-801424c9-3cfa-4b03-b81b-a0605f91a42b"
+  },
+  "item": [
+    {
+      "name": "audit_events",
+      "item": [
+        {
+          "name": "List Audit Events",
+          "id": "5286617c-a6dd-4f7a-bc86-a9f9dd56f1f6",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/audit_events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "audit_events"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "86c9ecc0-c40b-49c0-b809-43f8597b07e8",
+              "name": "Audit events.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/audit_events",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "audit_events"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:05:53.000Z",
+              "updatedAt": "2026-07-28T02:05:53.000Z",
+              "uid": "35240-86c9ecc0-c40b-49c0-b809-43f8597b07e8"
+            }
+          ],
+          "createdAt": "2026-07-28T02:05:53.000Z",
+          "updatedAt": "2026-07-28T02:05:53.000Z",
+          "uid": "35240-5286617c-a6dd-4f7a-bc86-a9f9dd56f1f6"
+        }
+      ],
+      "id": "4c65c21f-38d6-4612-bd03-a9815ea29494",
+      "createdAt": "2026-07-28T02:05:53.000Z",
+      "updatedAt": "2026-07-28T02:05:53.000Z",
+      "uid": "35240-4c65c21f-38d6-4612-bd03-a9815ea29494"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lever.co/v1"
+    }
+  ]
+}

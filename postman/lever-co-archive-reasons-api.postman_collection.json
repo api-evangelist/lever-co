@@ -1,0 +1,184 @@
+{
+  "info": {
+    "_postman_id": "56fd6db7-099b-4776-a3c9-a7b1fed75821",
+    "name": "Lever Data Applications Archive Reasons API",
+    "description": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:05:51.000Z",
+    "updatedAt": "2026-07-28T02:05:51.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-56fd6db7-099b-4776-a3c9-a7b1fed75821"
+  },
+  "item": [
+    {
+      "name": "archive_reasons",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve An Archive Reason",
+              "id": "68c6646a-727d-4f1c-9159-0aadf609154e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/archive_reasons/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "archive_reasons",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8d6d0188-c56c-449b-871b-89ae242f33cd",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "09dd3fdd-a2ea-42fc-86c8-a16459b76b67",
+                  "name": "The archive reason.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/archive_reasons/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "archive_reasons",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:05:51.000Z",
+                  "updatedAt": "2026-07-28T02:05:51.000Z",
+                  "uid": "35240-09dd3fdd-a2ea-42fc-86c8-a16459b76b67"
+                }
+              ],
+              "createdAt": "2026-07-28T02:05:51.000Z",
+              "updatedAt": "2026-07-28T02:05:51.000Z",
+              "uid": "35240-68c6646a-727d-4f1c-9159-0aadf609154e"
+            }
+          ],
+          "id": "84b1c572-55e3-4fed-b59d-40f037eeff85",
+          "createdAt": "2026-07-28T02:05:51.000Z",
+          "updatedAt": "2026-07-28T02:05:51.000Z",
+          "uid": "35240-84b1c572-55e3-4fed-b59d-40f037eeff85"
+        },
+        {
+          "name": "List Archive Reasons",
+          "id": "e45ce757-887f-47d7-8a28-5e68f666c6b2",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/archive_reasons",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "archive_reasons"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3947da3f-caf1-422c-afb7-71af74dd40c6",
+              "name": "Archive reasons.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/archive_reasons",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "archive_reasons"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:05:51.000Z",
+              "updatedAt": "2026-07-28T02:05:51.000Z",
+              "uid": "35240-3947da3f-caf1-422c-afb7-71af74dd40c6"
+            }
+          ],
+          "createdAt": "2026-07-28T02:05:51.000Z",
+          "updatedAt": "2026-07-28T02:05:51.000Z",
+          "uid": "35240-e45ce757-887f-47d7-8a28-5e68f666c6b2"
+        }
+      ],
+      "id": "6fc9fc4c-cd1a-4b77-8d3b-ec71e17e1743",
+      "createdAt": "2026-07-28T02:05:51.000Z",
+      "updatedAt": "2026-07-28T02:05:51.000Z",
+      "uid": "35240-6fc9fc4c-cd1a-4b77-8d3b-ec71e17e1743"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lever.co/v1"
+    }
+  ]
+}

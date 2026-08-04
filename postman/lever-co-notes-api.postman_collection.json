@@ -1,0 +1,212 @@
+{
+  "info": {
+    "_postman_id": "c065495e-d332-4bf7-b658-e795c38337e2",
+    "name": "Lever Data Applications Notes API",
+    "description": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:06:16.000Z",
+    "updatedAt": "2026-07-28T02:06:16.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c065495e-d332-4bf7-b658-e795c38337e2"
+  },
+  "item": [
+    {
+      "name": "opportunities",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "notes",
+              "item": [
+                {
+                  "name": "List Notes",
+                  "id": "f69eb551-1001-4ef9-8a37-5dfd4d243bba",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/opportunities/:id/notes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "opportunities",
+                        ":id",
+                        "notes"
+                      ],
+                      "variable": [
+                        {
+                          "id": "163693a0-6ab4-4abc-8839-f605a27080ef",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "e8e031f6-e14f-4745-8b09-72885c51806f",
+                      "name": "Notes on the opportunity.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/opportunities/:id/notes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "opportunities",
+                            ":id",
+                            "notes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:06:16.000Z",
+                      "updatedAt": "2026-07-28T02:06:16.000Z",
+                      "uid": "35240-e8e031f6-e14f-4745-8b09-72885c51806f"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:06:16.000Z",
+                  "updatedAt": "2026-07-28T02:06:16.000Z",
+                  "uid": "35240-f69eb551-1001-4ef9-8a37-5dfd4d243bba"
+                },
+                {
+                  "name": "Create A Note",
+                  "id": "ec9f1d66-3d12-49c6-90ca-924b481c48ab",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/opportunities/:id/notes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "opportunities",
+                        ":id",
+                        "notes"
+                      ],
+                      "variable": [
+                        {
+                          "id": "abce548c-292a-41ee-95b0-cad0eab09511",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "14ca9860-2cef-40c3-b314-9e03dfc74415",
+                      "name": "Note created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/opportunities/:id/notes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "opportunities",
+                            ":id",
+                            "notes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:06:16.000Z",
+                      "updatedAt": "2026-07-28T02:06:16.000Z",
+                      "uid": "35240-14ca9860-2cef-40c3-b314-9e03dfc74415"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:06:16.000Z",
+                  "updatedAt": "2026-07-28T02:06:16.000Z",
+                  "uid": "35240-ec9f1d66-3d12-49c6-90ca-924b481c48ab"
+                }
+              ],
+              "id": "57fbff8f-51c5-4489-804d-27209677c94b",
+              "createdAt": "2026-07-28T02:06:16.000Z",
+              "updatedAt": "2026-07-28T02:06:16.000Z",
+              "uid": "35240-57fbff8f-51c5-4489-804d-27209677c94b"
+            }
+          ],
+          "id": "96b323a4-d2df-4aa9-a878-483438875014",
+          "createdAt": "2026-07-28T02:06:16.000Z",
+          "updatedAt": "2026-07-28T02:06:16.000Z",
+          "uid": "35240-96b323a4-d2df-4aa9-a878-483438875014"
+        }
+      ],
+      "id": "3ed8cdfb-1eaf-4fc2-a17b-0c8d751483dc",
+      "createdAt": "2026-07-28T02:06:16.000Z",
+      "updatedAt": "2026-07-28T02:06:16.000Z",
+      "uid": "35240-3ed8cdfb-1eaf-4fc2-a17b-0c8d751483dc"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lever.co/v1"
+    }
+  ]
+}

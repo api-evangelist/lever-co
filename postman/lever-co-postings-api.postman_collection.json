@@ -1,0 +1,669 @@
+{
+  "info": {
+    "_postman_id": "c5345119-05a2-4080-9311-a5b2dc1ee193",
+    "name": "Lever Data Applications Postings API",
+    "description": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:06:29.000Z",
+    "updatedAt": "2026-07-28T02:06:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c5345119-05a2-4080-9311-a5b2dc1ee193"
+  },
+  "item": [
+    {
+      "name": "postings",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve A Posting",
+              "id": "132825b8-4855-4b04-93ec-b9b9881a2ca2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/postings/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "postings",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a7098288-4f52-487f-ae18-18be47d28a58",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "ef86b026-9c3c-4599-ad4f-8167e419ac1f",
+                  "name": "The posting.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/postings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "postings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"text\": \"<string>\",\n  \"state\": \"closed\",\n  \"categories\": {\n    \"commitment\": \"<string>\",\n    \"location\": \"<string>\",\n    \"team\": \"<string>\",\n    \"department\": \"<string>\",\n    \"level\": \"<string>\"\n  },\n  \"country\": \"<string>\",\n  \"createdAt\": \"<long>\",\n  \"updatedAt\": \"<long>\",\n  \"hostedUrl\": \"<uri>\",\n  \"applyUrl\": \"<uri>\",\n  \"workplaceType\": \"on-site\",\n  \"salaryRange\": {\n    \"min\": \"<number>\",\n    \"max\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"interval\": \"<string>\"\n  },\n  \"owner\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T02:06:30.000Z",
+                  "updatedAt": "2026-07-28T02:06:30.000Z",
+                  "uid": "35240-ef86b026-9c3c-4599-ad4f-8167e419ac1f"
+                }
+              ],
+              "createdAt": "2026-07-28T02:06:30.000Z",
+              "updatedAt": "2026-07-28T02:06:30.000Z",
+              "uid": "35240-132825b8-4855-4b04-93ec-b9b9881a2ca2"
+            },
+            {
+              "name": "Update A Posting",
+              "id": "de9d2748-6ed5-4a99-9dff-db14c9fc8bff",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/postings/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "postings",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8e069cdd-2c7f-45af-8fda-59417921406a",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "f440f187-66cf-455e-8057-ee6f78ea435a",
+                  "name": "Posting updated.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/postings/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "postings",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:06:30.000Z",
+                  "updatedAt": "2026-07-28T02:06:30.000Z",
+                  "uid": "35240-f440f187-66cf-455e-8057-ee6f78ea435a"
+                }
+              ],
+              "createdAt": "2026-07-28T02:06:30.000Z",
+              "updatedAt": "2026-07-28T02:06:30.000Z",
+              "uid": "35240-de9d2748-6ed5-4a99-9dff-db14c9fc8bff"
+            }
+          ],
+          "id": "42bbb4fe-62c6-4bb1-9e8b-2ed5501b7c4e",
+          "createdAt": "2026-07-28T02:06:30.000Z",
+          "updatedAt": "2026-07-28T02:06:30.000Z",
+          "uid": "35240-42bbb4fe-62c6-4bb1-9e8b-2ed5501b7c4e"
+        },
+        {
+          "name": "List Postings",
+          "id": "f41e2054-9c46-4760-8811-d155ccf45665",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/postings?limit=100&offset=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "postings"
+              ],
+              "query": [
+                {
+                  "description": "Number of records to return (1-100, default 100).",
+                  "key": "limit",
+                  "value": "100"
+                },
+                {
+                  "description": "Opaque cursor returned in the previous response's `next` field.",
+                  "key": "offset",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5e9e6f30-1615-4cf8-9846-df5fe3c0c41c",
+              "name": "A page of postings.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/postings?limit=100&offset=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "postings"
+                  ],
+                  "query": [
+                    {
+                      "description": "Number of records to return (1-100, default 100).",
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "description": "Opaque cursor returned in the previous response's `next` field.",
+                      "key": "offset",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"text\": \"<string>\",\n      \"state\": \"draft\",\n      \"categories\": {\n        \"commitment\": \"<string>\",\n        \"location\": \"<string>\",\n        \"team\": \"<string>\",\n        \"department\": \"<string>\",\n        \"level\": \"<string>\"\n      },\n      \"country\": \"<string>\",\n      \"createdAt\": \"<long>\",\n      \"updatedAt\": \"<long>\",\n      \"hostedUrl\": \"<uri>\",\n      \"applyUrl\": \"<uri>\",\n      \"workplaceType\": \"hybrid\",\n      \"salaryRange\": {\n        \"min\": \"<number>\",\n        \"max\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"interval\": \"<string>\"\n      },\n      \"owner\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"text\": \"<string>\",\n      \"state\": \"closed\",\n      \"categories\": {\n        \"commitment\": \"<string>\",\n        \"location\": \"<string>\",\n        \"team\": \"<string>\",\n        \"department\": \"<string>\",\n        \"level\": \"<string>\"\n      },\n      \"country\": \"<string>\",\n      \"createdAt\": \"<long>\",\n      \"updatedAt\": \"<long>\",\n      \"hostedUrl\": \"<uri>\",\n      \"applyUrl\": \"<uri>\",\n      \"workplaceType\": \"remote\",\n      \"salaryRange\": {\n        \"min\": \"<number>\",\n        \"max\": \"<number>\",\n        \"currency\": \"<string>\",\n        \"interval\": \"<string>\"\n      },\n      \"owner\": \"<string>\"\n    }\n  ],\n  \"hasNext\": \"<boolean>\",\n  \"next\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T02:06:30.000Z",
+              "updatedAt": "2026-07-28T02:06:30.000Z",
+              "uid": "35240-5e9e6f30-1615-4cf8-9846-df5fe3c0c41c"
+            }
+          ],
+          "createdAt": "2026-07-28T02:06:30.000Z",
+          "updatedAt": "2026-07-28T02:06:30.000Z",
+          "uid": "35240-f41e2054-9c46-4760-8811-d155ccf45665"
+        },
+        {
+          "name": "Create A Posting",
+          "id": "ab52bd8e-f9b5-485a-b6b5-047d3dc8ff40",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"text\": \"<string>\",\n  \"state\": \"<string>\",\n  \"categories\": {},\n  \"owner\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/postings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "postings"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9016cafb-0930-4255-9e01-79950a5dc049",
+              "name": "Posting created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"text\": \"<string>\",\n  \"state\": \"<string>\",\n  \"categories\": {},\n  \"owner\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/postings",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "postings"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:06:30.000Z",
+              "updatedAt": "2026-07-28T02:06:30.000Z",
+              "uid": "35240-9016cafb-0930-4255-9e01-79950a5dc049"
+            }
+          ],
+          "createdAt": "2026-07-28T02:06:30.000Z",
+          "updatedAt": "2026-07-28T02:06:30.000Z",
+          "uid": "35240-ab52bd8e-f9b5-485a-b6b5-047d3dc8ff40"
+        }
+      ],
+      "id": "73381465-08b2-4841-8a0c-18f50613bc46",
+      "createdAt": "2026-07-28T02:06:30.000Z",
+      "updatedAt": "2026-07-28T02:06:30.000Z",
+      "uid": "35240-73381465-08b2-4841-8a0c-18f50613bc46"
+    },
+    {
+      "name": "{site}",
+      "item": [
+        {
+          "name": "{postingId}",
+          "item": [
+            {
+              "name": "Retrieve A Public Posting",
+              "id": "0e6ec49e-52c4-4b64-b0d2-32b8e55c5af9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/:site/:postingId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":site",
+                    ":postingId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3fee51bf-7d8e-4902-b84b-56d3be38a1b0",
+                      "key": "site",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    },
+                    {
+                      "id": "a9a08bec-3ec2-4c24-b4de-43c8f66e55f0",
+                      "key": "postingId",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "description": "Returns a single published posting as JSON."
+              },
+              "response": [
+                {
+                  "id": "51de40f3-91c6-4616-ac14-e906632bf3ce",
+                  "name": "The posting.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:site/:postingId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":site",
+                        ":postingId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "site"
+                        },
+                        {
+                          "key": "postingId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:06:30.000Z",
+                  "updatedAt": "2026-07-28T02:06:30.000Z",
+                  "uid": "35240-51de40f3-91c6-4616-ac14-e906632bf3ce"
+                }
+              ],
+              "createdAt": "2026-07-28T02:06:30.000Z",
+              "updatedAt": "2026-07-28T02:06:30.000Z",
+              "uid": "35240-0e6ec49e-52c4-4b64-b0d2-32b8e55c5af9"
+            }
+          ],
+          "id": "a00fa496-33d4-4ff2-a6f8-6b131be43947",
+          "createdAt": "2026-07-28T02:06:30.000Z",
+          "updatedAt": "2026-07-28T02:06:30.000Z",
+          "uid": "35240-a00fa496-33d4-4ff2-a6f8-6b131be43947"
+        },
+        {
+          "name": "List Public Postings",
+          "id": "4ff7b27c-a96f-4ad8-b7cb-0e9da50aaf7d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/:site?skip=<integer>&limit=<integer>&location=<string>&commitment=<string>&team=<string>&department=<string>&level=<string>&group=<string>&mode=html&css=<string>&resize=<boolean>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ":site"
+              ],
+              "query": [
+                {
+                  "key": "skip",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "location",
+                  "value": "<string>"
+                },
+                {
+                  "key": "commitment",
+                  "value": "<string>"
+                },
+                {
+                  "key": "team",
+                  "value": "<string>"
+                },
+                {
+                  "key": "department",
+                  "value": "<string>"
+                },
+                {
+                  "key": "level",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Group results by `location`, `commitment`, `team`, `department`, or `level`.",
+                  "key": "group",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Response format.",
+                  "key": "mode",
+                  "value": "html"
+                },
+                {
+                  "description": "Optional URL of a CSS stylesheet to apply when mode is `html` or `iframe`.",
+                  "key": "css",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Enable iframe auto-resize.",
+                  "key": "resize",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "id": "5632e6b0-d7b8-4ab4-8968-8dd92ff897b4",
+                  "key": "site",
+                  "value": "<string>",
+                  "description": "(Required) Lever company site name (e.g. `acmeco`)."
+                }
+              ]
+            },
+            "description": "Returns a paginated list of published postings for the given Lever site. Supports JSON (default),\nHTML, and iframe response modes via the `mode` query parameter.\n"
+          },
+          "response": [
+            {
+              "id": "4796edfd-4853-4a9f-bf7a-994cc15fd3d0",
+              "name": "A page of postings, or HTML / XML content depending on `mode`.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:site?skip=<integer>&limit=<integer>&location=<string>&commitment=<string>&team=<string>&department=<string>&level=<string>&group=<string>&mode=html&css=<string>&resize=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":site"
+                  ],
+                  "query": [
+                    {
+                      "key": "skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "commitment",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "team",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "department",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "level",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Group results by `location`, `commitment`, `team`, `department`, or `level`.",
+                      "key": "group",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Response format.",
+                      "key": "mode",
+                      "value": "html"
+                    },
+                    {
+                      "description": "Optional URL of a CSS stylesheet to apply when mode is `html` or `iframe`.",
+                      "key": "css",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Enable iframe auto-resize.",
+                      "key": "resize",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "site"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:06:30.000Z",
+              "updatedAt": "2026-07-28T02:06:30.000Z",
+              "uid": "35240-4796edfd-4853-4a9f-bf7a-994cc15fd3d0"
+            }
+          ],
+          "createdAt": "2026-07-28T02:06:30.000Z",
+          "updatedAt": "2026-07-28T02:06:30.000Z",
+          "uid": "35240-4ff7b27c-a96f-4ad8-b7cb-0e9da50aaf7d"
+        }
+      ],
+      "id": "3ab7caba-f0ba-4863-90ed-da86c9641d16",
+      "createdAt": "2026-07-28T02:06:30.000Z",
+      "updatedAt": "2026-07-28T02:06:30.000Z",
+      "uid": "35240-3ab7caba-f0ba-4863-90ed-da86c9641d16"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lever.co/v1"
+    }
+  ]
+}

@@ -1,0 +1,393 @@
+{
+  "info": {
+    "_postman_id": "2d74d7d9-9f62-4e57-8f78-d6ed914ba1cc",
+    "name": "Lever Data Applications Interviews API",
+    "description": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:05:59.000Z",
+    "updatedAt": "2026-07-28T02:06:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2d74d7d9-9f62-4e57-8f78-d6ed914ba1cc"
+  },
+  "item": [
+    {
+      "name": "opportunities",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "interviews",
+              "item": [
+                {
+                  "name": "{interviewId}",
+                  "item": [
+                    {
+                      "name": "Update An Interview",
+                      "id": "8176e1d1-d3ab-420c-9372-2f6c83d56f4b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/opportunities/:id/interviews/:interviewId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "opportunities",
+                            ":id",
+                            "interviews",
+                            ":interviewId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "98690e33-1a93-4fe4-80f3-cce67cd9b0a9",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "77a9e278-a00c-4296-912c-2c55cd71ee6c",
+                              "key": "interviewId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "4ef0b6a3-1863-4f67-bf26-3b339fafddef",
+                          "name": "Interview updated.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/opportunities/:id/interviews/:interviewId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "opportunities",
+                                ":id",
+                                "interviews",
+                                ":interviewId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "interviewId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:06:00.000Z",
+                          "updatedAt": "2026-07-28T02:06:00.000Z",
+                          "uid": "35240-4ef0b6a3-1863-4f67-bf26-3b339fafddef"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:06:00.000Z",
+                      "updatedAt": "2026-07-28T02:06:00.000Z",
+                      "uid": "35240-8176e1d1-d3ab-420c-9372-2f6c83d56f4b"
+                    },
+                    {
+                      "name": "Delete An Interview",
+                      "id": "cc9301ed-e11d-4efc-ab92-ae2122288c1b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/opportunities/:id/interviews/:interviewId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "opportunities",
+                            ":id",
+                            "interviews",
+                            ":interviewId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "4ed2f05d-34cb-440e-9b5f-9b904dfca0e2",
+                              "key": "id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            },
+                            {
+                              "id": "48b449a0-d710-4546-b8c4-79337ef9a9d0",
+                              "key": "interviewId",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "ee501e45-7565-4ad6-91f1-59e3068deaf7",
+                          "name": "Interview deleted.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/opportunities/:id/interviews/:interviewId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "opportunities",
+                                ":id",
+                                "interviews",
+                                ":interviewId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id"
+                                },
+                                {
+                                  "key": "interviewId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T02:06:00.000Z",
+                          "updatedAt": "2026-07-28T02:06:00.000Z",
+                          "uid": "35240-ee501e45-7565-4ad6-91f1-59e3068deaf7"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T02:06:00.000Z",
+                      "updatedAt": "2026-07-28T02:06:00.000Z",
+                      "uid": "35240-cc9301ed-e11d-4efc-ab92-ae2122288c1b"
+                    }
+                  ],
+                  "id": "284bb766-4f83-491a-8dc7-3965ada8292f",
+                  "createdAt": "2026-07-28T02:06:00.000Z",
+                  "updatedAt": "2026-07-28T02:06:00.000Z",
+                  "uid": "35240-284bb766-4f83-491a-8dc7-3965ada8292f"
+                },
+                {
+                  "name": "List Interviews",
+                  "id": "d9cf0a1f-045b-40ef-905f-8696bfce5649",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/opportunities/:id/interviews",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "opportunities",
+                        ":id",
+                        "interviews"
+                      ],
+                      "variable": [
+                        {
+                          "id": "39ca757a-4dd0-4831-8b09-57fd081fd3d0",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "b84cf500-a72f-470d-b16a-1051dee1c86d",
+                      "name": "Interviews on the opportunity.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/opportunities/:id/interviews",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "opportunities",
+                            ":id",
+                            "interviews"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:06:00.000Z",
+                      "updatedAt": "2026-07-28T02:06:00.000Z",
+                      "uid": "35240-b84cf500-a72f-470d-b16a-1051dee1c86d"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:06:00.000Z",
+                  "updatedAt": "2026-07-28T02:06:00.000Z",
+                  "uid": "35240-d9cf0a1f-045b-40ef-905f-8696bfce5649"
+                },
+                {
+                  "name": "Create An Interview",
+                  "id": "a939603f-2cd7-4553-9eb0-fbd9ce500da7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/opportunities/:id/interviews",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "opportunities",
+                        ":id",
+                        "interviews"
+                      ],
+                      "variable": [
+                        {
+                          "id": "2747b339-439b-4d95-98fc-5a4ae800e2e5",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "a7f97838-6ff2-4f26-93f7-118b1eff20ce",
+                      "name": "Interview created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/opportunities/:id/interviews",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "opportunities",
+                            ":id",
+                            "interviews"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:06:00.000Z",
+                      "updatedAt": "2026-07-28T02:06:00.000Z",
+                      "uid": "35240-a7f97838-6ff2-4f26-93f7-118b1eff20ce"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:06:00.000Z",
+                  "updatedAt": "2026-07-28T02:06:00.000Z",
+                  "uid": "35240-a939603f-2cd7-4553-9eb0-fbd9ce500da7"
+                }
+              ],
+              "id": "8710ba16-013d-4c92-99b6-acedeb7fb30d",
+              "createdAt": "2026-07-28T02:06:00.000Z",
+              "updatedAt": "2026-07-28T02:06:00.000Z",
+              "uid": "35240-8710ba16-013d-4c92-99b6-acedeb7fb30d"
+            }
+          ],
+          "id": "c54daf87-32d8-4dbd-b77f-d050afc79e0c",
+          "createdAt": "2026-07-28T02:06:00.000Z",
+          "updatedAt": "2026-07-28T02:06:00.000Z",
+          "uid": "35240-c54daf87-32d8-4dbd-b77f-d050afc79e0c"
+        }
+      ],
+      "id": "1ef76d80-e6d5-4e45-9926-b4fe82422b86",
+      "createdAt": "2026-07-28T02:06:00.000Z",
+      "updatedAt": "2026-07-28T02:06:00.000Z",
+      "uid": "35240-1ef76d80-e6d5-4e45-9926-b4fe82422b86"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lever.co/v1"
+    }
+  ]
+}

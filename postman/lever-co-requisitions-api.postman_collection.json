@@ -1,0 +1,315 @@
+{
+  "info": {
+    "_postman_id": "3b8ef481-5065-4c0b-825d-54b6699f1e36",
+    "name": "Lever Data Applications Requisitions API",
+    "description": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:06:30.000Z",
+    "updatedAt": "2026-07-28T02:06:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3b8ef481-5065-4c0b-825d-54b6699f1e36"
+  },
+  "item": [
+    {
+      "name": "requisitions",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Update A Requisition",
+              "id": "3f3a2283-b5f5-40d0-8ae5-ffd4eacf2f10",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/requisitions/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "requisitions",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "da0fe885-a977-44df-8f0c-5d98c274682c",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "884af87a-3a41-41ad-b4f0-991d01cc2aab",
+                  "name": "Requisition updated.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/requisitions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "requisitions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:06:31.000Z",
+                  "updatedAt": "2026-07-28T02:06:31.000Z",
+                  "uid": "35240-884af87a-3a41-41ad-b4f0-991d01cc2aab"
+                }
+              ],
+              "createdAt": "2026-07-28T02:06:31.000Z",
+              "updatedAt": "2026-07-28T02:06:31.000Z",
+              "uid": "35240-3f3a2283-b5f5-40d0-8ae5-ffd4eacf2f10"
+            },
+            {
+              "name": "Delete A Requisition",
+              "id": "f4c0dc4d-2312-47f6-b36d-030a400aae93",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/requisitions/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "requisitions",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8bad91f1-ff25-424d-a569-f6ee7d7700de",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "4f8522c7-644f-484b-be38-7423ec003bc6",
+                  "name": "Requisition deleted.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/requisitions/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "requisitions",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:06:31.000Z",
+                  "updatedAt": "2026-07-28T02:06:31.000Z",
+                  "uid": "35240-4f8522c7-644f-484b-be38-7423ec003bc6"
+                }
+              ],
+              "createdAt": "2026-07-28T02:06:31.000Z",
+              "updatedAt": "2026-07-28T02:06:31.000Z",
+              "uid": "35240-f4c0dc4d-2312-47f6-b36d-030a400aae93"
+            }
+          ],
+          "id": "478fb8f9-e75d-47bd-bf1f-021e29a2bd5d",
+          "createdAt": "2026-07-28T02:06:31.000Z",
+          "updatedAt": "2026-07-28T02:06:31.000Z",
+          "uid": "35240-478fb8f9-e75d-47bd-bf1f-021e29a2bd5d"
+        },
+        {
+          "name": "List Requisitions",
+          "id": "816d1429-24f8-45ff-805f-7cecf79031c9",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/requisitions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "requisitions"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d24d93d4-ad1c-4c47-ad65-94c0de6fbec0",
+              "name": "Requisitions.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/requisitions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "requisitions"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:06:31.000Z",
+              "updatedAt": "2026-07-28T02:06:31.000Z",
+              "uid": "35240-d24d93d4-ad1c-4c47-ad65-94c0de6fbec0"
+            }
+          ],
+          "createdAt": "2026-07-28T02:06:31.000Z",
+          "updatedAt": "2026-07-28T02:06:31.000Z",
+          "uid": "35240-816d1429-24f8-45ff-805f-7cecf79031c9"
+        },
+        {
+          "name": "Create A Requisition",
+          "id": "df99297f-3160-4375-b3ae-25021d9895fe",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/requisitions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "requisitions"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3f0faab4-b98f-4045-a2a7-01c8b5c49bc7",
+              "name": "Requisition created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/requisitions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "requisitions"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:06:31.000Z",
+              "updatedAt": "2026-07-28T02:06:31.000Z",
+              "uid": "35240-3f0faab4-b98f-4045-a2a7-01c8b5c49bc7"
+            }
+          ],
+          "createdAt": "2026-07-28T02:06:31.000Z",
+          "updatedAt": "2026-07-28T02:06:31.000Z",
+          "uid": "35240-df99297f-3160-4375-b3ae-25021d9895fe"
+        }
+      ],
+      "id": "5b53a600-8d1f-4873-b1ac-6cd9641b7ba8",
+      "createdAt": "2026-07-28T02:06:31.000Z",
+      "updatedAt": "2026-07-28T02:06:31.000Z",
+      "uid": "35240-5b53a600-8d1f-4873-b1ac-6cd9641b7ba8"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lever.co/v1"
+    }
+  ]
+}

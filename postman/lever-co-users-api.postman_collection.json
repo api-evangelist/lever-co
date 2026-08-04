@@ -1,0 +1,315 @@
+{
+  "info": {
+    "_postman_id": "825ff4e0-a8e0-42f8-b12d-2598d295496e",
+    "name": "Lever Data Applications Users API",
+    "description": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:06:36.000Z",
+    "updatedAt": "2026-07-28T02:06:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-825ff4e0-a8e0-42f8-b12d-2598d295496e"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve A User",
+              "id": "196fcaa8-e92d-485e-ab57-3140a1db81d2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/users/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "df48b7d2-96ff-4a0d-822a-32ed25475dd0",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "4068bb55-48cd-4ee0-b32d-c62abed443de",
+                  "name": "The user.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:06:37.000Z",
+                  "updatedAt": "2026-07-28T02:06:37.000Z",
+                  "uid": "35240-4068bb55-48cd-4ee0-b32d-c62abed443de"
+                }
+              ],
+              "createdAt": "2026-07-28T02:06:37.000Z",
+              "updatedAt": "2026-07-28T02:06:37.000Z",
+              "uid": "35240-196fcaa8-e92d-485e-ab57-3140a1db81d2"
+            },
+            {
+              "name": "Update A User",
+              "id": "fa79a107-1752-4ab3-856a-2cf362a85b4a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/users/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ae4f6065-bf0d-4f1e-8abb-18f931e575d7",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "1bf8096d-9218-48ac-9460-4d3f6dbe3dfe",
+                  "name": "User updated.",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:06:37.000Z",
+                  "updatedAt": "2026-07-28T02:06:37.000Z",
+                  "uid": "35240-1bf8096d-9218-48ac-9460-4d3f6dbe3dfe"
+                }
+              ],
+              "createdAt": "2026-07-28T02:06:37.000Z",
+              "updatedAt": "2026-07-28T02:06:37.000Z",
+              "uid": "35240-fa79a107-1752-4ab3-856a-2cf362a85b4a"
+            }
+          ],
+          "id": "7ea9c9ff-cc3c-465d-9c11-ce06f5aba3dc",
+          "createdAt": "2026-07-28T02:06:37.000Z",
+          "updatedAt": "2026-07-28T02:06:37.000Z",
+          "uid": "35240-7ea9c9ff-cc3c-465d-9c11-ce06f5aba3dc"
+        },
+        {
+          "name": "List Users",
+          "id": "1e212ea7-25d5-4671-b654-f1d584a95887",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4dfd4db0-c14f-4d58-bc57-4a5c6127dbe3",
+              "name": "Users.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:06:37.000Z",
+              "updatedAt": "2026-07-28T02:06:37.000Z",
+              "uid": "35240-4dfd4db0-c14f-4d58-bc57-4a5c6127dbe3"
+            }
+          ],
+          "createdAt": "2026-07-28T02:06:37.000Z",
+          "updatedAt": "2026-07-28T02:06:37.000Z",
+          "uid": "35240-1e212ea7-25d5-4671-b654-f1d584a95887"
+        },
+        {
+          "name": "Create A User",
+          "id": "9b037e3b-f1b7-4b81-a37a-1cadecb50f44",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9a5749c9-25f7-4aed-a9b5-6e69c8bf7d4d",
+              "name": "User created.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:06:37.000Z",
+              "updatedAt": "2026-07-28T02:06:37.000Z",
+              "uid": "35240-9a5749c9-25f7-4aed-a9b5-6e69c8bf7d4d"
+            }
+          ],
+          "createdAt": "2026-07-28T02:06:37.000Z",
+          "updatedAt": "2026-07-28T02:06:37.000Z",
+          "uid": "35240-9b037e3b-f1b7-4b81-a37a-1cadecb50f44"
+        }
+      ],
+      "id": "ab2caffc-6f34-4344-afd3-acc58c3cadf6",
+      "createdAt": "2026-07-28T02:06:37.000Z",
+      "updatedAt": "2026-07-28T02:06:37.000Z",
+      "uid": "35240-ab2caffc-6f34-4344-afd3-acc58c3cadf6"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lever.co/v1"
+    }
+  ]
+}

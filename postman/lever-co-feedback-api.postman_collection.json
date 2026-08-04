@@ -1,0 +1,212 @@
+{
+  "info": {
+    "_postman_id": "9b0f0066-4d84-4890-a944-6824f0d8050a",
+    "name": "Lever Data Applications Feedback API",
+    "description": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:05:57.000Z",
+    "updatedAt": "2026-07-28T02:05:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9b0f0066-4d84-4890-a944-6824f0d8050a"
+  },
+  "item": [
+    {
+      "name": "opportunities",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "feedback",
+              "item": [
+                {
+                  "name": "List Feedback",
+                  "id": "e16eb95b-55ec-49d4-834c-a8df87879727",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/opportunities/:id/feedback",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "opportunities",
+                        ":id",
+                        "feedback"
+                      ],
+                      "variable": [
+                        {
+                          "id": "ef8970b0-0ba5-4849-b5df-5b9bf181bc9f",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "50bc82e9-51de-4d5a-b38f-6b98af910b81",
+                      "name": "Feedback on the opportunity.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/opportunities/:id/feedback",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "opportunities",
+                            ":id",
+                            "feedback"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:05:57.000Z",
+                      "updatedAt": "2026-07-28T02:05:57.000Z",
+                      "uid": "35240-50bc82e9-51de-4d5a-b38f-6b98af910b81"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:05:57.000Z",
+                  "updatedAt": "2026-07-28T02:05:57.000Z",
+                  "uid": "35240-e16eb95b-55ec-49d4-834c-a8df87879727"
+                },
+                {
+                  "name": "Create Feedback",
+                  "id": "0289763c-4e4c-4a6d-be92-d809add75a00",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/opportunities/:id/feedback",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "opportunities",
+                        ":id",
+                        "feedback"
+                      ],
+                      "variable": [
+                        {
+                          "id": "7c7eae3f-a37b-4502-9b96-b1c81f02c464",
+                          "key": "id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "b131646b-a228-4eac-ab79-cf76f49d1a8a",
+                      "name": "Feedback created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/opportunities/:id/feedback",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "opportunities",
+                            ":id",
+                            "feedback"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:05:57.000Z",
+                      "updatedAt": "2026-07-28T02:05:57.000Z",
+                      "uid": "35240-b131646b-a228-4eac-ab79-cf76f49d1a8a"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:05:57.000Z",
+                  "updatedAt": "2026-07-28T02:05:57.000Z",
+                  "uid": "35240-0289763c-4e4c-4a6d-be92-d809add75a00"
+                }
+              ],
+              "id": "05ee4773-d5da-408d-b838-bd99a0e39ee5",
+              "createdAt": "2026-07-28T02:05:57.000Z",
+              "updatedAt": "2026-07-28T02:05:57.000Z",
+              "uid": "35240-05ee4773-d5da-408d-b838-bd99a0e39ee5"
+            }
+          ],
+          "id": "5a47656f-d74e-437d-89df-d54f5ce77990",
+          "createdAt": "2026-07-28T02:05:57.000Z",
+          "updatedAt": "2026-07-28T02:05:57.000Z",
+          "uid": "35240-5a47656f-d74e-437d-89df-d54f5ce77990"
+        }
+      ],
+      "id": "5df4c6ee-1618-4ffa-944f-2ffe0a13d297",
+      "createdAt": "2026-07-28T02:05:57.000Z",
+      "updatedAt": "2026-07-28T02:05:57.000Z",
+      "uid": "35240-5df4c6ee-1618-4ffa-944f-2ffe0a13d297"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lever.co/v1"
+    }
+  ]
+}

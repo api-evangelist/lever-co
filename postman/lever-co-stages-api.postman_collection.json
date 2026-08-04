@@ -1,0 +1,184 @@
+{
+  "info": {
+    "_postman_id": "ac0b9908-1e32-4b1d-89ed-68cd16b0a3b5",
+    "name": "Lever Data Applications Stages API",
+    "description": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:06:32.000Z",
+    "updatedAt": "2026-07-28T02:06:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ac0b9908-1e32-4b1d-89ed-68cd16b0a3b5"
+  },
+  "item": [
+    {
+      "name": "stages",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve A Stage",
+              "id": "d5b097f8-7ee1-4643-95a0-b4a05ca322d7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/stages/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "stages",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "3db03dfa-9c21-4fac-9e58-3dc058459cf0",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) "
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "fe0d7eee-f230-4557-9559-47fb48184288",
+                  "name": "The stage.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/stages/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "stages",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:06:33.000Z",
+                  "updatedAt": "2026-07-28T02:06:33.000Z",
+                  "uid": "35240-fe0d7eee-f230-4557-9559-47fb48184288"
+                }
+              ],
+              "createdAt": "2026-07-28T02:06:33.000Z",
+              "updatedAt": "2026-07-28T02:06:33.000Z",
+              "uid": "35240-d5b097f8-7ee1-4643-95a0-b4a05ca322d7"
+            }
+          ],
+          "id": "0fa7ab8d-dc90-4eae-9e97-a6d99fcce88a",
+          "createdAt": "2026-07-28T02:06:33.000Z",
+          "updatedAt": "2026-07-28T02:06:33.000Z",
+          "uid": "35240-0fa7ab8d-dc90-4eae-9e97-a6d99fcce88a"
+        },
+        {
+          "name": "List Stages",
+          "id": "44f9a14d-4d72-4b40-bf63-04db7b970189",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/stages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "stages"
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "dc98ec4a-7c3d-4253-a56d-6ebca4d19397",
+              "name": "Stages.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/stages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "stages"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T02:06:33.000Z",
+              "updatedAt": "2026-07-28T02:06:33.000Z",
+              "uid": "35240-dc98ec4a-7c3d-4253-a56d-6ebca4d19397"
+            }
+          ],
+          "createdAt": "2026-07-28T02:06:33.000Z",
+          "updatedAt": "2026-07-28T02:06:33.000Z",
+          "uid": "35240-44f9a14d-4d72-4b40-bf63-04db7b970189"
+        }
+      ],
+      "id": "46dab76c-2494-43cc-8956-cc2b9aa58b49",
+      "createdAt": "2026-07-28T02:06:33.000Z",
+      "updatedAt": "2026-07-28T02:06:33.000Z",
+      "uid": "35240-46dab76c-2494-43cc-8956-cc2b9aa58b49"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lever.co/v1"
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "info": {
+    "_postman_id": "3a54bb98-1369-4afa-8855-c20eb49cf48f",
+    "name": "Lever Data Applications EEO Responses API",
+    "description": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:05:54.000Z",
+    "updatedAt": "2026-07-28T02:05:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3a54bb98-1369-4afa-8855-c20eb49cf48f"
+  },
+  "item": [
+    {
+      "name": "eeo",
+      "item": [
+        {
+          "name": "responses",
+          "item": [
+            {
+              "name": "pii",
+              "item": [
+                {
+                  "name": "List EEO Responses With PII",
+                  "id": "f1dc1350-fc11-4c87-8c7a-d4206f3c7895",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/eeo/responses/pii",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "eeo",
+                        "responses",
+                        "pii"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "b486ce62-f6b7-40b7-ac89-76dcfa54540b",
+                      "name": "EEO survey responses including PII (requires elevated scope).",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/eeo/responses/pii",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "eeo",
+                            "responses",
+                            "pii"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T02:05:54.000Z",
+                      "updatedAt": "2026-07-28T02:05:54.000Z",
+                      "uid": "35240-b486ce62-f6b7-40b7-ac89-76dcfa54540b"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T02:05:54.000Z",
+                  "updatedAt": "2026-07-28T02:05:54.000Z",
+                  "uid": "35240-f1dc1350-fc11-4c87-8c7a-d4206f3c7895"
+                }
+              ],
+              "id": "a86b7d33-c7ad-4dac-8bf8-b204608b3f34",
+              "createdAt": "2026-07-28T02:05:54.000Z",
+              "updatedAt": "2026-07-28T02:05:54.000Z",
+              "uid": "35240-a86b7d33-c7ad-4dac-8bf8-b204608b3f34"
+            },
+            {
+              "name": "List EEO Responses",
+              "id": "4fc39acf-1e18-485b-91cd-fcaa06759294",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/eeo/responses",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "eeo",
+                    "responses"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "79be39f6-3930-4ece-9f2a-930cf314aa71",
+                  "name": "EEO survey responses.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/eeo/responses",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "eeo",
+                        "responses"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T02:05:54.000Z",
+                  "updatedAt": "2026-07-28T02:05:54.000Z",
+                  "uid": "35240-79be39f6-3930-4ece-9f2a-930cf314aa71"
+                }
+              ],
+              "createdAt": "2026-07-28T02:05:54.000Z",
+              "updatedAt": "2026-07-28T02:05:54.000Z",
+              "uid": "35240-4fc39acf-1e18-485b-91cd-fcaa06759294"
+            }
+          ],
+          "id": "0a438c18-2b6a-4fa4-843b-41caa347a168",
+          "createdAt": "2026-07-28T02:05:54.000Z",
+          "updatedAt": "2026-07-28T02:05:54.000Z",
+          "uid": "35240-0a438c18-2b6a-4fa4-843b-41caa347a168"
+        }
+      ],
+      "id": "a8d68509-2481-48aa-92ff-897dd691065a",
+      "createdAt": "2026-07-28T02:05:54.000Z",
+      "updatedAt": "2026-07-28T02:05:54.000Z",
+      "uid": "35240-a8d68509-2481-48aa-92ff-897dd691065a"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.lever.co/v1"
+    }
+  ]
+}
