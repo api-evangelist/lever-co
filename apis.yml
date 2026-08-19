@@ -1,5 +1,6 @@
 aid: lever-co
 url: https://raw.githubusercontent.com/api-evangelist/lever-co/refs/heads/main/apis.yml
+specificationVersion: '0.23'
 apis:
 - aid: lever-co:lever-postings-xml-feed
   name: Lever Postings XML Feed
