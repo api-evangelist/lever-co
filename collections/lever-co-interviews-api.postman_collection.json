@@ -1,0 +1,417 @@
+{
+  "item": [
+    {
+      "id": "641e25da-b983-4f09-88f0-93fe050dc64e",
+      "name": "Interviews",
+      "description": {
+        "content": "Scheduled interviews on an opportunity.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "31ba6592-c41f-4864-a9c5-7fdf7186ac4f",
+          "name": "List Interviews",
+          "request": {
+            "name": "List Interviews",
+            "description": {},
+            "url": {
+              "path": [
+                "opportunities",
+                ":id",
+                "interviews"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e666be39-bc75-42c9-92b1-b45594eac5ff",
+              "name": "Interviews on the opportunity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "opportunities",
+                    ":id",
+                    "interviews"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12a619a9-e8fe-4807-987f-94aff06b54e0",
+          "name": "Create An Interview",
+          "request": {
+            "name": "Create An Interview",
+            "description": {},
+            "url": {
+              "path": [
+                "opportunities",
+                ":id",
+                "interviews"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c083ce5-86e4-495e-88a1-6b0d1ad976b5",
+              "name": "Interview created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "opportunities",
+                    ":id",
+                    "interviews"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e530314-5151-44fb-8ef8-3e19d6a4d579",
+          "name": "Update An Interview",
+          "request": {
+            "name": "Update An Interview",
+            "description": {},
+            "url": {
+              "path": [
+                "opportunities",
+                ":id",
+                "interviews",
+                ":interviewId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "interviewId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2cff90e3-8740-4c2f-be0e-02faf23d911f",
+              "name": "Interview updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "opportunities",
+                    ":id",
+                    "interviews",
+                    ":interviewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "interviewId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75f98044-3a02-4c1f-8010-f28c8b2b1ae4",
+          "name": "Delete An Interview",
+          "request": {
+            "name": "Delete An Interview",
+            "description": {},
+            "url": {
+              "path": [
+                "opportunities",
+                ":id",
+                "interviews",
+                ":interviewId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "interviewId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "17c895a9-2170-47c7-ab81-5866f0d1a059",
+              "name": "Interview deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "opportunities",
+                    ":id",
+                    "interviews",
+                    ":interviewId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "interviewId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.lever.co/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4203011e-bdd2-4422-97d1-72f44982de7e",
+    "name": "Lever Data Applications Interviews API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+      "type": "text/plain"
+    }
+  }
+}

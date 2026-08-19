@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lever Data Applications Panels API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Panels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Panels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/panels"
+          },
+          "docs": "List Panels"
+        },
+        {
+          "info": {
+            "name": "Create A Panel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lever.co/v1/panels"
+          },
+          "docs": "Create A Panel"
+        },
+        {
+          "info": {
+            "name": "Update A Panel",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.lever.co/v1/panels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update A Panel"
+        },
+        {
+          "info": {
+            "name": "Delete A Panel",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.lever.co/v1/panels/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete A Panel"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

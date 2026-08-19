@@ -1,0 +1,110 @@
+{
+  "item": [
+    {
+      "id": "3b73d30e-4dc5-465d-91aa-7e4b820b4354",
+      "name": "Offers",
+      "description": {
+        "content": "Offer records associated with hired candidates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "63411de9-a8f0-4172-a786-7d17596d42e7",
+          "name": "List Offers",
+          "request": {
+            "name": "List Offers",
+            "description": {},
+            "url": {
+              "path": [
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "00d54048-ae87-4a34-a142-91288c465e22",
+              "name": "Offers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.lever.co/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e6e56e3e-b15b-4f46-b3c6-136193aa1800",
+    "name": "Lever Data Applications Offers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+      "type": "text/plain"
+    }
+  }
+}

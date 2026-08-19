@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lever Data Applications Feedback API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Feedback",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/opportunities/:id/feedback",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Feedback"
+        },
+        {
+          "info": {
+            "name": "Create Feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lever.co/v1/opportunities/:id/feedback",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create Feedback"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

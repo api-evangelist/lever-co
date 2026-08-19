@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lever Data Applications Audit Events API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Audit Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Audit Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/audit_events"
+          },
+          "docs": "List Audit Events"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

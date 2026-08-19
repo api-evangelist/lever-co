@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lever Data Applications Sources API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/sources"
+          },
+          "docs": "List Sources"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

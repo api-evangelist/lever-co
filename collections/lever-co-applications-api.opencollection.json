@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lever Data Applications API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Applications For An Opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/opportunities/:id/applications",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Applications For An Opportunity"
+        },
+        {
+          "info": {
+            "name": "Submit An Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lever.co/v1/:site/:postingId",
+            "params": [
+              {
+                "name": "site",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "postingId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Posting-form API key."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit an application against a posting. Accepts either JSON or multipart/form-data.\nRequires a posting-form API key passed via `?key=`.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

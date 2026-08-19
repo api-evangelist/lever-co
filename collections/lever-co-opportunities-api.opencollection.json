@@ -1,0 +1,158 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lever Data Applications Opportunities API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Opportunities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Opportunities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/opportunities",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return (1-100, default 100)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor returned in the previous response's `next` field."
+              },
+              {
+                "name": "expand",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of nested fields to expand inline (e.g. `applications,owner,stage`)."
+              }
+            ]
+          },
+          "docs": "List all opportunities (candidate records) visible to the API key."
+        },
+        {
+          "info": {
+            "name": "Create An Opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lever.co/v1/opportunities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new opportunity for a candidate, optionally associating it with one or more postings."
+        },
+        {
+          "info": {
+            "name": "Retrieve An Opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/opportunities/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve An Opportunity"
+        },
+        {
+          "info": {
+            "name": "Update An Opportunity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.lever.co/v1/opportunities/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update An Opportunity"
+        },
+        {
+          "info": {
+            "name": "Retrieve A Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/contacts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve A Contact"
+        },
+        {
+          "info": {
+            "name": "Update A Contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.lever.co/v1/contacts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update A Contact"
+        },
+        {
+          "info": {
+            "name": "List Referrals",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/referrals"
+          },
+          "docs": "List Referrals"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

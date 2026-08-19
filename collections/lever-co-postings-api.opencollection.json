@@ -1,0 +1,202 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lever Data Applications Postings API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Postings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Postings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/postings",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to return (1-100, default 100)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor returned in the previous response's `next` field."
+              }
+            ]
+          },
+          "docs": "List Postings"
+        },
+        {
+          "info": {
+            "name": "Create A Posting",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lever.co/v1/postings",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create A Posting"
+        },
+        {
+          "info": {
+            "name": "Retrieve A Posting",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/postings/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve A Posting"
+        },
+        {
+          "info": {
+            "name": "Update A Posting",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.lever.co/v1/postings/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update A Posting"
+        },
+        {
+          "info": {
+            "name": "List Public Postings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/:site",
+            "params": [
+              {
+                "name": "site",
+                "value": "",
+                "type": "path",
+                "description": "Lever company site name (e.g. `acmeco`)."
+              },
+              {
+                "name": "skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "commitment",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "team",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "department",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "level",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "group",
+                "value": "",
+                "type": "query",
+                "description": "Group results by `location`, `commitment`, `team`, `department`, or `level`."
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query",
+                "description": "Response format."
+              },
+              {
+                "name": "css",
+                "value": "",
+                "type": "query",
+                "description": "Optional URL of a CSS stylesheet to apply when mode is `html` or `iframe`."
+              },
+              {
+                "name": "resize",
+                "value": "",
+                "type": "query",
+                "description": "Enable iframe auto-resize."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of published postings for the given Lever site. Supports JSON (default),\nHTML, and iframe response modes via the `mode` query parameter.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve A Public Posting",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/:site/:postingId",
+            "params": [
+              {
+                "name": "site",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "postingId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a single published posting as JSON."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

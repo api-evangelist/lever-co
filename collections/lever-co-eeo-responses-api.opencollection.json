@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lever Data Applications EEO Responses API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EEO Responses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List EEO Responses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/eeo/responses"
+          },
+          "docs": "List EEO Responses"
+        },
+        {
+          "info": {
+            "name": "List EEO Responses With PII",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/eeo/responses/pii"
+          },
+          "docs": "List EEO Responses With PII"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

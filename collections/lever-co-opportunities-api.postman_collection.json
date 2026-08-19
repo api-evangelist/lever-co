@@ -1,0 +1,684 @@
+{
+  "item": [
+    {
+      "id": "179e8c8e-2954-480b-90b7-1da6775c0672",
+      "name": "Opportunities",
+      "description": {
+        "content": "Opportunities are the unified record for a candidate at a posting (replaces legacy Candidates).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a3351639-a7a6-4d47-a7e9-12198fc62516",
+          "name": "List Opportunities",
+          "request": {
+            "name": "List Opportunities",
+            "description": {
+              "content": "List all opportunities (candidate records) visible to the API key.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "opportunities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Number of records to return (1-100, default 100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<string>",
+                  "description": "Opaque cursor returned in the previous response's `next` field."
+                },
+                {
+                  "disabled": false,
+                  "key": "expand",
+                  "value": "<string>",
+                  "description": "Comma-separated list of nested fields to expand inline (e.g. `applications,owner,stage`)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0a67ad76-3882-4959-bbff-6b34570ebb29",
+              "name": "A page of opportunities.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "opportunities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expand",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"contact\": \"string\",\n      \"headline\": \"string\",\n      \"stage\": \"string\",\n      \"location\": \"string\",\n      \"emails\": [\n        \"string\",\n        \"string\"\n      ],\n      \"archived\": {\n        \"archivedAt\": 9347,\n        \"reason\": \"string\"\n      },\n      \"createdAt\": 3259,\n      \"updatedAt\": 1914,\n      \"applications\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sources\": [\n        \"string\",\n        \"string\"\n      ],\n      \"origin\": \"string\",\n      \"owner\": \"string\",\n      \"followers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"contact\": \"string\",\n      \"headline\": \"string\",\n      \"stage\": \"string\",\n      \"location\": \"string\",\n      \"emails\": [\n        \"string\",\n        \"string\"\n      ],\n      \"archived\": {\n        \"archivedAt\": 4496,\n        \"reason\": \"string\"\n      },\n      \"createdAt\": 6676,\n      \"updatedAt\": 4597,\n      \"applications\": [\n        \"string\",\n        \"string\"\n      ],\n      \"sources\": [\n        \"string\",\n        \"string\"\n      ],\n      \"origin\": \"string\",\n      \"owner\": \"string\",\n      \"followers\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tags\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ],\n  \"hasNext\": true,\n  \"next\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e018b61a-ba43-48cd-b0a2-b2487780f05b",
+          "name": "Create An Opportunity",
+          "request": {
+            "name": "Create An Opportunity",
+            "description": {
+              "content": "Create a new opportunity for a candidate, optionally associating it with one or more postings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "opportunities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"headline\": \"<string>\",\n  \"location\": \"<string>\",\n  \"postings\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"owner\": \"<string>\",\n  \"sources\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c6e22d70-e05c-41b6-8577-676d6d7b3029",
+              "name": "Opportunity created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "opportunities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"headline\": \"<string>\",\n  \"location\": \"<string>\",\n  \"postings\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"owner\": \"<string>\",\n  \"sources\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"contact\": \"string\",\n  \"headline\": \"string\",\n  \"stage\": \"string\",\n  \"location\": \"string\",\n  \"emails\": [\n    \"string\",\n    \"string\"\n  ],\n  \"archived\": {\n    \"archivedAt\": 9949,\n    \"reason\": \"string\"\n  },\n  \"createdAt\": 1936,\n  \"updatedAt\": 1880,\n  \"applications\": [\n    \"string\",\n    \"string\"\n  ],\n  \"sources\": [\n    \"string\",\n    \"string\"\n  ],\n  \"origin\": \"string\",\n  \"owner\": \"string\",\n  \"followers\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "54af4f61-8e86-4c31-a206-1cba6403359f",
+          "name": "Retrieve An Opportunity",
+          "request": {
+            "name": "Retrieve An Opportunity",
+            "description": {},
+            "url": {
+              "path": [
+                "opportunities",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7e42603-5665-45f5-84b9-32e1d6e177d9",
+              "name": "The opportunity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "opportunities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"contact\": \"string\",\n  \"headline\": \"string\",\n  \"stage\": \"string\",\n  \"location\": \"string\",\n  \"emails\": [\n    \"string\",\n    \"string\"\n  ],\n  \"archived\": {\n    \"archivedAt\": 9949,\n    \"reason\": \"string\"\n  },\n  \"createdAt\": 1936,\n  \"updatedAt\": 1880,\n  \"applications\": [\n    \"string\",\n    \"string\"\n  ],\n  \"sources\": [\n    \"string\",\n    \"string\"\n  ],\n  \"origin\": \"string\",\n  \"owner\": \"string\",\n  \"followers\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d21ec25-91d7-49e6-ba5b-5e266d9a4fef",
+          "name": "Update An Opportunity",
+          "request": {
+            "name": "Update An Opportunity",
+            "description": {},
+            "url": {
+              "path": [
+                "opportunities",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"headline\": \"<string>\",\n  \"location\": \"<string>\",\n  \"owner\": \"<string>\",\n  \"followers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "63845bcd-6bac-48f6-83ff-70156d87b498",
+              "name": "Opportunity updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "opportunities",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"headline\": \"<string>\",\n  \"location\": \"<string>\",\n  \"owner\": \"<string>\",\n  \"followers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ce25c96-807c-4352-859d-807fbb686617",
+          "name": "Retrieve A Contact",
+          "request": {
+            "name": "Retrieve A Contact",
+            "description": {},
+            "url": {
+              "path": [
+                "contacts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d3d5e43-03df-4422-8c52-942df382e7dc",
+              "name": "The contact (the person across all opportunities).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "adc44df9-9675-4510-aea1-65d17a990447",
+          "name": "Update A Contact",
+          "request": {
+            "name": "Update A Contact",
+            "description": {},
+            "url": {
+              "path": [
+                "contacts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8296df19-e3a1-415d-82e4-19c48e259ef8",
+              "name": "Contact updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contacts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9df757db-4131-49ab-a24f-d6042b108755",
+          "name": "List Referrals",
+          "request": {
+            "name": "List Referrals",
+            "description": {},
+            "url": {
+              "path": [
+                "referrals"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01cfeefd-3f9c-46da-8b5e-8a1499cce192",
+              "name": "Referrals.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "referrals"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.lever.co/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "59e95b40-8353-4277-b4b5-c717e2e78e67",
+    "name": "Lever Data Applications Opportunities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at\n`https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,\nApplications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,\nEEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or\nOAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state\nper key with a burst of 20 req/s.\n\n\nContact Support:\n Name: Lever",
+      "type": "text/plain"
+    }
+  }
+}

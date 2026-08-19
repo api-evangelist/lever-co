@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lever Data Applications Archive Reasons API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Archive Reasons",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Archive Reasons",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/archive_reasons"
+          },
+          "docs": "List Archive Reasons"
+        },
+        {
+          "info": {
+            "name": "Retrieve An Archive Reason",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/archive_reasons/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve An Archive Reason"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

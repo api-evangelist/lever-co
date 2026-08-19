@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lever Data Applications Interviews API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Interviews",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Interviews",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/opportunities/:id/interviews",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List Interviews"
+        },
+        {
+          "info": {
+            "name": "Create An Interview",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lever.co/v1/opportunities/:id/interviews",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create An Interview"
+        },
+        {
+          "info": {
+            "name": "Update An Interview",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.lever.co/v1/opportunities/:id/interviews/:interviewId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "interviewId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update An Interview"
+        },
+        {
+          "info": {
+            "name": "Delete An Interview",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.lever.co/v1/opportunities/:id/interviews/:interviewId",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "interviewId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete An Interview"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

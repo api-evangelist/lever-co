@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lever Data Applications Requisitions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Requisitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Requisitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.lever.co/v1/requisitions"
+          },
+          "docs": "List Requisitions"
+        },
+        {
+          "info": {
+            "name": "Create A Requisition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.lever.co/v1/requisitions"
+          },
+          "docs": "Create A Requisition"
+        },
+        {
+          "info": {
+            "name": "Update A Requisition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.lever.co/v1/requisitions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update A Requisition"
+        },
+        {
+          "info": {
+            "name": "Delete A Requisition",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.lever.co/v1/requisitions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete A Requisition"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
