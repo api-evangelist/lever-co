@@ -6,6 +6,12 @@ apis:
   name: Lever Postings XML Feed
   tags:
   - Postings
+  - Job
+  - XML
+  - Job Boards
+  - Feeds
+  tags_raw:
+  - Postings
   - Jobs
   - XML
   - Job Boards
@@ -24,6 +30,10 @@ apis:
 - aid: lever-co:lever-webhooks
   name: Lever Webhooks
   tags:
+  - Webhook
+  - Event
+  - Integration
+  tags_raw:
   - Webhooks
   - Events
   - Integrations
@@ -44,6 +54,8 @@ apis:
   humanURL: https://hire.lever.co/developer/documentation
   baseURL: https://api.lever.co/v1
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
@@ -154,6 +166,8 @@ apis:
   humanURL: https://hire.lever.co/developer/documentation
   baseURL: https://api.lever.co/v1
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -397,6 +411,8 @@ apis:
   humanURL: https://hire.lever.co/developer/documentation
   baseURL: https://api.lever.co/v1
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -419,6 +435,8 @@ apis:
   humanURL: https://hire.lever.co/developer/documentation
   baseURL: https://api.lever.co/v1
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
@@ -437,6 +455,18 @@ apis:
     url: https://github.com/lever/postings-api/blob/master/README.md
 name: Lever
 tags:
+  - Applicant Tracking
+  - ATS
+  - CRM
+  - Recruiting
+  - Hiring
+  - Talent Acquisition
+  - Human Resources
+  - HR Tech
+  - Postings
+  - Webhook
+  - Authentication
+tags_raw:
   - Applicant Tracking
   - ATS
   - CRM
