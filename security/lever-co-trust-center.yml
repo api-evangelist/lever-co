@@ -1,20 +1,44 @@
-generated: '2026-07-11'
+generated: '2026-08-26'
 method: searched
 probe: true
-source: https://www.lever.co/security
+source: >-
+  https://www.lever.co/security (HTTP 200, fetched 2026-08-26) and
+  https://www.employinc.com/legal/ — the parent company's legal and security
+  hub. Baseline written by 0-working/probe-security-programs.py.
 url: https://www.lever.co/security
+owner: Employ Inc.
+description: >-
+  Lever's public security and compliance page, operated under parent company
+  Employ Inc. Certifications are named on the page; Lever does not run a
+  self-serve trust portal with downloadable evidence — reports are obtained
+  through sales or support under NDA.
 certifications:
-- SOC 2
-- ISO 27001
-- PCI DSS
-- GDPR
+  - SOC 2
+  - ISO 27001
+  - PCI DSS
+  - GDPR
+data_residency:
+  regions: [US, EU]
+  evidence: >-
+    Lever operates a separate EU data centre. OAuth authorization and API
+    actions for EU customers are routed to the appropriate data centre
+    automatically (https://hire.lever.co/developer/oauth), and the public
+    Postings API has an EU host at https://api.eu.lever.co/v0/postings.
+self_serve_evidence_portal: false
+subprocessor_list_published: null
+status_page: https://status.lever.co/
+vulnerability_disclosure: security/lever-co-vulnerability-disclosure.yml
+domain_security: security/lever-co-domain-security.yml
 evidence:
-- source: https://www.lever.co/security
-  keywords:
-  - soc 2
-  - soc2
-  - iso 27001
-  - iso/iec 27001
-  - pci-dss
-  - compliance certification
-  - gdpr
+  - source: https://www.lever.co/security
+    status: 200
+    checked: '2026-08-26'
+    keywords:
+      - soc 2
+      - iso 27001
+      - pci-dss
+      - gdpr
+  - source: https://www.employinc.com/legal/
+    status: 200
+    checked: '2026-08-26'
+    kind: parent-company legal and security hub

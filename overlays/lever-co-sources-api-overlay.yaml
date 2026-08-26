@@ -1,0 +1,44 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Lever Data Applications Sources API
+  version: 1.0.0
+extends: openapi/lever-co-sources-api-openapi.yml
+x-generated: '2026-08-26'
+x-method: generated
+x-source: openapi/lever-co-sources-api-openapi.yml
+x-operations:
+- listSources
+actions:
+- target: $.info
+  update:
+    x-apievangelist:
+      catalog: https://apis.io/lever-co
+      provider: Lever
+      maintainer: Kin Lane <kin@apievangelist.com>
+      artifacts:
+      - apis.yml
+      - authentication/lever-co-authentication.yml
+      - scopes/lever-co-scopes.yml
+      - conventions/lever-co-conventions.yml
+      - errors/lever-co-problem-types.yml
+      - rate-limits/lever-co-rate-limits.yml
+      - lifecycle/lever-co-lifecycle.yml
+      - changelog/lever-co-changelog.yml
+      - conformance/lever-co-conformance.yml
+      - data-model/lever-co-data-model.yml
+      - sandbox/lever-co-sandbox.yml
+      - packages/lever-co-packages.yml
+      - mcp/lever-co-mcp.yml
+      - llms/lever-co-llms.txt
+    x-lever-runtime:
+      idempotency: none — the Lever Data API accepts no Idempotency-Key. A retried write duplicates.
+      pagination: keyset — limit (1-100) plus an opaque offset token; envelope {data, next, hasNext}.
+      field_selection: ?include= is SUBTRACTIVE (naming a field suppresses all others); ?expand= inlines id references
+        and overrides include.
+      error_envelope: '{"code": string, "message": string} as application/json. Not RFC 9457.'
+      rate_limit: token bucket per API key — 10 req/s steady, 20 req/s burst, HTTP 429 on exhaustion, no Retry-After
+        and no RateLimit-* headers.
+      identifiers: bare RFC 4122 UUIDs, no type prefix.
+      timestamps: epoch milliseconds (int64), not ISO 8601.
+      sandbox: https://api.sandbox.lever.co/v1 — gated behind partner-program approval.
+      docs: https://hire.lever.co/developer/documentation

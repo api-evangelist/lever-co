@@ -1,0 +1,89 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  https://hire.lever.co/developer/partner and https://hire.lever.co/developer/oauth
+  — fetched 2026-08-26 (HTTP 200). Every value below is quoted from those pages;
+  no test credential, key or fixture was invented, and none is published by
+  Lever.
+docs:
+  - https://hire.lever.co/developer/partner
+  - https://hire.lever.co/developer/oauth
+description: >-
+  Lever operates a real, fully separate sandbox — its own API host, its own
+  authorization server and its own Lever account — but it is GATED. There is no
+  self-serve test mode, no test-vs-live key prefix, and no published test data.
+  A sandbox account is provisioned by the Lever team only after a company is
+  approved into the partner integration program, and Lever states explicitly
+  that it does NOT issue API keys for development because OAuth is mandatory for
+  integrations. For an unapproved developer there is no way to exercise the
+  Data API at all without a paying Lever customer's production credential.
+availability: gated
+gate: Partner program approval — "Once approved, we will set you up for success by providing you a Lever sandbox account."
+self_serve: false
+modes:
+  - name: sandbox
+    base_url: https://api.sandbox.lever.co/v1
+    oauth_authorize: https://sandbox-lever.auth0.com/authorize
+    oauth_audience: https://api.sandbox.lever.co/v1/
+    app_registration: A separate OAuth app from production, with its own client_id/client_secret and its own callback URLs.
+    callback_scheme: 'http is permitted on sandbox callbacks during development (production requires https).'
+    notes:
+      - 'Email is turned OFF in Lever sandbox accounts. Invited users receive no invitation email and must use the login link directly; a warning about this appears at the bottom of the page and is expected behaviour.'
+      - 'Sandbox data is a Lever-provisioned account, not a published fixture set — there are no documented test candidates, postings or ids.'
+  - name: production
+    base_url: https://api.lever.co/v1
+    oauth_authorize: https://auth.lever.co/authorize
+    oauth_audience: https://api.lever.co/v1/
+    app_registration: Production client_id/client_secret are issued by the Lever team only after the QA runthrough at step 4 of the partner process.
+key_formats: {}
+key_format_note: >-
+  Lever publishes NO key prefix convention. API keys and OAuth client secrets
+  carry no test/live marker, so a credential cannot be identified as sandbox or
+  production by inspection — the only discriminator is which base URL and
+  authorization server accepted it.
+test_data:
+  cards: []
+  accounts: []
+  tokens: []
+  triggers: []
+  note: >-
+    None published. Lever's API is an ATS, not a payments API, so there are no
+    test cards or bank accounts; and unlike Stripe's magic values it ships no
+    named fixture ids, no simulation triggers and no time/clock manipulation.
+    Testing means operating a real sandbox tenant by hand.
+time_simulation:
+  supported: false
+  note: No test clocks or time-travel facility. Time-dependent behaviour (SLA windows, timeToFill, the 30-day deleted-record query window) cannot be simulated.
+tooling:
+  - name: Example OAuth App
+    url: https://github.com/lever/integrator-resources/tree/main/ExampleOAuthApp
+    kind: runnable reference implementation of the authorization-code flow
+  - name: Lever Data API Postman collection
+    url: https://github.com/lever/integrator-resources/blob/main/DataAPIPostman/Lever-DataAPI-Collection.json
+    kind: official Postman collection (152 KB) plus Lever-OAuth-Environment.json
+    caveat: >-
+      Published verbatim by Lever — "The Postman authentication tab will only
+      work on Sandbox as it doesn't include the audience parameter." The
+      collection's auth tab is therefore broken against production until the
+      integrator adds audience=https://api.lever.co/v1/ themselves.
+  - name: Postings API Node example
+    url: https://github.com/lever/postings-api/tree/master/nodejs
+    kind: example client for the public, unauthenticated v0 Postings API
+unauthenticated_surface:
+  base_url: https://api.lever.co/v0/postings
+  eu_base_url: https://api.eu.lever.co/v0/postings
+  demo_site: leverdemo
+  probed:
+    - {url: 'https://api.lever.co/v0/postings/leverdemo', status: 200, content_type: 'application/json; charset=utf-8'}
+    - {url: 'https://api.lever.co/v0/postings/leverdemo?mode=xml', status: 200, content_type: 'text/xml; charset=utf-8'}
+  note: >-
+    Lever maintains a real public demo board, `leverdemo`, whose postings are
+    labelled in the response body as a fictional demonstration listing. It needs
+    no credential and is the only part of the Lever surface any developer can
+    call today. It is the practical substitute for a sandbox when evaluating the
+    Postings API — but it exposes nothing of the authenticated Data API.
+gaps:
+  - No self-serve sandbox: evaluation requires a partner application and Lever's approval.
+  - No published test credentials, fixture ids, or key prefixes.
+  - No dry-run/validate-only mode on any production endpoint (conventions/lever-co-conventions.yml).
+  - The official Postman collection ships mis-configured for production by Lever's own admission.

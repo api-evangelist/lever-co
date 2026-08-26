@@ -1,26 +1,89 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/lever-data-api-openapi.yml
+generated: '2026-08-26'
+method: searched
+source: >-
+  https://hire.lever.co/developer/documentation (Authentication section) and
+  https://hire.lever.co/developer/oauth, both fetched 2026-08-26 (HTTP 200).
+  Baseline derived from openapi/*.yml securitySchemes with
+  0-working/derive-authentication.py, then upgraded from the published docs.
+docs:
+  - https://hire.lever.co/developer/documentation
+  - https://hire.lever.co/developer/oauth
+description: >-
+  Lever runs two distinct credential models against the same Data API base
+  (https://api.lever.co/v1). HTTP Basic with an API key is for a customer's own
+  internal workflows; OAuth 2.0 authorization code is the ONLY path for a
+  third-party product integration and requires the app to be registered through
+  the Lever partner program. All requests must be HTTPS; unencrypted HTTP is
+  rejected.
+base_url: https://api.lever.co/v1
+sandbox_base_url: https://api.sandbox.lever.co/v1
+eu_note: >-
+  Lever operates an EU data centre. OAuth authorization and API actions for EU
+  customers are redirected automatically to the appropriate data centre; the
+  public Postings API has an EU host at https://api.eu.lever.co/v0/postings.
 summary:
   types:
-  - http
-  - oauth2
+    - http
+    - oauth2
   oauth2_flows:
-  - authorizationCode
+    - authorizationCode
 schemes:
-- name: BasicAuth
-  type: http
-  scheme: basic
-  description: HTTP Basic authentication using a Lever API key as the username and an empty
-    password.
-  sources:
-  - openapi/lever-data-api-openapi.yml
-- name: OAuth2
-  type: oauth2
-  flows:
-  - flow: authorizationCode
-    authorizationUrl: https://auth.lever.co/authorize
-    tokenUrl: https://auth.lever.co/oauth/token
-    scopes: 22
-  sources:
-  - openapi/lever-data-api-openapi.yml
+  - name: BasicAuth
+    type: http
+    scheme: basic
+    audience: Lever customers building their own internal workflows
+    description: >-
+      HTTP Basic authentication with the Lever API key as the USERNAME and an
+      EMPTY password. Keys are created and revoked on the API Credentials tab of
+      the Integrations and API page in Lever account settings. Multiple keys can
+      be active at once; each key carries its own endpoint permissions and an
+      optional confidential-data grant that can only be given at key creation.
+    key_management_url: https://hire.lever.co/developer/documentation
+    scoped: false
+    notes:
+      - Lever does not issue API keys for partner integration development — OAuth is required.
+      - Older Basic Auth integrations require the customer to hold the Data API feature.
+    sources:
+      - https://hire.lever.co/developer/documentation
+  - name: OAuth2
+    type: oauth2
+    audience: Registered partner product integrations (mandatory since 2020)
+    registration: >-
+      Apps must be registered with Lever (name, 20-140 char description, callback
+      URI(s), square 150x150 logo URI, requested scopes). Lever's team issues the
+      client_id and client_secret. Sandbox and production are separate apps with
+      separate callbacks.
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://auth.lever.co/authorize
+        tokenUrl: https://auth.lever.co/oauth/token
+        sandbox_authorizationUrl: https://sandbox-lever.auth0.com/authorize
+        required_params: [client_id, redirect_uri, response_type, state, audience, scope]
+        audience: https://api.lever.co/v1/
+        sandbox_audience: https://api.sandbox.lever.co/v1/
+        token_type: Bearer
+        access_token_lifetime_seconds: 3600
+        refresh_tokens: Request the offline_access scope to receive a refresh_token; refresh returns a new access AND refresh token.
+        scope_detail: scopes/lever-co-scopes.yml
+        scope_limits: Most use cases need 5-8 scopes; hard maximum of 20 scopes per app. A write:admin scope implies the matching read:admin.
+    consent:
+      granted_by: Lever Super Admin, on behalf of the whole organization
+      revocable: true
+      revoke_location: The customer's Lever settings page lists the connected app and can revoke it.
+      re_consent: Consent is re-requested only on first authorization, after revocation, or when new scopes are requested.
+    sources:
+      - https://hire.lever.co/developer/oauth
+      - https://hire.lever.co/developer/documentation
+common_failures:
+  - symptom: Consent screen shows only `offline_access`
+    cause: The `audience` parameter is missing or malformed on /authorize.
+    fix: Pass audience=https://api.lever.co/v1/ (trailing slash required); sandbox uses https://api.sandbox.lever.co/v1/.
+  - symptom: 401 Unauthorized on token exchange
+    cause: The client SECRET was not used for client_secret (the API key was sent instead).
+    fix: Use the OAuth client_secret issued at app registration.
+  - symptom: 403 "Unable to find a signing key that matches"
+    cause: A sandbox token was presented to the production API (or vice versa).
+    fix: Match token issuer to base URL — https://api.sandbox.lever.co/v1 for sandbox, https://api.lever.co/v1 for production.
+  - symptom: Redirect window shows "undefined"
+    cause: A parameter in the redirect URL does not match the registered app, most often redirect_uri.
+    fix: Make redirect_uri byte-identical to the registered callback.

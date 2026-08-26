@@ -1,143 +1,245 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/lever-data-api-openapi.yml
+generated: '2026-08-26'
+method: searched
+source: https://hire.lever.co/developer/documentation#scopes — the complete OAuth scope reference published on the
+  Lever Data API documentation page (fetched 2026-08-26, HTTP 200). Baseline derived from openapi/*.yml securitySchemes
+  with 0-working/derive-oauth-scopes.py, then upgraded with the full published list.
+docs: https://hire.lever.co/developer/documentation
+description: OAuth 2.0 scopes an application can request against the Lever Data API. Scopes follow a resource:access:role
+  convention where role is always `admin` (Lever grants integrations admin-level access to a resource, not a per-user
+  subset). `offline_access` is requested at the /authorize step to receive a refresh token. Basic Auth API keys
+  do NOT use scopes — key permissions are configured per key in the Lever account Integrations and API settings,
+  including a separate grant for confidential data that can only be given at key-creation time.
 schemes:
 - name: OAuth2
-  source: openapi/lever-data-api-openapi.yml
+  type: oauth2
   flows:
   - flow: authorizationCode
     authorizationUrl: https://auth.lever.co/authorize
     tokenUrl: https://auth.lever.co/oauth/token
+    audience: https://api.lever.co/v1/
+    sandbox_authorizationUrl: https://sandbox-lever.auth0.com/authorize
+    token_lifetime_seconds: 3600
+    refresh_tokens: Request the offline_access scope to receive a refresh_token.
+  sources:
+  - https://hire.lever.co/developer/documentation
+  - https://hire.lever.co/developer/oauth
+scope_count: 52
 scopes:
-- scope: audit_events:read:admin
-  description: Read audit log events.
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
-- scope: confidential:access:admin
-  description: Access confidential records.
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
-- scope: eeo_responses:read:admin
-  description: Read EEO survey responses.
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
-- scope: eeo_responses_pii:read:admin
-  description: Read EEO survey responses with PII.
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
-- scope: feedback:read:admin
-  description: Read feedback.
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
-- scope: feedback:write:admin
-  description: Write feedback.
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
-- scope: files:read:admin
-  description: Read files.
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
-- scope: files:write:admin
-  description: Write files.
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
-- scope: interviews:read:admin
-  description: Read interviews.
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
-- scope: interviews:write:admin
-  description: Write interviews.
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
-- scope: offers:read:admin
-  description: Read offers.
-  flows:
-  - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
 - scope: offline_access
-  description: Issue refresh tokens.
+  description: Include this scope in the authorize call in order to get a refresh token during the token exchange.
   flows:
   - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
+- scope: applications:read:admin
+  description: View all opportunity applications.
+  flows:
+  - authorizationCode
+- scope: archive_reasons:read:admin
+  description: View all archived reasons.
+  flows:
+  - authorizationCode
+- scope: audit_events:read:admin
+  description: View all audit events.
+  flows:
+  - authorizationCode
+- scope: confidential:access:admin
+  description: Access all confidential data.
+  flows:
+  - authorizationCode
+- scope: contact:read:admin
+  description: View an opportunity's contact.
+  flows:
+  - authorizationCode
+- scope: contact:write:admin
+  description: View and manage an opportunity's contact.
+  flows:
+  - authorizationCode
+- scope: diversity_surveys:read:admin
+  description: View all diversity surveys.
+  flows:
+  - authorizationCode
+- scope: eeo_responses:read:admin
+  description: View all EEO responses without personally identifiable information.
+  flows:
+  - authorizationCode
+- scope: eeo_responses_pii:read:admin
+  description: View all EEO responses with or without personally identifiable information.
+  flows:
+  - authorizationCode
+- scope: feedback:read:admin
+  description: View all of an opportunity's feedback.
+  flows:
+  - authorizationCode
+- scope: feedback:write:admin
+  description: View and manage all of an opportunity's feedback.
+  flows:
+  - authorizationCode
+- scope: feedback_templates:read:admin
+  description: View all feedback templates.
+  flows:
+  - authorizationCode
+- scope: feedback_templates:write:admin
+  description: View and manage all feedback templates.
+  flows:
+  - authorizationCode
+- scope: files:read:admin
+  description: View all of an opportunity's files.
+  flows:
+  - authorizationCode
+- scope: files:write:admin
+  description: View and manage all of an opportunity's files.
+  flows:
+  - authorizationCode
+- scope: forms:read:admin
+  description: View all of an opportunity's forms.
+  flows:
+  - authorizationCode
+- scope: forms:write:admin
+  description: View and manage all of an opportunity's forms.
+  flows:
+  - authorizationCode
+- scope: form_templates:read:admin
+  description: View all form templates.
+  flows:
+  - authorizationCode
+- scope: form_templates:write:admin
+  description: View and manage all form templates.
+  flows:
+  - authorizationCode
+- scope: groups:read:admin
+  description: View all user groups.
+  flows:
+  - authorizationCode
+- scope: groups:write:admin
+  description: View and manage all user groups.
+  flows:
+  - authorizationCode
+- scope: interviews:read:admin
+  description: View all of an opportunity's interviews.
+  flows:
+  - authorizationCode
+- scope: interviews:write:admin
+  description: View and manage all of an opportunity's interviews.
+  flows:
+  - authorizationCode
+- scope: notes:read:admin
+  description: View all of an opportunity's notes.
+  flows:
+  - authorizationCode
+- scope: notes:write:admin
+  description: View and manage all of an opportunity's notes.
+  flows:
+  - authorizationCode
+- scope: offers:read:admin
+  description: View all of an opportunity's offers.
+  flows:
+  - authorizationCode
 - scope: opportunities:read:admin
-  description: Read opportunities.
+  description: View all opportunities.
   flows:
   - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
 - scope: opportunities:write:admin
-  description: Write opportunities.
+  description: View and manage all opportunities.
   flows:
   - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
+- scope: panels:read:admin
+  description: View all of an opportunity's panels.
+  flows:
+  - authorizationCode
+- scope: panels:write:admin
+  description: View and manage all of an opportunity's panels.
+  flows:
+  - authorizationCode
+- scope: permissions:read:admin
+  description: View all user or role permissions.
+  flows:
+  - authorizationCode
+- scope: permissions:write:admin
+  description: View and manage all user or role permissions.
+  flows:
+  - authorizationCode
 - scope: postings:read:admin
-  description: Read postings.
+  description: View all postings.
   flows:
   - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
 - scope: postings:write:admin
-  description: Write postings.
+  description: View and manage all postings.
   flows:
   - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
+- scope: referrals:read:admin
+  description: View all of an opportunity's referrals.
+  flows:
+  - authorizationCode
 - scope: requisitions:read:admin
-  description: Read requisitions.
+  description: View all requisitions.
   flows:
   - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
 - scope: requisitions:write:admin
-  description: Write requisitions.
+  description: View and manage all requisitions.
   flows:
   - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
+- scope: requisition_fields:read:admin
+  description: View all requisition fields.
+  flows:
+  - authorizationCode
+- scope: requisition_fields:write:admin
+  description: View and manage all requisition fields.
+  flows:
+  - authorizationCode
+- scope: resumes:read:admin
+  description: View all of an opportunity's resumes.
+  flows:
+  - authorizationCode
+- scope: roles:read:admin
+  description: View all roles.
+  flows:
+  - authorizationCode
+- scope: roles:write:admin
+  description: View and manage all roles.
+  flows:
+  - authorizationCode
+- scope: sources:read:admin
+  description: View all sources.
+  flows:
+  - authorizationCode
+- scope: stages:read:admin
+  description: View all stages.
+  flows:
+  - authorizationCode
+- scope: tags:read:admin
+  description: View all tags.
+  flows:
+  - authorizationCode
+- scope: tasks:read:admin
+  description: View all tasks.
+  flows:
+  - authorizationCode
+- scope: uploads:write:admin
+  description: Manage all file uploads.
+  flows:
+  - authorizationCode
 - scope: users:read:admin
-  description: Read users.
+  description: View all users.
   flows:
   - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
 - scope: users:write:admin
-  description: Write users.
+  description: View and manage all users.
   flows:
   - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
 - scope: webhooks:read:admin
-  description: Read webhook subscriptions.
+  description: View all webhooks.
   flows:
   - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
 - scope: webhooks:write:admin
-  description: Write webhook subscriptions.
+  description: Manage all webhooks.
   flows:
   - authorizationCode
-  sources:
-  - openapi/lever-data-api-openapi.yml
+notes:
+- 'OAuth registration is gated: apps must be approved through the Lever partner program before Lever issues a client_id/secret
+  (https://hire.lever.co/developer/partner).'
+- The `audience` query parameter (https://api.lever.co/v1/) is REQUIRED on the /authorize call; omitting it is the
+  most common integration failure and the published Postman collection omits it, so its auth tab only works against
+  sandbox.
+- confidential:access:admin only returns confidential postings/opportunities/requisitions when the underlying credential
+  was also granted confidential access.
+- Requisitions endpoints (requisitions:*, requisition_fields:*) require the customer to hold the Lever TRM Enterprise
+  package or the Advanced HR feature.

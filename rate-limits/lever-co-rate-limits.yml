@@ -4,8 +4,16 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Lever
 providerId: lever-co
 created: '2026-05-25'
-modified: '2026-05-25'
+modified: '2026-08-26'
 reconciled: true
+generated: '2026-08-26'
+method: searched
+source: >-
+  https://hire.lever.co/developer/documentation — "Rate Limits" and "Responses
+  and Errors" sections, fetched 2026-08-26 (HTTP 200) — plus
+  https://github.com/lever/postings-api. Response headers verified by live
+  probe of https://api.lever.co/v0/postings/leverdemo?limit=1 on 2026-08-26.
+limit_count: 3
 tags:
   - Rate Limiting
   - Quotas
@@ -20,7 +28,24 @@ responseCodes:
   throttled: 429
   quotaExceeded: 429
 headers:
-  retryAfter: retry-after
+  published: []
+  observed: []
+  retryAfter: null
+  rateLimitRemaining: null
+  rateLimitLimit: null
+  rateLimitReset: null
+  finding: >-
+    Lever publishes NO rate-limit response headers and returns none. A live GET
+    of https://api.lever.co/v0/postings/leverdemo?limit=1 on 2026-08-26 returned
+    only Date, Content-Type, Content-Length, Connection,
+    Strict-Transport-Security, X-Content-Type-Options, X-XSS-Protection,
+    X-Stream-Path and ETag — no X-RateLimit-*, no RateLimit-*, no Retry-After.
+    The documentation names no header either. An agent therefore cannot read its
+    remaining budget or a server-supplied backoff interval; it can only observe
+    the 429 after the fact and schedule its own exponential backoff. Combined
+    with the absence of any idempotency key
+    (conventions/lever-co-conventions.yml), a backoff-and-retry on a write can
+    double-fire — read back before retrying.
 limits:
   - api: Lever Data API
     scope: per-api-key

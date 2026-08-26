@@ -1,0 +1,164 @@
+generated: '2026-08-26'
+method: searched
+source: https://hire.lever.co/developer/updates — Lever's dated "API Updates" page, fetched 2026-08-26 (HTTP 200).
+docs: https://hire.lever.co/developer/updates
+description: >-
+  Lever maintains a single dated API Updates page as its changelog. Entries are
+  headed "Updated <weekday>, <Month D, YYYY>" and describe additive field and
+  endpoint changes in prose; there are no version numbers, no release tags, no
+  RSS/Atom feed and no machine-readable form, so this artifact is the structured
+  capture. The page carries no per-entry anchors, so `url` below is the page
+  itself.
+versioning:
+  scheme: single path version (v1), no version header, no per-account pinning
+  current: v1
+  breaking_change_policy: A field rename or removal requires a version bump; additions ship in place.
+  detail: lifecycle/lever-co-lifecycle.yml
+cadence:
+  latest_entry: '2026-04-30'
+  entries_2026: 4
+  entries_2025: 1
+  entries_2024: 2
+  entries_2023: 3
+  observation: >-
+    Low-volume and bursty. The four 2026 entries all land in an 18-day window
+    (April 13-30) and all add delta/reconciliation surfaces driven by named
+    partner needs — LinkedIn is called out by name twice. Nothing since
+    2026-04-30 as of this capture.
+window: Recent entries only (2021-2026). The live page is the source of truth.
+entries:
+  - date: '2026-04-30'
+    breaking: false
+    additions:
+      - 'GET /applications/deleted — retrieve soft-deleted applications in a time window.'
+    highlights:
+      - >-
+        Requires deleted_at_start and deleted_at_end (max 30-day window), keyset
+        pagination. Returns id, deletedAt, opportunityId and postingId (null for
+        sourced candidates). Added so integrations such as LinkedIn can clean up
+        orphaned application records.
+  - date: '2026-04-27'
+    breaking: false
+    additions:
+      - 'GET /postings/deleted — retrieve postings deleted in a time window.'
+    highlights:
+      - >-
+        Requires deleted_at_start and deleted_at_end (max 30-day window), keyset
+        pagination. Returns only id and deletedAt. Added so integrations can
+        remove stale job listings.
+  - date: '2026-04-20'
+    breaking: false
+    additions:
+      - 'Five HTTP metadata fields on application objects: ipAddress, referer, userAgent, acceptLanguage, timezone.'
+    highlights:
+      - >-
+        Exposed for fraud detection and security analysis. All String|null,
+        subject to Lever's standard retention and deletion policies. Available
+        on listOpportunities and getOpportunity when expand=applications, and on
+        Apply to a posting. ipAddress and referer were already captured
+        internally but not exposed; timezone is an IANA identifier optionally
+        supplied in the apply request body and rejected if invalid.
+  - date: '2026-04-13'
+    breaking: false
+    additions:
+      - 'GET /opportunities/{opportunity}/file_actions — file-related activity for an opportunity.'
+    highlights:
+      - >-
+        occurred_at_start / occurred_at_end filters and keyset pagination.
+        Returns file-added, resume-imported and file-remove events so
+        integrations can poll for deltas instead of re-fetching full file
+        history.
+  - date: '2025-03-31'
+    breaking: false
+    additions:
+      - "Feedback of types 'assignment' and 'share' now included in the List all feedback response alongside 'interview'."
+  - date: '2024-06-24'
+    breaking: false
+    additions:
+      - 'Optional feedbackTemplate field per interviewer on the Interviews and Panels endpoints (defaults to the interview''s template when omitted).'
+      - "Removed the prompt=consent requirement from the OAuth authorization URL — consent is now requested only on first authorization, re-authorization after revocation, or a new scope request. Fixed non-admin Microsoft365 SSO users being blocked from authorizing apps."
+  - date: '2024-01-22'
+    breaking: false
+    additions:
+      - "origin field on POST /postings/{posting}/apply — 'applied' or 'internal', defaulting to 'applied'."
+  - date: '2023-03-27'
+    breaking: false
+    additions:
+      - 'contactCreated and contactUpdated webhooks.'
+  - date: '2023-03-16'
+    breaking: false
+    additions:
+      - 'accessRole filter on GET /users.'
+  - date: '2023-02-07'
+    breaking: false
+    additions:
+      - 'isAnonymized field on GET /contacts. Anonymous contacts cannot be updated and opportunities cannot be linked to them.'
+  - date: '2022-11-29'
+    breaking: false
+    additions:
+      - 'updatedAt on requisitions, reflecting a defined set of 17 fields.'
+  - date: '2022-10-03'
+    breaking: true
+    removals:
+      - "The include_deleted query parameter was REMOVED from the list opportunities endpoint; use the List deleted opportunities endpoint instead."
+    highlights:
+      - >-
+        The only removal in the recorded changelog. It shipped without a version
+        bump and without a Sunset header, which is a live counterexample to the
+        stated "we won't rename or remove without a version bump" promise —
+        the promise covers FIELDS, not query parameters.
+  - date: '2022-09-28'
+    breaking: false
+    additions:
+      - "type on archive reasons, plus a 'hired'/'non-hired' type filter."
+  - date: '2022-09-07'
+    breaking: false
+    additions:
+      - 'postingIds on create/update requisition and requisitionCodes on create/update posting, linking requisitions to postings. An empty array clears all links; omitting the field leaves it unmodified. Confidential postings cannot be modified through the API.'
+  - date: '2022-07-29'
+    breaking: false
+    additions:
+      - 'workplaceType on postings.'
+  - date: '2022-07-19'
+    breaking: false
+    additions:
+      - 'timeToFillStartAt and timeToFillEndAt on requisitions.'
+  - date: '2022-07-14'
+    breaking: false
+    additions:
+      - 'OAuth became available for EU customers; authorization is routed automatically to the correct data centre.'
+  - date: '2022-03-28'
+    breaking: false
+    additions:
+      - 'status on archive reasons.'
+  - date: '2021-07-28'
+    breaking: false
+    additions:
+      - 'Update note endpoint — update an opportunity note and its associated comments.'
+  - date: '2021-06-02'
+    breaking: false
+    additions:
+      - 'contact field on create opportunity, linking to an existing contact by id. Without it, Lever falls back to de-duplicating by the email in the request.'
+  - date: '2021-05-19'
+    breaking: false
+    additions:
+      - '/opportunities/deleted endpoint added; include_deleted on list opportunities deprecated (removed 2022-10-03).'
+  - date: '2021-05-18'
+    breaking: false
+    additions:
+      - 'linkedContactIds exposed on the Users endpoint.'
+  - date: '2021-04-19'
+    breaking: false
+    additions:
+      - 'Threaded comments on notes via a note_id parameter on create a note.'
+observations:
+  - >-
+    Every 2026 change is a read surface for reconciling deletions and file
+    activity, with a mandatory 30-day query window. That is the shape of an API
+    being hardened for large syndication partners, not one being extended for
+    new use cases.
+  - >-
+    Two entries change OAuth behaviour (2022-07-14 EU availability, 2024-06-24
+    prompt=consent removal) — worth watching because Lever emits no Deprecation
+    or Sunset header, so this page is the only channel through which an auth
+    change is announced.

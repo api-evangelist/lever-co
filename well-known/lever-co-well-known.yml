@@ -1,0 +1,84 @@
+generated: '2026-08-26'
+method: probed
+source: >-
+  Live GET of the five canonical /.well-known/ discovery paths against every
+  host named in apis.yml baseURL, every OpenAPI servers[] host, and the parent
+  company site. Status is the HTTP code observed at fetch time (2026-08-26).
+description: >-
+  Lever serves no /.well-known/ discovery document on any of its hosts.
+  api.lever.co and www.lever.co return a real 404 for every path.
+  hire.lever.co is a single-page application whose catch-all route answers
+  200 text/html with the Lever Hire shell for ANY /.well-known/* path — that is
+  an SPA false positive, not a served document, so it is recorded as a miss and
+  nothing was saved. No WellKnown or SecurityTxt pointer is emitted in apis.yml
+  because no path returned a real document. Lever's vulnerability-disclosure
+  policy is published instead as SECURITY.md in its GitHub repos
+  (security/lever-co-vulnerability-disclosure.yml).
+hosts:
+  - host: https://api.lever.co
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://www.lever.co
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://hire.lever.co
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        type: text/html
+        note: SPA catch-all — returns the Lever Hire application shell, not a document. Treated as a miss.
+      - path: /.well-known/openid-configuration
+        status: 200
+        type: text/html
+        note: SPA catch-all — application shell, not a document. Treated as a miss.
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        type: text/html
+        note: SPA catch-all — application shell, not a document. Treated as a miss.
+      - path: /.well-known/api-catalog
+        status: 200
+        type: text/html
+        note: SPA catch-all — application shell, not a document. Treated as a miss.
+      - path: /.well-known/ai-plugin.json
+        status: 200
+        type: text/html
+        note: SPA catch-all — application shell, not a document. Treated as a miss.
+  - host: https://www.employinc.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+saved_documents: []
+findings:
+  - >-
+    Lever's OAuth authorization server (https://auth.lever.co, an Auth0 tenant —
+    sandbox is https://sandbox-lever.auth0.com) publishes no
+    /.well-known/oauth-authorization-server or /.well-known/openid-configuration
+    on the lever.co hosts probed, so an agent cannot discover the token endpoint
+    programmatically; it is documented only in prose at
+    https://hire.lever.co/developer/oauth.

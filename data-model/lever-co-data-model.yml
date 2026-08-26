@@ -1,0 +1,183 @@
+generated: '2026-08-26'
+method: derived
+source: >-
+  Derived from the id-reference fields and $ref links in openapi/lever-co-*.yml
+  and json-schema/lever-opportunity-schema.json + lever-posting-schema.json in
+  this repo, cross-checked against the object reference at
+  https://hire.lever.co/developer/documentation and the deprecated-Candidates
+  page at https://hire.lever.co/developer/deprecated (both fetched 2026-08-26).
+docs: https://hire.lever.co/developer/documentation
+notation: >-
+  relationships use has_one / has_many / belongs_to with the foreign-key field
+  name; direction is from the entity that holds the reference.
+identifiers:
+  format: RFC 4122 UUID v4, lowercase, hyphenated (e.g. 250d8f03-738a-4bba-a671-8a3d73477145)
+  prefixed: false
+  note: >-
+    Lever uses NO id prefixes. Every entity's id is a bare UUID, so an id alone
+    does not tell an agent what kind of object it points at — unlike prefix
+    schemes (Stripe cus_/pi_) an id must always be carried with its type. Ids
+    are called "UID" throughout the docs.
+timestamps:
+  format: integer epoch milliseconds (int64)
+  fields: [createdAt, updatedAt, archivedAt, lastInteractionAt, lastAdvancedAt, snoozedUntil, deletedAt, triggeredAt]
+core_concept:
+  summary: >-
+    The central modelling decision, and the one that breaks naive integrations:
+    a person and a candidacy are DIFFERENT objects. A Contact is the unique
+    human. An Opportunity is one journey of that human through the pipeline for
+    one posting. One Contact can own many Opportunities. The legacy Candidate
+    resource conflated the two and was deprecated in 2020; the `candidateId`
+    field surviving on webhook payloads is the same value as `opportunityId`,
+    not a Contact id.
+entities:
+  - name: Contact
+    domain: people
+    description: "A unique individual and their personal/contact information, shared and consistent across all of that person's Opportunities."
+  - name: Opportunity
+    domain: pipeline
+    description: "One candidacy — a Contact's journey through the pipeline for a given posting. The unified pipeline record; replaces the legacy Candidate."
+  - name: Application
+    domain: pipeline
+    description: "A submission against a specific Posting on an Opportunity. Carries HTTP metadata (ipAddress, referer, userAgent, acceptLanguage, timezone) since 2026-04-20."
+  - name: Posting
+    domain: jobs
+    description: "A published job role. Also the object exposed unauthenticated at /v0/postings/{site}."
+  - name: Requisition
+    domain: jobs
+    description: "A headcount-tracking record backing one or more Postings. Requires the TRM Enterprise package or Advanced HR feature."
+  - name: RequisitionField
+    domain: jobs
+    description: "A customer-defined custom field on requisitions. Updates are whole-object and delete by omission."
+  - name: Stage
+    domain: pipeline
+    description: "A position in the recruiting pipeline (lead, applicant, phone screen, on-site, offer, hired)."
+  - name: ArchiveReason
+    domain: pipeline
+    description: "Why an Opportunity left the active pipeline. Typed 'hired' or 'non-hired'."
+  - name: Source
+    domain: pipeline
+    description: "How the candidate entered the pipeline (referral, agency, job board, sourced)."
+  - name: Tag
+    domain: pipeline
+    description: "A free-form label applied to Opportunities."
+  - name: Interview
+    domain: interviewing
+    description: "A scheduled interview on an Opportunity, with interviewers and an optional per-interviewer feedback template."
+  - name: Panel
+    domain: interviewing
+    description: "A group of Interviews scheduled together with multiple interviewers."
+  - name: Feedback
+    domain: interviewing
+    description: "A completed feedback form. Types include interview, assignment and share."
+  - name: FeedbackTemplate
+    domain: interviewing
+    description: "The form definition a Feedback instance is filled against."
+  - name: ProfileForm
+    domain: interviewing
+    description: "A non-interview form captured on an Opportunity."
+  - name: ProfileFormTemplate
+    domain: interviewing
+    description: "The definition a ProfileForm is filled against."
+  - name: Offer
+    domain: hiring
+    description: "An offer record associated with a hired candidate. Read-only through the API."
+  - name: Referral
+    domain: pipeline
+    description: "An employee referral captured against an Opportunity."
+  - name: File
+    domain: documents
+    description: "An attachment on an Opportunity. Upload formats docx, doc, js, jpg, png, pdf, txt."
+  - name: Resume
+    domain: documents
+    description: "A parsed resume on an Opportunity. Image uploads attach but are not parsed."
+  - name: User
+    domain: identity
+    description: "A Lever user — recruiter, hiring manager, interviewer or admin. Deactivatable and reactivatable."
+  - name: Group
+    domain: identity
+    description: "A user group."
+  - name: Role
+    domain: identity
+    description: "A permission role held by users."
+  - name: EeoResponse
+    domain: compliance
+    description: "An Equal Employment Opportunity self-identification response. Separate read scopes with and without PII."
+  - name: DiversitySurvey
+    domain: compliance
+    description: "A diversity survey definition and its responses."
+  - name: AuditEvent
+    domain: compliance
+    description: "An admin/security-relevant action (user:deactivated, account:reactivated, and similar)."
+  - name: Webhook
+    domain: events
+    description: "An outbound event subscription. Ten event types across the application and candidate lifecycle."
+relationships:
+  - {from: Opportunity, to: Contact, kind: belongs_to, via: contact}
+  - {from: Contact, to: Opportunity, kind: has_many, via: contact}
+  - {from: Opportunity, to: Application, kind: has_many, via: applications}
+  - {from: Application, to: Opportunity, kind: belongs_to, via: opportunityId}
+  - {from: Application, to: Posting, kind: belongs_to, via: postingId}
+  - {from: Opportunity, to: Stage, kind: belongs_to, via: stage}
+  - {from: Opportunity, to: ArchiveReason, kind: belongs_to, via: archived.reason}
+  - {from: Opportunity, to: Source, kind: has_many, via: sources}
+  - {from: Opportunity, to: Tag, kind: has_many, via: tags}
+  - {from: Opportunity, to: User, kind: has_many, via: followers}
+  - {from: Opportunity, to: User, kind: belongs_to, via: owner}
+  - {from: Opportunity, to: Interview, kind: has_many, via: opportunityId}
+  - {from: Opportunity, to: Feedback, kind: has_many, via: opportunityId}
+  - {from: Opportunity, to: Note, kind: has_many, via: opportunityId}
+  - {from: Opportunity, to: File, kind: has_many, via: opportunityId}
+  - {from: Opportunity, to: Resume, kind: has_many, via: opportunityId}
+  - {from: Opportunity, to: Referral, kind: has_many, via: opportunityId}
+  - {from: Opportunity, to: Offer, kind: has_many, via: opportunityId}
+  - {from: Opportunity, to: ProfileForm, kind: has_many, via: opportunityId}
+  - {from: Interview, to: Panel, kind: belongs_to, via: panel}
+  - {from: Panel, to: Interview, kind: has_many, via: interviews}
+  - {from: Interview, to: User, kind: has_many, via: interviewers}
+  - {from: Interview, to: FeedbackTemplate, kind: belongs_to, via: feedbackTemplate}
+  - {from: Feedback, to: FeedbackTemplate, kind: belongs_to, via: baseTemplateId}
+  - {from: Feedback, to: User, kind: belongs_to, via: user}
+  - {from: Feedback, to: Interview, kind: belongs_to, via: interview}
+  - {from: ProfileForm, to: ProfileFormTemplate, kind: belongs_to, via: baseTemplateId}
+  - {from: Posting, to: Requisition, kind: has_many, via: requisitionCodes}
+  - {from: Requisition, to: Posting, kind: has_many, via: postingIds}
+  - {from: Requisition, to: RequisitionField, kind: has_many, via: customFields}
+  - {from: Requisition, to: User, kind: belongs_to, via: hiringManager}
+  - {from: Requisition, to: User, kind: belongs_to, via: owner}
+  - {from: Posting, to: User, kind: belongs_to, via: owner}
+  - {from: Posting, to: User, kind: belongs_to, via: hiringManager}
+  - {from: Posting, to: User, kind: has_many, via: followers}
+  - {from: User, to: Contact, kind: has_many, via: linkedContactIds}
+  - {from: User, to: Group, kind: has_many, via: groups}
+  - {from: User, to: Role, kind: belongs_to, via: accessRole}
+  - {from: EeoResponse, to: Opportunity, kind: belongs_to, via: opportunityId}
+  - {from: AuditEvent, to: User, kind: belongs_to, via: userId}
+expandable_references:
+  note: >-
+    Any id-reference field flagged "Expandable" in the docs can be inlined with
+    ?expand=<field> — followers, owner, hiringManager, stage, contact and
+    applications are the common ones. Expansion is per-request and takes
+    precedence over ?include.
+confidentiality:
+  applies_to: [Posting, Opportunity, Requisition]
+  values: [non-confidential, confidential]
+  rule: >-
+    An Opportunity can only be confidential if it sits against a confidential
+    Posting. Confidential objects are invisible — and return an access error
+    rather than an empty result — unless the credential holds the confidential
+    grant. Confidential Postings cannot be modified through the API at all.
+lifecycle_notes:
+  - >-
+    An Opportunity exits the pipeline by being ARCHIVED with a reason, not
+    deleted. Archiving is reversible (set the reason to null); see the
+    reversibility block in conventions/lever-co-conventions.yml.
+  - >-
+    Opportunities, Postings and Applications that ARE deleted are discoverable
+    for reconciliation through the deleted-record endpoints, within a maximum
+    30-day query window. That is a visibility window, not a restore window.
+schemas_in_repo:
+  - json-schema/lever-opportunity-schema.json
+  - json-schema/lever-posting-schema.json
+  - json-ld/lever-co-context.jsonld
+render: null

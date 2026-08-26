@@ -1,0 +1,42 @@
+generated: '2026-08-26'
+method: generated
+source: >-
+  Packaged Agent Skills for the Lever Data API. Every step is grounded in an
+  operationId verified verbatim in ../openapi/lever-co-*-openapi.yml; the
+  cross-cutting rules cite ../conventions/, ../errors/, ../scopes/,
+  ../authentication/ and ../rate-limits/. Lever publishes no skills or AGENTS.md
+  of its own — the developer surface (hire.lever.co/developer and its five
+  sub-pages, all fetched 2026-08-26) makes no mention of agents, MCP or tools —
+  so these are GENERATED, not harvested.
+description: >-
+  Five marquee flows covering the Lever surface an integration actually uses:
+  the unauthenticated job board, sourcing a candidate, interviewing and
+  feedback, event subscriptions, and requisitions. Each carries the two runtime
+  facts that most often break a Lever client — there is no idempotency key, and
+  requisition updates delete by omission.
+skills:
+  - file: lever-co-sync-public-job-board.md
+    name: Sync a public Lever job board
+    api: openapi/lever-co-postings-api-openapi.yml
+    auth: none
+    operations: [listPublicPostings, getPublicPosting]
+  - file: lever-co-source-candidate.md
+    name: Source a candidate into the pipeline
+    api: openapi/lever-co-opportunities-api-openapi.yml
+    auth: 'oauth2: opportunities:write:admin, stages:read:admin, sources:read:admin'
+    operations: [listStages, listSources, createOpportunity, getOpportunity, updateOpportunity]
+  - file: lever-co-schedule-interview-and-collect-feedback.md
+    name: Schedule an interview and collect feedback
+    api: openapi/lever-co-interviews-api-openapi.yml
+    auth: 'oauth2: interviews:write:admin, feedback:write:admin, panels:write:admin'
+    operations: [listInterviews, createInterview, updateInterview, deleteInterview, listFeedback, createFeedback, listPanels, createPanel]
+  - file: lever-co-subscribe-to-webhooks.md
+    name: Subscribe to Lever webhooks and verify deliveries
+    api: openapi/lever-co-webhooks-api-openapi.yml
+    auth: 'oauth2: webhooks:write:admin'
+    operations: [listWebhooks, createWebhook, updateWebhook, deleteWebhook]
+  - file: lever-co-manage-requisitions-and-postings.md
+    name: Manage requisitions and link them to postings
+    api: openapi/lever-co-requisitions-api-openapi.yml
+    auth: 'oauth2: requisitions:write:admin, postings:write:admin, requisition_fields:write:admin'
+    operations: [listRequisitions, createRequisition, updateRequisition, deleteRequisition, listPostings, getPosting, createPosting, updatePosting]

@@ -1,0 +1,338 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  https://hire.lever.co/developer/documentation (API Overview: Introduction,
+  Authentication, Rate Limits, Responses and Errors, Pagination, Confidential
+  Data, Lists, Customizing the Response, Supported File Formats, Webhooks) and
+  https://hire.lever.co/developer/oauth and /developer/updates — all fetched
+  2026-08-26, HTTP 200. Cross-checked against openapi/*.yml in this repo.
+docs: https://hire.lever.co/developer/documentation
+description: >-
+  Cross-cutting runtime semantics of the Lever Data API: how every operation
+  authenticates, paginates, shapes its response, signals failure and rate
+  limits, and what can and cannot be taken back. These are the behaviours
+  OpenAPI does not express, and for Lever several of them are unusual enough to
+  break a naive client — the offset token is opaque and not reusable, `include`
+  is subtractive rather than additive, and there is no idempotency key anywhere
+  in the API.
+base_url: https://api.lever.co/v1
+sandbox_base_url: https://api.sandbox.lever.co/v1
+public_postings_base_url: https://api.lever.co/v0/postings
+eu_postings_base_url: https://api.eu.lever.co/v0/postings
+api_style: REST over HTTPS, JSON request and response bodies, UTF-8. Unencrypted HTTP is not supported.
+
+authentication:
+  scheme: >-
+    HTTP Basic (API key as username, EMPTY password) for a customer's own
+    internal use, or OAuth 2.0 authorization-code Bearer token for registered
+    partner integrations.
+  oauth_authorize: https://auth.lever.co/authorize
+  oauth_token: https://auth.lever.co/oauth/token
+  oauth_audience_required: true
+  access_token_lifetime_seconds: 3600
+  docs: https://hire.lever.co/developer/documentation
+  detail: authentication/lever-co-authentication.yml
+  scopes: scopes/lever-co-scopes.yml
+
+idempotency:
+  supported: false
+  mechanism: null
+  applies_to: null
+  docs: null
+  detail: >-
+    Lever publishes NO idempotency key, request-deduplication header, or
+    client-supplied request id. Nothing in the documentation, the OpenAPI
+    definitions in this repo, or the official Postman collection accepts an
+    Idempotency-Key. A retried POST is a second write: retrying
+    createOpportunity produces a duplicate candidate record, retrying
+    createNote/createFeedback/createInterview duplicates the object, and
+    retrying submitApplication on the public Postings endpoint files a second
+    application. Because the documented recovery advice for a 429 is
+    "retry using exponential backoff", the absence of an idempotency key is a
+    real hazard for any automated client: back off, but reconcile with a GET
+    before re-firing a write.
+  agent_guidance: >-
+    Before retrying any POST, list the child collection (listNotes,
+    listInterviews, listApplications, listFeedback) and check whether the
+    object already landed. Prefer a natural-key check on the opportunity's
+    emails[] before createOpportunity.
+
+pagination:
+  style: opaque offset token (keyset)
+  applies_to: All list endpoints (opportunities, postings, users, and the rest).
+  request_params:
+    limit: 1-100; default 100 if omitted. Some endpoints document a lower default.
+    offset: >-
+      An opaque token taken from a previous response's `next` field. You may
+      only pass back an offset that Lever itself returned — tokens are not
+      constructible and not portable between endpoints.
+  response_fields:
+    data: array of the resource objects
+    next: offset token for the next page
+    hasNext: boolean — false means end of list
+  envelope_example: '{ "data": [...], "next": "0.1414895548650.a6070140-...", "hasNext": true }'
+  termination: Loop while hasNext is true; do not infer the end from an empty data array alone.
+  docs: https://hire.lever.co/developer/documentation
+  keyset_time_windows: >-
+    The deleted-record endpoints (List deleted applications, List deleted
+    postings, List deleted opportunities) and List opportunity file actions use
+    keyset pagination plus REQUIRED time-range filters — deleted_at_start /
+    deleted_at_end and occurred_at_start / occurred_at_end — with a maximum
+    30-day window per query. To sweep a longer period, chunk into <=30-day
+    windows.
+
+field_selection:
+  include:
+    supported: true
+    mechanism: '?include=<field> — repeatable, e.g. /postings?include=content&include=followers'
+    semantics: >-
+      SUBTRACTIVE, not additive. By default all fields are returned; the moment
+      `include` is specified, ONLY the named fields come back. This inverts the
+      convention most APIs use and silently drops fields a client expected.
+  expand:
+    supported: true
+    mechanism: '?expand=<field> — e.g. /postings?expand=followers'
+    semantics: >-
+      Inlines an id-reference as the full object. Available on all requests,
+      scoped to that response only. Expandable fields are flagged in the docs.
+      `expand` takes precedence over `include`: anything expanded is
+      automatically included.
+  docs: https://hire.lever.co/developer/documentation
+
+metadata:
+  supported: false
+  detail: >-
+    Lever has no generic key/value metadata bag on its objects. The closest
+    equivalents are domain-specific: free-form `tags` on opportunities
+    (listTags), `sources` (listSources), and customer-defined custom fields on
+    requisitions and profile forms.
+
+request_tracing:
+  request_id_header: null
+  detail: >-
+    No request-id header is documented and none was observed on a live
+    unauthenticated response from https://api.lever.co/v0/postings (probed
+    2026-08-26: Strict-Transport-Security, X-Content-Type-Options,
+    X-XSS-Protection, X-Stream-Path, ETag — no request id, no rate-limit
+    headers). Support correlation is by timestamp and endpoint, not by id.
+  audit_trail: >-
+    The one first-class traceability surface is the Audit Events API
+    (listAuditEvents, scope audit_events:read:admin), which records
+    admin/security-relevant actions including user:deactivated,
+    user:reactivated, account:deactivated and account:reactivated.
+
+versioning:
+  scheme: single major version in the path
+  current: v1
+  mechanism: https://api.lever.co/v1 — no version header, no per-account pinning.
+  compatibility_promise: >-
+    Published verbatim: "we won't rename or remove fields without a version
+    bump, but we may decide to add additional fields to the API in the future."
+    Clients must therefore tolerate unknown fields.
+  legacy_surfaces:
+    - v0 public Postings API (https://api.lever.co/v0/postings) — unauthenticated, still current, separate lifecycle from v1.
+  detail: lifecycle/lever-co-lifecycle.yml
+  changelog: changelog/lever-co-changelog.yml
+  docs: https://hire.lever.co/developer/updates
+
+error_envelope:
+  media_type: application/json
+  rfc9457: false
+  shape: '{ "code": string, "message": string }'
+  example: '{ "code": "ResourceNotFound", "message": "stages a80bbbe0-d4dd-4eac-bdbf-302345414f93 was not found" }'
+  detail: errors/lever-co-problem-types.yml
+  note: >-
+    Not application/problem+json. `code` is a PascalCase symbolic string
+    (ResourceNotFound, UnauthorizedError) — machine-readable, but Lever
+    publishes no enumerated catalogue of code values, so a client cannot switch
+    exhaustively on it.
+
+rate_limit_signaling:
+  headers_returned: none observed
+  documented_headers: []
+  exhaustion_status: 429
+  algorithm: token bucket, per API key
+  steady_state: 10 requests/second per API key
+  burst: up to 20 requests/second
+  endpoint_specific_limits: false
+  guidance: >-
+    Lever publishes NO X-RateLimit-* or RateLimit-* response headers and no
+    Retry-After, so a client cannot read its remaining budget — it can only
+    observe the 429. The documented remedy is exponential backoff. Combined
+    with the absence of an idempotency key, backoff on a write must be paired
+    with a read-back check.
+  detail: rate-limits/lever-co-rate-limits.yml
+
+confidential_data:
+  detail: >-
+    Postings, opportunities and requisitions can be marked confidential. A
+    credential only sees them if it was granted confidential access — for an
+    API key that grant can ONLY be made at key creation and cannot be added
+    later; for OAuth it is the confidential:access:admin scope. Without the
+    grant, requests for confidential objects return an access error rather than
+    an empty result, so a client cannot distinguish "no such record" from
+    "not permitted" by count alone.
+
+file_handling:
+  upload_formats: [docx, doc, js, jpg, png, pdf, txt]
+  parsing_note: >-
+    Image files (jpg, png) upload and attach successfully but are NOT parsed
+    for information — e.g. a resume submitted as an image on createOpportunity
+    will attach without populating any candidate fields, and the API returns no
+    error to say so.
+
+webhooks:
+  transport: HTTPS only — self-signed certificates are rejected.
+  signing: >-
+    HMAC-SHA256 over the concatenation of `token` + `triggeredAt`, keyed by the
+    account signing token, compared against the `signature` field IN THE BODY
+    (not a header).
+  replay_protection: >-
+    Not automatic. Lever's own guidance is to cache the 48-character `token`
+    locally and reject a repeat, and to bound `triggeredAt` against clock skew.
+  event_catalog: openapi/lever-webhooks-asyncapi.yml
+  configuration: Programmatic via the Webhooks API (createWebhook/updateWebhook/deleteWebhook), or manually in account integration settings.
+
+dry_run_mode:
+  supported: false
+  grade: na
+  detail: >-
+    No preview, validate-only, or simulate parameter exists on any Lever
+    endpoint. The substitute is the partner SANDBOX environment
+    (https://api.sandbox.lever.co/v1), a fully separate account and auth
+    server rather than a per-request rehearsal — see
+    sandbox/lever-co-sandbox.yml. Sandbox access is gated behind partner
+    approval, so it is not available to every consumer.
+
+reversibility:
+  grade: documented
+  summary: >-
+    Lever documents two genuine reversal paths and no time window for either.
+    Two of its state changes are cleanly undoable (archiving an opportunity,
+    deactivating a user); everything else that removes data is a hard delete
+    with no documented restore, and the requisition-field docs state
+    explicitly that removed data "cannot be recovered from within Lever or via
+    our API". No endpoint accepts an undo, rollback or restore verb, and the
+    deleted-record listing endpoints are for DISCOVERY of what disappeared,
+    not for recovery of it.
+  write_surfaces:
+    - operation: updateOpportunity
+      surface: PUT /opportunities/{id} — Update archived state
+      action: Archive an opportunity with a reason
+      reversal: Same operation with the archive reason set to null un-archives it.
+      reversal_operation: updateOpportunity
+      window: null
+      window_documented: false
+      docs: https://hire.lever.co/developer/documentation
+      evidence: >-
+        "Update an Opportunity's archived state. If an Opportunity is already
+        archived, its archive reason can be changed or if null is specified as
+        the reason, it will be unarchived."
+      grade: documented
+    - operation: updateUser
+      surface: POST /users/{id}/deactivate and /users/{id}/reactivate (Deactivate a user / Reactivate a user)
+      action: Deactivate a Lever user
+      reversal: Reactivate a user — "A deactivated user's account is re-enabled."
+      reversal_operation: reactivateUser
+      window: null
+      window_documented: false
+      docs: https://hire.lever.co/developer/documentation
+      evidence: Deactivate/Reactivate are a documented pair; both emit user:deactivated / user:reactivated audit events.
+      grade: documented
+      note: >-
+        The deactivate/reactivate pair is documented in the API reference but is
+        not present as an operation in openapi/lever-co-users-api-openapi.yml,
+        which stops at updateUser — a gap in our captured contract, not in
+        Lever's API.
+    - operation: deleteInterview
+      surface: DELETE /opportunities/{id}/interviews/{interviewId}
+      reversal: null
+      window: null
+      window_documented: false
+      grade: irreversible
+    - operation: deletePanel
+      surface: DELETE /panels/{id}
+      reversal: null
+      window: null
+      window_documented: false
+      grade: irreversible
+      note: Deleting a panel removes its constituent interviews.
+    - operation: deleteFile
+      surface: DELETE /files/{id}
+      reversal: null
+      window: null
+      window_documented: false
+      grade: irreversible
+    - operation: deleteRequisition
+      surface: DELETE /requisitions/{id}
+      reversal: null
+      window: null
+      window_documented: false
+      grade: irreversible
+    - operation: deleteWebhook
+      surface: DELETE /webhooks/{id}
+      reversal: Re-create with createWebhook, but delivery history and the prior subscription id are not restored.
+      window: null
+      window_documented: false
+      grade: irreversible
+    - operation: updateRequisition
+      surface: PUT /requisitions/{id} and the requisition-field update
+      reversal: null
+      window: null
+      window_documented: false
+      grade: irreversible
+      evidence: >-
+        "you'll want to POST the whole requisition_field object again, with the
+        updated properties. Anything that you do not include will be considered
+        deleted and will be removed. This data cannot be recovered from within
+        Lever or via our API."
+      hazard: >-
+        This is a whole-object PUT with delete-by-omission semantics. An agent
+        that PUTs a partial object silently destroys every field it left out,
+        unrecoverably. Always GET, merge, then PUT.
+    - operation: createFeedback
+      surface: POST /opportunities/{id}/feedback
+      reversal: Delete feedback (documented in the API reference; not captured in openapi/*.yml)
+      window: null
+      window_documented: false
+      grade: documented
+    - operation: createNote
+      surface: POST /opportunities/{id}/notes
+      reversal: Delete a note (documented in the API reference; not captured in openapi/*.yml)
+      window: null
+      window_documented: false
+      grade: documented
+    - operation: submitApplication
+      surface: POST https://api.lever.co/v0/postings/{site}/{postingId}
+      reversal: null
+      window: null
+      window_documented: false
+      grade: irreversible
+      note: >-
+        A submitted application cannot be withdrawn through the API. The
+        opportunity it creates can be archived, which is not the same thing.
+  deleted_record_visibility:
+    endpoints:
+      - {operation: listDeletedApplications, path: 'GET /applications/deleted', window: 'required deleted_at_start/deleted_at_end, max 30 days'}
+      - {operation: listDeletedPostings, path: 'GET /postings/deleted', window: 'required deleted_at_start/deleted_at_end, max 30 days'}
+      - {operation: listDeletedOpportunities, path: 'GET /opportunities/deleted', window: 'time-range filtered'}
+    note: >-
+      These endpoints report WHAT was deleted so an integration can reconcile
+      its mirror. They do not restore anything, and the 30-day cap is a query
+      window, not a recovery window. Recorded here so the max-30-day figure is
+      never mistaken for a reversal window.
+  agent_guidance:
+    - Treat every DELETE as final; there is no restore path and no grace period.
+    - Prefer archiving an opportunity over deleting related objects — archive is the one cleanly reversible state change.
+    - Never issue a partial PUT to /requisitions/{id} or a requisition field; GET-merge-PUT or you will destroy omitted data irrecoverably.
+    - There is no idempotency key, so a retry after a timeout may double-write. Read back before retrying.
+
+cross_references:
+  errors: errors/lever-co-problem-types.yml
+  lifecycle: lifecycle/lever-co-lifecycle.yml
+  authentication: authentication/lever-co-authentication.yml
+  scopes: scopes/lever-co-scopes.yml
+  rate_limits: rate-limits/lever-co-rate-limits.yml
+  sandbox: sandbox/lever-co-sandbox.yml
+  changelog: changelog/lever-co-changelog.yml
+  data_model: data-model/lever-co-data-model.yml

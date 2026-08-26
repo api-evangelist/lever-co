@@ -1,0 +1,110 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  Searched npm (registry.npmjs.org, including the full-text search index), PyPI,
+  RubyGems, Packagist, crates.io, NuGet, Maven Central and pkg.go.dev for a
+  first-party Lever client library, plus the github.com/lever organization (29
+  public repos, listed via the GitHub API on 2026-08-26) and the developer docs
+  at https://hire.lever.co/developer/documentation and /developer/oauth.
+description: >-
+  FINDING: Lever ships NO first-party SDK in any package registry. There is no
+  `lever` package on npm, PyPI, RubyGems, Packagist, crates.io, NuGet, Maven
+  Central or pkg.go.dev published by Lever or Employ Inc. What Lever does
+  publish is source-only integrator scaffolding on GitHub — an example OAuth app
+  and an official Postman collection in lever/integrator-resources, and a Node
+  example in lever/postings-api — neither of which is installable from a
+  registry and neither of which is versioned or dated as a release. Consumers
+  either call the REST API directly or use a third-party wrapper. The
+  github.com/lever org's remaining repos are forks of unrelated OSS
+  (coffeescript, sharedb, mailparser, quill, derby) and are not Lever API
+  clients.
+official_sdk_count: 0
+packages:
+  - language: javascript
+    registry: github
+    name: lever/integrator-resources
+    url: https://github.com/lever/integrator-resources
+    source: https://github.com/lever/integrator-resources
+    install: git clone https://github.com/lever/integrator-resources
+    official: true
+    kind: example-app-and-postman-collection
+    version: null
+    published: null
+    note: >-
+      First-party, but NOT a package: there is no registry entry, no tag and no
+      release, so `version` and `published` are null by inspection rather than by
+      omission. Contains ExampleOAuthApp (a runnable OAuth 2.0 authorization-code
+      demo) and DataAPIPostman/Lever-DataAPI-Collection.json (the official
+      Postman collection for the Data API, 152 KB) plus
+      Lever-OAuth-Environment.json. Linked from the docs as "Integrator
+      Resources". Last pushed 2025-11-24 per the GitHub API.
+  - language: javascript
+    registry: github
+    name: lever/postings-api
+    url: https://github.com/lever/postings-api
+    source: https://github.com/lever/postings-api
+    install: git clone https://github.com/lever/postings-api
+    official: true
+    kind: reference-docs-and-example
+    version: null
+    published: null
+    note: >-
+      First-party documentation repo for the public Postings API (v0) with a
+      nodejs/ example directory. No registry entry, no release tags, so version
+      and published are null. Last pushed 2026-04-23 per the GitHub API — the
+      most recently maintained first-party developer artifact Lever has.
+third_party:
+  - language: javascript
+    registry: npm
+    name: gatsby-source-lever
+    url: https://www.npmjs.com/package/gatsby-source-lever
+    source: https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-source-lever
+    install: npm install gatsby-source-lever
+    official: false
+    version: 5.16.0
+    published: '2026-01-26'
+    note: >-
+      Published by the Gatsby project, not Lever. Sources job postings from the
+      public Lever Postings API into a Gatsby site. Version and date read from
+      registry.npmjs.org on 2026-08-26.
+  - language: javascript
+    registry: npm
+    name: mcp-lever
+    url: https://www.npmjs.com/package/mcp-lever
+    source: https://github.com/smeet666/mcp-lever
+    install: npx -y mcp-lever
+    official: false
+    version: 2.0.0
+    published: '2026-08-26'
+    note: >-
+      Community MCP server (author Damien Bouissou) over the PUBLIC Lever job
+      board endpoints only — resolve a company to its board, search openings,
+      read a posting. No API key required and no access to the authenticated
+      Data API. Not endorsed by or affiliated with Lever. See
+      mcp/lever-co-mcp.yml.
+checked_and_absent:
+  - {registry: npm, name: lever, status: 404}
+  - {registry: npm, name: lever-api, status: 404}
+  - {registry: npm, name: lever-client, status: 404}
+  - {registry: npm, name: node-lever, status: 404}
+  - {registry: npm, name: "@lever/api", status: 404}
+  - {registry: pypi, name: lever-api, status: 404}
+  - {registry: pypi, name: leverapi, status: 404}
+  - registry: pypi
+    name: python-lever
+    status: 200
+    note: >-
+      NOT Lever's. python-lever 0.2.4 on PyPI is a JWT helper by Fashola Ayodeji
+      (github.com/fashtop3/lever-jwt) that has nothing to do with Lever the ATS.
+      Recorded here so a later pass does not mistake it for a first-party SDK.
+implications:
+  - >-
+    With no first-party SDK, there is no registry release date to read as a
+    maintenance signal for the Lever API. The only dated first-party developer
+    artifacts are GitHub pushes (postings-api 2026-04-23, integrator-resources
+    2025-11-24) and the API changelog at /developer/updates (last entry
+    2026-04-30) — all three are current, so the API is actively maintained even
+    though the SDK surface is empty.
+  - >-
+    The official Postman collection is the de-facto client: it is the only
+    machine-readable, first-party artifact Lever distributes for the Data API.

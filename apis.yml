@@ -38,6 +38,7 @@ apis:
   - Events
   - Integrations
   humanURL: https://hire.lever.co/developer/documentation
+  baseURL: https://api.lever.co/v1
   properties:
   - url: https://hire.lever.co/developer/documentation
     type: Documentation
@@ -60,6 +61,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-applications-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-applications-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -82,6 +85,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-archive-reasons-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-archive-reasons-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -104,6 +109,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-audit-events-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-audit-events-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -126,6 +133,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-eeo-responses-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-eeo-responses-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -148,6 +157,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-feedback-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-feedback-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -172,6 +183,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-files-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-files-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -194,6 +207,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-interviews-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-interviews-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -216,6 +231,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-notes-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-notes-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -238,6 +255,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-offers-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-offers-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -261,6 +280,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-opportunities-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-opportunities-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -283,6 +304,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-panels-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-panels-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -305,6 +328,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-postings-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-postings-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -327,6 +352,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-requisitions-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-requisitions-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -349,6 +376,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-sources-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-sources-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -371,6 +400,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-stages-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-stages-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -393,6 +424,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-tags-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-tags-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -417,6 +450,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-users-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-users-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -441,6 +476,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lever-co-webhooks-api-openapi.yml
+  - type: Overlay
+    url: overlays/lever-co-webhooks-api-overlay.yaml
   - type: Documentation
     url: https://hire.lever.co/developer/documentation
   - type: JSONSchema
@@ -454,6 +491,22 @@ apis:
   - type: Documentation
     url: https://github.com/lever/postings-api/blob/master/README.md
 name: Lever
+description: >-
+  Lever is an applicant tracking system (ATS) and candidate relationship management (CRM) platform for
+  recruiting teams, now owned by Employ Inc. alongside Jobvite, JazzHR and NXTThing RPO. Lever exposes two
+  distinct public surfaces: the authenticated Lever Data API at https://api.lever.co/v1 — a REST API over
+  the whole recruiting pipeline (opportunities, contacts, applications, postings, requisitions, interviews,
+  panels, feedback, notes, files, offers, users, stages, sources, tags, EEO responses, audit events and
+  webhooks) — and an unauthenticated public Postings API at https://api.lever.co/v0/postings used to
+  syndicate job listings to careers sites and third-party job boards, including an XML feed mode. Access to
+  the Data API is credential-split: Lever customers use HTTP Basic with an API key for their own internal
+  workflows, while every third-party product integration must use OAuth 2.0 and be approved through the
+  Lever partner program, which also provisions a separate sandbox at https://api.sandbox.lever.co/v1. Lever
+  publishes 52 OAuth scopes, ten webhook events with HMAC-SHA256 body signing, a dated API changelog, and a
+  deprecation page covering the legacy Candidates surface superseded by Opportunities in 2020. It ships no
+  first-party SDK in any package registry and no MCP server.
+created: '2026-05-25'
+modified: '2026-08-26'
 tags:
   - Applicant Tracking
   - ATS
@@ -595,6 +648,69 @@ common:
   - url: https://hire.lever.co/developer/documentation
     name: OAuth Authentication
     type: Authentication
+  - type: Packages
+    url: packages/lever-co-packages.yml
+    name: Client Libraries and Packages
+  - type: MCPServer
+    url: mcp/lever-co-mcp.yml
+    name: MCP Server Profile
+  - type: LLMsTxt
+    url: llms/lever-co-llms.txt
+    name: llms.txt
+  - type: Conventions
+    url: conventions/lever-co-conventions.yml
+    name: API Conventions and Runtime Semantics
+  - type: ErrorCatalog
+    url: errors/lever-co-problem-types.yml
+    name: Error Catalog
+  - type: Lifecycle
+    url: lifecycle/lever-co-lifecycle.yml
+    name: API Lifecycle
+  - type: Deprecation
+    url: lifecycle/lever-co-lifecycle.yml
+    name: Deprecation Policy
+  - type: ChangeLog
+    url: changelog/lever-co-changelog.yml
+    name: API Changelog
+  - type: ChangeLog
+    url: https://hire.lever.co/developer/updates
+    name: Lever API Updates
+  - type: Conformance
+    url: conformance/lever-co-conformance.yml
+    name: Standards Conformance
+  - type: Compliance
+    url: security/lever-co-trust-center.yml
+    name: Security and Compliance Certifications
+  - type: DataModel
+    url: data-model/lever-co-data-model.yml
+    name: Data Model
+  - type: Sandbox
+    url: sandbox/lever-co-sandbox.yml
+    name: Sandbox and Test Environment
+  - type: AgentSkill
+    url: skills/_index.yml
+    name: Agent Skills
+  - type: Webhooks
+    url: openapi/lever-webhooks-asyncapi.yml
+    name: Webhook Event Catalog
+  - type: APIReference
+    url: https://hire.lever.co/developer/documentation
+    name: Lever Data API Reference
+  - type: GettingStarted
+    url: https://hire.lever.co/developer/partner
+    name: Getting Started - Partner Integration
+  - type: GitHubOrganization
+    url: https://github.com/lever
+    name: Lever on GitHub
+  - type: Postman
+    url: https://github.com/lever/integrator-resources/tree/main/DataAPIPostman
+    name: Official Lever Data API Postman Collection
+  - type: SignUp
+    url: https://www.lever.co/demo
+    name: Request a Demo
+  - type: Login
+    url: https://hire.lever.co/
+    name: Lever Hire Sign In
 properties:
   - type: Vocabulary
     url: vocabulary/lever-co-vocabulary.yml
@@ -603,3 +719,8 @@ maintainers:
   - FN: Kin Lane
     url: https://kinlane.com
     email: info@apievangelist.com
+x-enrichment:
+  date: '2026-08-26'
+  status: enriched
+  artifacts_added: 35
+  pass: local-v1

@@ -1,0 +1,129 @@
+generated: '2026-08-26'
+method: derived
+status: candidate
+source: >-
+  SEARCH first: no official Lever MCP server exists. Probed the Lever developer
+  surface (https://hire.lever.co/developer, /documentation, /oauth, /partner,
+  /usecases, /updates — all HTTP 200 and fetched 2026-08-26) with no mention of
+  MCP, agents or tool servers; the github.com/lever organization (29 repos via
+  the GitHub API) contains no MCP repo; npm has no @lever/* or lever-mcp
+  package. The candidate tool list below is DERIVED from the operationIds in
+  openapi/*.yml in this repo and is not published by Lever.
+description: >-
+  Lever does not ship an MCP server, hosted or local. Nothing in the Lever
+  developer program addresses agents. The only MCP server that speaks Lever is a
+  third-party npm package, mcp-lever, which wraps the PUBLIC job-board endpoints
+  only (no API key, no authenticated Data API) and is not affiliated with Lever
+  — recorded under third_party below so it is never mistaken for a provider
+  surface. The tools[] list is a derived CANDIDATE mapping of what a Lever MCP
+  server would expose if one existed, grounded one-to-one in real operationIds.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+  checked: '2026-08-26'
+  note: >-
+    mode is `none` because Lever publishes neither a remote MCP endpoint nor a
+    stdio package. No endpoint URL was guessed. An agent that needs Lever today
+    must call the REST Data API directly with an OAuth bearer token
+    (authentication/lever-co-authentication.yml).
+third_party:
+  - name: mcp-lever
+    registry: npm
+    version: 2.0.0
+    published: '2026-08-26'
+    install: npx -y mcp-lever
+    package: https://www.npmjs.com/package/mcp-lever
+    source: https://github.com/smeet666/mcp-lever
+    author: Damien Bouissou (github.com/smeet666)
+    official: false
+    mode: local-stdio
+    auth: none
+    scope: >-
+      Public Lever job boards only — resolve a company to its board, search its
+      openings, read one posting. Backed by the unauthenticated
+      https://api.lever.co/v0/postings/{site} surface. No access to
+      opportunities, applications, interviews, feedback or any authenticated
+      Data API resource.
+    note: Community project. Not endorsed by, affiliated with, or supported by Lever.
+candidate_surface:
+  openapi:
+    - openapi/lever-co-opportunities-api-openapi.yml
+    - openapi/lever-co-postings-api-openapi.yml
+    - openapi/lever-co-applications-api-openapi.yml
+    - openapi/lever-co-interviews-api-openapi.yml
+    - openapi/lever-co-feedback-api-openapi.yml
+    - openapi/lever-co-requisitions-api-openapi.yml
+    - openapi/lever-co-users-api-openapi.yml
+    - openapi/lever-co-webhooks-api-openapi.yml
+  base_url: https://api.lever.co/v1
+  auth: OAuth 2.0 authorization code, Bearer token (scopes/lever-co-scopes.yml)
+tools:
+  - {name: lever_list_opportunities, rest: listOpportunities, method: GET, path: '/opportunities', scope: 'opportunities:read:admin', write: false}
+  - {name: lever_get_opportunity, rest: getOpportunity, method: GET, path: '/opportunities/{id}', scope: 'opportunities:read:admin', write: false}
+  - {name: lever_create_opportunity, rest: createOpportunity, method: POST, path: '/opportunities', scope: 'opportunities:write:admin', write: true}
+  - {name: lever_update_opportunity, rest: updateOpportunity, method: PUT, path: '/opportunities/{id}', scope: 'opportunities:write:admin', write: true}
+  - {name: lever_get_contact, rest: getContact, method: GET, path: '/contacts/{id}', scope: 'contact:read:admin', write: false}
+  - {name: lever_update_contact, rest: updateContact, method: PUT, path: '/contacts/{id}', scope: 'contact:write:admin', write: true}
+  - {name: lever_list_referrals, rest: listReferrals, method: GET, path: '/referrals', scope: 'referrals:read:admin', write: false}
+  - {name: lever_list_postings, rest: listPostings, method: GET, path: '/postings', scope: 'postings:read:admin', write: false}
+  - {name: lever_get_posting, rest: getPosting, method: GET, path: '/postings/{id}', scope: 'postings:read:admin', write: false}
+  - {name: lever_create_posting, rest: createPosting, method: POST, path: '/postings', scope: 'postings:write:admin', write: true}
+  - {name: lever_update_posting, rest: updatePosting, method: PUT, path: '/postings/{id}', scope: 'postings:write:admin', write: true}
+  - {name: lever_list_public_postings, rest: listPublicPostings, method: GET, path: '/{site}', scope: 'none (public v0 endpoint)', write: false}
+  - {name: lever_get_public_posting, rest: getPublicPosting, method: GET, path: '/{site}/{postingId}', scope: 'none (public v0 endpoint)', write: false}
+  - {name: lever_list_applications, rest: listApplications, method: GET, path: '/opportunities/{id}/applications', scope: 'applications:read:admin', write: false}
+  - {name: lever_submit_application, rest: submitApplication, method: POST, path: '/{site}/{postingId}', scope: 'none (public v0 endpoint)', write: true}
+  - {name: lever_list_interviews, rest: listInterviews, method: GET, path: '/opportunities/{id}/interviews', scope: 'interviews:read:admin', write: false}
+  - {name: lever_create_interview, rest: createInterview, method: POST, path: '/opportunities/{id}/interviews', scope: 'interviews:write:admin', write: true}
+  - {name: lever_update_interview, rest: updateInterview, method: PUT, path: '/opportunities/{id}/interviews/{interviewId}', scope: 'interviews:write:admin', write: true}
+  - {name: lever_delete_interview, rest: deleteInterview, method: DELETE, path: '/opportunities/{id}/interviews/{interviewId}', scope: 'interviews:write:admin', write: true}
+  - {name: lever_list_feedback, rest: listFeedback, method: GET, path: '/opportunities/{id}/feedback', scope: 'feedback:read:admin', write: false}
+  - {name: lever_create_feedback, rest: createFeedback, method: POST, path: '/opportunities/{id}/feedback', scope: 'feedback:write:admin', write: true}
+  - {name: lever_list_notes, rest: listNotes, method: GET, path: '/opportunities/{id}/notes', scope: 'notes:read:admin', write: false}
+  - {name: lever_create_note, rest: createNote, method: POST, path: '/opportunities/{id}/notes', scope: 'notes:write:admin', write: true}
+  - {name: lever_list_files, rest: listFiles, method: GET, path: '/files', scope: 'files:read:admin', write: false}
+  - {name: lever_upload_file, rest: uploadFile, method: POST, path: '/files', scope: 'files:write:admin', write: true}
+  - {name: lever_get_file, rest: getFile, method: GET, path: '/files/{id}', scope: 'files:read:admin', write: false}
+  - {name: lever_delete_file, rest: deleteFile, method: DELETE, path: '/files/{id}', scope: 'files:write:admin', write: true}
+  - {name: lever_list_panels, rest: listPanels, method: GET, path: '/panels', scope: 'panels:read:admin', write: false}
+  - {name: lever_create_panel, rest: createPanel, method: POST, path: '/panels', scope: 'panels:write:admin', write: true}
+  - {name: lever_update_panel, rest: updatePanel, method: PUT, path: '/panels/{id}', scope: 'panels:write:admin', write: true}
+  - {name: lever_delete_panel, rest: deletePanel, method: DELETE, path: '/panels/{id}', scope: 'panels:write:admin', write: true}
+  - {name: lever_list_requisitions, rest: listRequisitions, method: GET, path: '/requisitions', scope: 'requisitions:read:admin', write: false}
+  - {name: lever_create_requisition, rest: createRequisition, method: POST, path: '/requisitions', scope: 'requisitions:write:admin', write: true}
+  - {name: lever_update_requisition, rest: updateRequisition, method: PUT, path: '/requisitions/{id}', scope: 'requisitions:write:admin', write: true}
+  - {name: lever_delete_requisition, rest: deleteRequisition, method: DELETE, path: '/requisitions/{id}', scope: 'requisitions:write:admin', write: true}
+  - {name: lever_list_users, rest: listUsers, method: GET, path: '/users', scope: 'users:read:admin', write: false}
+  - {name: lever_get_user, rest: getUser, method: GET, path: '/users/{id}', scope: 'users:read:admin', write: false}
+  - {name: lever_create_user, rest: createUser, method: POST, path: '/users', scope: 'users:write:admin', write: true}
+  - {name: lever_update_user, rest: updateUser, method: PUT, path: '/users/{id}', scope: 'users:write:admin', write: true}
+  - {name: lever_list_stages, rest: listStages, method: GET, path: '/stages', scope: 'stages:read:admin', write: false}
+  - {name: lever_get_stage, rest: getStage, method: GET, path: '/stages/{id}', scope: 'stages:read:admin', write: false}
+  - {name: lever_list_archive_reasons, rest: listArchiveReasons, method: GET, path: '/archive_reasons', scope: 'archive_reasons:read:admin', write: false}
+  - {name: lever_get_archive_reason, rest: getArchiveReason, method: GET, path: '/archive_reasons/{id}', scope: 'archive_reasons:read:admin', write: false}
+  - {name: lever_list_sources, rest: listSources, method: GET, path: '/sources', scope: 'sources:read:admin', write: false}
+  - {name: lever_list_tags, rest: listTags, method: GET, path: '/tags', scope: 'tags:read:admin', write: false}
+  - {name: lever_list_offers, rest: listOffers, method: GET, path: '/offers', scope: 'offers:read:admin', write: false}
+  - {name: lever_list_audit_events, rest: listAuditEvents, method: GET, path: '/audit_events', scope: 'audit_events:read:admin', write: false}
+  - {name: lever_list_eeo_responses, rest: listEeoResponses, method: GET, path: '/eeo/responses', scope: 'eeo_responses:read:admin', write: false}
+  - {name: lever_list_eeo_responses_pii, rest: listEeoResponsesPii, method: GET, path: '/eeo/responses/pii', scope: 'eeo_responses_pii:read:admin', write: false}
+  - {name: lever_list_webhooks, rest: listWebhooks, method: GET, path: '/webhooks', scope: 'webhooks:read:admin', write: false}
+  - {name: lever_create_webhook, rest: createWebhook, method: POST, path: '/webhooks', scope: 'webhooks:write:admin', write: true}
+  - {name: lever_update_webhook, rest: updateWebhook, method: PUT, path: '/webhooks/{id}', scope: 'webhooks:write:admin', write: true}
+  - {name: lever_delete_webhook, rest: deleteWebhook, method: DELETE, path: '/webhooks/{id}', scope: 'webhooks:write:admin', write: true}
+tool_count: 53
+agent_notes:
+  - >-
+    Every DELETE tool above is irreversible — Lever documents no restore for
+    deleted interviews, panels, notes, files, requisitions or webhooks, and the
+    requisition-field docs state outright that data removed by an update "cannot
+    be recovered from within Lever or via our API". See the reversibility block
+    in conventions/lever-co-conventions.yml before wiring any of them into an
+    autonomous loop.
+  - >-
+    The Data API has NO idempotency key. A retried POST creates a second
+    opportunity, note, feedback form or interview.

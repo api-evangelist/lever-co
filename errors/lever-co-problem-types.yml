@@ -1,0 +1,107 @@
+generated: '2026-08-26'
+method: searched
+format: lever-error-object
+rfc9457: false
+source: >-
+  https://hire.lever.co/developer/documentation — "Responses and Errors" section,
+  fetched 2026-08-26 (HTTP 200). Cross-checked against openapi/*.yml in this
+  repo, which declare success responses (200/201/204) and a single 429 but
+  carry no 4xx/5xx response schemas, and against two live probes:
+  GET https://api.lever.co/v1/ returned 401
+  {"code":"UnauthorizedError","message":"The request requires authentication."}
+  and GET https://api.lever.co/v1/openapi.json returned 404
+  {"code":"ResourceNotFound","message":"/v1/openapi.json does not exist"}.
+description: >-
+  Lever returns a flat JSON error object, not RFC 9457 application/problem+json.
+  There is no `type` URI, no `title`, no `instance` and no `errors[]` array for
+  field-level validation detail — a 400 tells you the request was malformed but
+  not which parameter. `code` is a PascalCase symbolic string that IS
+  machine-readable, but Lever publishes no enumerated list of its values, so a
+  client cannot switch exhaustively on it; the values below were observed live
+  or quoted verbatim from the docs.
+envelope:
+  media_type: application/json
+  shape: '{ "code": string, "message": string }'
+  example: '{ "code": "ResourceNotFound", "message": "stages a80bbbe0-d4dd-4eac-bdbf-302345414f93 was not found" }'
+  field_level_detail: false
+  retryable_signal: none — no Retry-After header and no retryable flag; the client must infer from the status.
+observed_codes:
+  - code: UnauthorizedError
+    status: 401
+    observed: 'GET https://api.lever.co/v1/ (unauthenticated), 2026-08-26'
+    message: The request requires authentication.
+  - code: ResourceNotFound
+    status: 404
+    observed: 'GET https://api.lever.co/v1/openapi.json, 2026-08-26; also the docs example'
+    message: '<resource> does not exist / was not found'
+problems:
+  - status: 400
+    title: Invalid Request
+    meaning: Usually a missing or malformed parameter.
+    remediation: Check the parameter names and syntax against the API reference. Lever does not name the offending field, so validate client-side.
+    retryable: false
+  - status: 401
+    title: Unauthorized
+    code: UnauthorizedError
+    meaning: A valid API key or Bearer token was not provided. Every request must be authenticated.
+    remediation: >-
+      For Basic Auth, send the API key as the USERNAME with an empty password.
+      For OAuth, check the token has not passed its 3600s lifetime and refresh
+      with offline_access. A 401 on token exchange usually means the API key was
+      sent where the OAuth client_secret belongs.
+    retryable: false
+    detail: authentication/lever-co-authentication.yml
+  - status: 403
+    title: Forbidden
+    meaning: >-
+      The Lever account settings do not authorize this credential to perform the
+      operation. Also returned when a credential without the confidential grant
+      requests confidential data, and when a sandbox token is presented to the
+      production API ("Unable to find a signing key that matches").
+    remediation: >-
+      Ask a Super Admin to widen the key's API settings, or request the needed
+      OAuth scope. Confidential access on an API key can ONLY be granted at key
+      creation — an existing key cannot be upgraded. Confirm the token issuer
+      matches the base URL.
+    retryable: false
+    detail: scopes/lever-co-scopes.yml
+  - status: 404
+    title: Not Found
+    code: ResourceNotFound
+    meaning: Either the method+path is not a known action, or the object does not exist.
+    remediation: Distinguish the two by the message body — a path miss names the path, an object miss names the UID.
+    retryable: false
+  - status: 429
+    title: Too Many Requests
+    meaning: The per-API-key token bucket is exhausted (10 req/s steady, bursts to 20 req/s).
+    remediation: >-
+      Retry with exponential backoff. No Retry-After header is returned and no
+      X-RateLimit-*/RateLimit-* headers are published, so the client must
+      schedule its own backoff. Because Lever has no idempotency key, read back
+      before re-firing a write.
+    retryable: true
+    detail: rate-limits/lever-co-rate-limits.yml
+  - status: 500
+    title: Server Error
+    meaning: An error on Lever's side.
+    remediation: Retry with backoff; if persistent, check https://status.lever.co/ and contact Lever support.
+    retryable: true
+  - status: 503
+    title: Service Unavailable
+    meaning: Lever is temporarily down for maintenance.
+    remediation: Documented remedy is to retry with exponential backoff.
+    retryable: true
+non_error_statuses:
+  - {status: 200, meaning: Data in the top-level `data` field.}
+  - {status: 201, meaning: Resource created; the created object is in `data`.}
+  - {status: 204, meaning: Success with no body (deletes).}
+  - {status: 301, meaning: Resource permanently moved; follow the Location header and update stored URIs.}
+gaps:
+  - >-
+    The OpenAPI definitions in openapi/ document only success responses plus one
+    429. No 4xx/5xx response schema is declared anywhere, so a code generator
+    building from the contract produces a client with no error typing at all.
+    This catalogue exists to fill that hole from the prose docs.
+  - >-
+    No enumerated error-code registry is published. Only UnauthorizedError and
+    ResourceNotFound are confirmed by live observation.

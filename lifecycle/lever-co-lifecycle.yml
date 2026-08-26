@@ -1,0 +1,124 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  https://hire.lever.co/developer/documentation (Introduction — compatibility
+  promise), https://hire.lever.co/developer/updates (dated API changelog),
+  https://hire.lever.co/developer/deprecated (the deprecated Candidates
+  surface), https://status.lever.co/ and https://www.lever.co/legal/terms-of-service
+  — fetched 2026-08-26. Deprecated operations cross-checked against
+  openapi/*.yml in this repo.
+description: >-
+  How the Lever Data API changes over time. Lever runs a single unversioned-in-
+  practice v1 path with an additive-only compatibility promise, announces every
+  change on a dated Updates page, and retires surfaces by leaving them in place
+  indefinitely rather than sunsetting them. There is no version header, no
+  per-account pinning, no Sunset/Deprecation header, and no published removal
+  date for anything — deprecation at Lever means "still works, use the other
+  one", which is generous to existing integrations and unhelpful to an agent
+  trying to tell live from legacy.
+versioning:
+  scheme: single major version in the path
+  current: v1
+  mechanism: https://api.lever.co/v1 — no Accept-Version or custom version header, no per-account pinned version.
+  compatibility_promise: >-
+    Verbatim from the docs: "Rest assured, we won't rename or remove fields
+    without a version bump, but we may decide to add additional fields to the
+    API in the future."
+  breaking_change_policy: A rename or removal requires a version bump; additions are made in place without one.
+  client_requirement: Clients must tolerate unknown fields appearing in responses.
+  docs: https://hire.lever.co/developer/documentation
+  parallel_surfaces:
+    - version: v0
+      surface: 'Public Postings API — https://api.lever.co/v0/postings (EU: https://api.eu.lever.co/v0/postings)'
+      status: current
+      note: >-
+        Unauthenticated, CORS-restricted to the customer's own domain, still
+        actively used and documented at github.com/lever/postings-api (last
+        pushed 2026-04-23). Older major number, but not deprecated.
+deprecation:
+  policy_url: https://hire.lever.co/developer/deprecated
+  changelog: https://hire.lever.co/developer/updates
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  removal_dates_published: false
+  posture: >-
+    Deprecated endpoints are "maintained for backwards compatibility"
+    indefinitely. Lever has removed a parameter exactly once in the recorded
+    changelog (include_deleted on list opportunities, 2022-10-03) and replaced
+    it with a dedicated endpoint. No Sunset or Deprecation response header is
+    emitted, so a client cannot learn of a deprecation at runtime — only by
+    reading the Updates page.
+  deprecated_surfaces:
+    - name: Candidates endpoints
+      superseded_by: Opportunities endpoints (openapi/lever-co-opportunities-api-openapi.yml)
+      deprecated_since: '2020'
+      still_served: true
+      docs: https://hire.lever.co/developer/deprecated
+      evidence: >-
+        "The Candidates endpoints were deprecated as of 2020. Though they are
+        maintained for backwards compatibility, going forward please see
+        Opportunities."
+      note: >-
+        The whole /developer/deprecated page exists to document this one
+        migration. A Candidate is now modelled as a Contact (the person) plus
+        one Opportunity per candidacy.
+    - name: candidateId field on webhook payloads
+      superseded_by: opportunityId
+      still_served: true
+      evidence: 'Webhook event payloads carry "WARNING: This field is deprecated. Use the opportunityId" on applicationCreated and the candidate* events.'
+    - name: '/candidates/... mirror routes for feedback, files, interviews, notes, panels, profile forms, referrals, resumes'
+      superseded_by: The equivalent /opportunities/{id}/... route
+      still_served: true
+      evidence: Each is marked "deprecated but maintained for backwards compatibility" in the API reference and returns the same response as the /opportunities equivalent.
+    - name: requisitionCode field on requisitions
+      superseded_by: requisitionCodes
+      still_served: true
+      evidence: '"This field is deprecated but maintained for backward compatibility. Use the requisitionCodes field instead."'
+  removed:
+    - name: include_deleted query parameter on list opportunities
+      removed_on: '2022-10-03'
+      replacement: The dedicated "List deleted opportunities" endpoint.
+      source: https://hire.lever.co/developer/updates
+  deprecated_operations_in_captured_specs:
+    - note: >-
+        No operation in openapi/lever-co-*-openapi.yml carries deprecated: true.
+        The deprecated surfaces above are the legacy /candidates/* routes, which
+        were deliberately NOT captured into this repo's specs — the specs
+        describe the current /opportunities-centred API only.
+release_cadence:
+  observed: >-
+    Irregular and low-volume. The Updates page records 4 changes in 2026 (all in
+    the March-April window: /opportunities/{id}/file_actions on 04-13, five
+    application HTTP-metadata fields on 04-20, /postings/deleted on 04-27,
+    /applications/deleted on 04-30), 1 in 2025, 2 in 2024, 4 in 2023.
+  latest_change: '2026-04-30'
+  direction: >-
+    The 2026 additions are all delta/reconciliation surfaces — deleted-record
+    listings and file-action history with required time-range filters — driven
+    by named partner needs (LinkedIn is called out twice). The API is being
+    extended for integration hygiene, not for new product surface.
+  detail: changelog/lever-co-changelog.yml
+status_page:
+  url: https://status.lever.co/
+  probed_status: 200
+  checked: '2026-08-26'
+  scope: Lever platform availability. No API-specific component and no historical uptime figure published on the page itself.
+sla:
+  public_uptime_target: null
+  url: https://www.lever.co/legal/terms-of-service
+  notes: >-
+    Lever publishes no numeric API uptime SLA. Availability commitments are
+    handled in the enterprise subscription agreement; pricing is contact-sales
+    (plans/lever-co-plans-pricing.yml).
+support:
+  help_center: https://help.lever.co/
+  partner_support: https://hire.lever.co/developer/partner
+  security: security@employinc.com
+ownership:
+  parent: Employ Inc.
+  siblings: [Jobvite, JazzHR, NXTThing RPO]
+  note: >-
+    Lever was acquired by Employ Inc. Legal, privacy and security pages resolve
+    to employinc.com; the vulnerability-disclosure policy is Employ-wide. The
+    API, its docs and its changelog remain Lever-branded on hire.lever.co.

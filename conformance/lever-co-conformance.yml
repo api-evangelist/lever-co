@@ -1,0 +1,164 @@
+generated: '2026-08-26'
+method: searched
+source: >-
+  https://hire.lever.co/developer/documentation, /developer/oauth,
+  /developer/partner, https://www.lever.co/security and
+  https://github.com/lever/postings-api/blob/master/SECURITY.md — fetched
+  2026-08-26. Cross-checked against openapi/*.yml securitySchemes and response
+  schemas, scopes/lever-co-scopes.yml and conventions/lever-co-conventions.yml.
+  Domain-standard probes were run live against the Lever job-feed surface.
+description: >-
+  Which cross-cutting and domain standards the Lever contract actually
+  implements, judged from the contract and the published docs rather than from
+  marketing claims. Lever conforms to the mainstream HTTP/OAuth stack and to
+  nothing else: no OIDC discovery, no RFC 9457 errors, no RFC 8594 sunset
+  headers, no idempotency, no standard rate-limit headers, and — notably for an
+  ATS — no HR-domain interchange standard on any surface, including the job feed
+  that exists specifically to be consumed by third parties.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      OAuth 2.0 authorization-code grant with refresh tokens, mandatory for all
+      partner integrations since 2020. authorizationUrl
+      https://auth.lever.co/authorize, tokenUrl
+      https://auth.lever.co/oauth/token, Bearer tokens with a 3600s lifetime,
+      52 published scopes, offline_access for refresh. Declared as an oauth2
+      securityScheme in every openapi/lever-co-*-openapi.yml.
+  - id: oauth2-audience-parameter
+    conforms: true
+    evidence: >-
+      Requires the RFC 8707-style `audience` parameter
+      (https://api.lever.co/v1/) on /authorize. Documented at
+      https://hire.lever.co/developer/oauth; omitting it silently degrades the
+      grant to offline_access only.
+  - id: http-basic-auth
+    conforms: true
+    evidence: >-
+      RFC 2617 Basic with the API key as username and empty password, for
+      customer-internal use. Declared as an http/basic securityScheme in the
+      OpenAPI definitions.
+  - id: oidc
+    conforms: false
+    evidence: >-
+      No /.well-known/openid-configuration on api.lever.co, www.lever.co or
+      hire.lever.co (all probed 2026-08-26 — 404, 404, and a 200 SPA shell
+      respectively). No id_token, no userinfo endpoint, no OIDC scopes. The
+      authorization server is an Auth0 tenant but Lever exposes no discovery
+      document of its own.
+    detail: well-known/lever-co-well-known.yml
+  - id: rfc9457
+    conforms: false
+    evidence: >-
+      Errors are a flat {"code","message"} JSON object served as
+      application/json, not application/problem+json. No type URI, no title, no
+      instance, no field-level errors array.
+    detail: errors/lever-co-problem-types.yml
+  - id: rfc8594-sunset
+    conforms: false
+    evidence: >-
+      No Sunset or Deprecation response header. Deprecated endpoints are
+      "maintained for backwards compatibility" indefinitely and announced only
+      in prose on https://hire.lever.co/developer/updates.
+    detail: lifecycle/lever-co-lifecycle.yml
+  - id: idempotency
+    conforms: false
+    evidence: >-
+      No Idempotency-Key header or equivalent anywhere in the docs, the OpenAPI
+      definitions or the official Postman collection. A retried POST double-
+      writes.
+    detail: conventions/lever-co-conventions.yml
+  - id: pagination
+    conforms: true
+    evidence: >-
+      Uniform keyset pagination across every list endpoint: limit (1-100) plus
+      an opaque `offset` token, with data/next/hasNext in the response envelope.
+      Consistent, but the token is opaque and non-constructible.
+  - id: ratelimit-headers
+    conforms: false
+    evidence: >-
+      Rate limits are documented (token bucket, 10 req/s steady, 20 req/s
+      burst, 429 on exhaustion) but NO X-RateLimit-*, RateLimit-* or
+      Retry-After header is published, and none was observed on a live response
+      from https://api.lever.co/v0/postings (probed 2026-08-26). The runtime
+      signal an agent needs is absent.
+    detail: rate-limits/lever-co-rate-limits.yml
+  - id: webhook-signing
+    conforms: true
+    evidence: >-
+      HMAC-SHA256 over token+triggeredAt keyed by the account signing token.
+      Deviates from the common pattern by carrying the signature in the request
+      BODY rather than a header, and replay protection is left to the receiver.
+  - id: hsts
+    conforms: true
+    evidence: 'Strict-Transport-Security observed on api.lever.co (max-age=63072000), www.lever.co (63072000) and hire.lever.co (15552000).'
+    detail: security/lever-co-domain-security.yml
+  - id: tls-only
+    conforms: true
+    evidence: 'Documented verbatim: "Unencrypted HTTP is not supported and all requests must be authenticated." Webhook receivers must also be HTTPS with a CA-signed certificate.'
+  - id: soc2
+    conforms: true
+    evidence: SOC 2 listed among the certifications published at https://www.lever.co/security.
+    detail: security/lever-co-trust-center.yml
+  - id: iso-27001
+    conforms: true
+    evidence: ISO 27001 listed at https://www.lever.co/security.
+  - id: gdpr
+    conforms: true
+    evidence: >-
+      GDPR named at https://www.lever.co/security; Lever operates a separate EU
+      data centre with automatic OAuth redirection for EU customers and an EU
+      Postings host (https://api.eu.lever.co/v0/postings).
+  - id: vulnerability-disclosure-policy
+    conforms: true
+    evidence: >-
+      Employ Inc. publishes a Vulnerability Disclosure Policy as SECURITY.md in
+      the Lever GitHub repos (security@employinc.com, five-step process,
+      explicit responsible-disclosure guidelines, no bug bounty).
+    detail: security/lever-co-vulnerability-disclosure.yml
+  - id: eeo-reporting
+    conforms: true
+    evidence: >-
+      Dedicated EEO surfaces — listEeoResponses and listEeoResponsesPii, gated
+      behind separate scopes (eeo_responses:read:admin vs
+      eeo_responses_pii:read:admin) so PII exposure is an explicit, separate
+      grant. US Equal Employment Opportunity reporting is a regulatory
+      obligation for covered employers and Lever models it as first-class API
+      surface with least-privilege defaults.
+domain_standard:
+  market: Applicant tracking / recruiting / HR technology
+  conforms: false
+  candidates_checked:
+    - standard: HR Open Standards (formerly HR-XML)
+      present: false
+      evidence: >-
+        No HR Open Standards namespace, schema URN or message type appears in
+        any openapi/*.yml, json-schema/*.json, the JSON-LD context, or the
+        published XML feed. Lever's object model (Opportunity, Contact, Posting,
+        Requisition, Stage, Archive Reason) is entirely proprietary.
+    - standard: schema.org/JobPosting (the de-facto interchange shape for job feeds, and what Google for Jobs indexes)
+      present: false
+      evidence: >-
+        Probed https://api.lever.co/v0/postings/leverdemo?mode=xml (HTTP 200,
+        text/xml, 1.1 MB) — the feed is a proprietary <jobs><job> document with
+        Lever-specific elements (id, position, description, categories,
+        applyUrl); it declares no schema.org vocabulary and no JobPosting type.
+        Also probed the hosted board https://jobs.lever.co/leverdemo (HTTP 200):
+        zero application/ld+json blocks, so the careers page publishes no
+        JobPosting structured data either.
+    - standard: SCIM (urn:ietf:params:scim:schemas:*) for the Users surface
+      present: false
+      evidence: >-
+        The Users API (listUsers/getUser/createUser/updateUser) is a proprietary
+        shape. No SCIM schema URN, no /scim/v2 path, no ServiceProviderConfig
+        appears in the contract or the docs.
+    - standard: OData
+      present: false
+      evidence: No $metadata surface and no OData query conventions on any host.
+  note: >-
+    REWARD-ONLY dimension — no penalty is implied. Recorded because the miss is
+    substantive rather than incidental: the XML feed at ?mode=xml exists for the
+    express purpose of syndicating postings to third-party job boards, which is
+    exactly the job schema.org/JobPosting was standardised for, and it is
+    published in a Lever-proprietary shape instead. Every consumer therefore
+    needs a Lever-specific connector.

@@ -1,0 +1,103 @@
+# Lever
+
+> Lever is an applicant tracking system (ATS) and candidate relationship management (CRM) platform for
+> recruiting teams, owned by Employ Inc. Its public API surface is the authenticated Lever Data API
+> (REST, https://api.lever.co/v1) plus an unauthenticated public Postings API (https://api.lever.co/v0/postings)
+> used to syndicate job listings to careers sites and job boards.
+
+Generated 2026-08-26 by API Evangelist from the artifacts in this repository and Lever's own published
+documentation. Lever does not publish an llms.txt of its own — https://www.lever.co/llms.txt returned 404
+and https://hire.lever.co/llms.txt returned a 200 SPA shell, both probed 2026-08-26. This file is
+GENERATED, not harvested.
+
+## Start here
+
+- [Lever Developer Portal](https://hire.lever.co/developer): entry point for the Data API, OAuth, and the partner program.
+- [Data API Documentation](https://hire.lever.co/developer/documentation): the complete API reference — overview, authentication, rate limits, errors, pagination, webhooks and every endpoint, on one page.
+- [OAuth guide](https://hire.lever.co/developer/oauth): the authorization-code flow, app registration requirements, and a debugging table.
+- [Partner program](https://hire.lever.co/developer/partner): how to get a sandbox account and production OAuth credentials.
+- [API Updates](https://hire.lever.co/developer/updates): the dated changelog. Latest entry 2026-04-30.
+- [Deprecated](https://hire.lever.co/developer/deprecated): the legacy Candidates surface, superseded by Opportunities in 2020.
+
+## What an agent needs to know first
+
+- **Two credential models.** HTTP Basic with an API key (key as username, EMPTY password) is for a customer's own internal workflows. OAuth 2.0 authorization code is the ONLY path for a third-party integration, and the app must be approved through the partner program first. Lever will not issue API keys for integration development.
+- **The `audience` parameter is required** on `https://auth.lever.co/authorize` — `audience=https://api.lever.co/v1/` with the trailing slash. Omit it and the consent screen silently grants only `offline_access`.
+- **A person and a candidacy are different objects.** A Contact is the human; an Opportunity is one journey through the pipeline for one posting. One Contact has many Opportunities. The `candidateId` still present on webhook payloads is an Opportunity id, not a Contact id.
+- **There is no idempotency key.** Retrying a POST creates a duplicate. Read back before retrying a write.
+- **`?include=` is subtractive.** By default all fields return; the moment you name one, ONLY that field returns.
+- **Ids are bare UUIDs with no type prefix.** An id alone never tells you what kind of object it points at.
+- **Timestamps are epoch milliseconds**, not seconds and not ISO 8601.
+
+## APIs
+
+- [Opportunities API](https://api.lever.co/v1/opportunities): the unified candidate/candidacy record. `listOpportunities`, `getOpportunity`, `createOpportunity`, `updateOpportunity`, `getContact`, `updateContact`, `listReferrals`.
+- [Postings API](https://api.lever.co/v1/postings): job postings. `listPostings`, `getPosting`, `createPosting`, `updatePosting`, plus the public `listPublicPostings` and `getPublicPosting`.
+- [Applications API](https://api.lever.co/v1/opportunities): `listApplications`, and `submitApplication` on the public posting endpoint.
+- [Interviews API](https://api.lever.co/v1/opportunities): `listInterviews`, `createInterview`, `updateInterview`, `deleteInterview`.
+- [Panels API](https://api.lever.co/v1/panels): `listPanels`, `createPanel`, `updatePanel`, `deletePanel`.
+- [Feedback API](https://api.lever.co/v1/opportunities): `listFeedback`, `createFeedback`.
+- [Notes API](https://api.lever.co/v1/opportunities): `listNotes`, `createNote`.
+- [Files API](https://api.lever.co/v1/files): `listFiles`, `uploadFile`, `getFile`, `deleteFile`.
+- [Requisitions API](https://api.lever.co/v1/requisitions): `listRequisitions`, `createRequisition`, `updateRequisition`, `deleteRequisition`. Requires the TRM Enterprise package or Advanced HR feature.
+- [Users API](https://api.lever.co/v1/users): `listUsers`, `getUser`, `createUser`, `updateUser`.
+- [Stages API](https://api.lever.co/v1/stages): `listStages`, `getStage`.
+- [Archive Reasons API](https://api.lever.co/v1/archive_reasons): `listArchiveReasons`, `getArchiveReason`.
+- [Sources API](https://api.lever.co/v1/sources): `listSources`.
+- [Tags API](https://api.lever.co/v1/tags): `listTags`.
+- [Offers API](https://api.lever.co/v1/offers): `listOffers` (read-only).
+- [EEO Responses API](https://api.lever.co/v1/eeo/responses): `listEeoResponses` and `listEeoResponsesPii`, behind separate scopes.
+- [Audit Events API](https://api.lever.co/v1/audit_events): `listAuditEvents`.
+- [Webhooks API](https://api.lever.co/v1/webhooks): `listWebhooks`, `createWebhook`, `updateWebhook`, `deleteWebhook`.
+- [Postings XML Feed](https://api.lever.co/v0/postings/{site}?mode=xml): a proprietary `<jobs><job>` feed for syndication to third-party job boards. Not schema.org/JobPosting.
+
+## Machine-readable artifacts in this repository
+
+- [apis.yml](apis.yml): the APIs.json index for every Lever API in this profile.
+- [OpenAPI definitions](openapi/): 18 OpenAPI 3.1 documents, one per resource, servers `https://api.lever.co/v1`.
+- [AsyncAPI / webhook events](openapi/lever-webhooks-asyncapi.yml): the ten published webhook events.
+- [Authentication profile](authentication/lever-co-authentication.yml): both credential models, endpoints, and the four common failure modes.
+- [OAuth scopes](scopes/lever-co-scopes.yml): all 52 published scopes.
+- [Conventions](conventions/lever-co-conventions.yml): pagination, include/expand, error envelope, rate-limit signalling, and the reversibility profile.
+- [Error catalogue](errors/lever-co-problem-types.yml): the `{code, message}` envelope and every documented status.
+- [Rate limits](rate-limits/lever-co-rate-limits.yml): token bucket, 10 req/s steady, 20 req/s burst, 429 on exhaustion.
+- [Lifecycle](lifecycle/lever-co-lifecycle.yml): versioning, deprecation posture, status page, ownership.
+- [Changelog](changelog/lever-co-changelog.yml): 23 structured entries from the dated Updates page.
+- [Data model](data-model/lever-co-data-model.yml): 27 entities and 40 relationships.
+- [Conformance](conformance/lever-co-conformance.yml): which standards the contract actually implements.
+- [Sandbox](sandbox/lever-co-sandbox.yml): the gated partner sandbox at `https://api.sandbox.lever.co/v1`.
+- [Packages](packages/lever-co-packages.yml): Lever ships no first-party SDK in any registry.
+- [MCP](mcp/lever-co-mcp.yml): Lever ships no MCP server; a derived candidate tool list is recorded there.
+- [Agent skills](skills/_index.yml): packaged flows grounded in real operationIds.
+- [Postman collection](collections/): request collections generated from the OpenAPI definitions.
+
+## Limits and runtime behaviour
+
+- Rate limit: token bucket per API key, 10 requests/second steady state, bursts to 20 requests/second. No per-endpoint limits.
+- On exhaustion: HTTP 429. **No `Retry-After` and no `X-RateLimit-*`/`RateLimit-*` headers are returned** — schedule your own exponential backoff.
+- Pagination: `limit` (1-100, default 100) plus an opaque `offset` token. Response envelope is `{data, next, hasNext}`. Only pass back an offset Lever returned.
+- OAuth access tokens expire in 3600 seconds; request `offline_access` for a refresh token.
+- Errors: `{"code": "...", "message": "..."}` as `application/json`. Not RFC 9457.
+
+## Reversibility — read before writing
+
+- Archiving an Opportunity is reversible: `updateOpportunity` with the archive reason set to `null` un-archives it. No time window applies.
+- Deactivating a user is reversible via the reactivate endpoint.
+- **Everything else that removes data is final.** There is no restore for deleted interviews, panels, notes, files, requisitions or webhooks, and no grace period.
+- **`PUT /requisitions/{id}` and requisition-field updates delete by omission.** Lever's docs state the removed data "cannot be recovered from within Lever or via our API". Always GET, merge, then PUT.
+- The deleted-record endpoints (`/applications/deleted`, `/postings/deleted`, `/opportunities/deleted`) report WHAT was deleted within a 30-day query window. They do not restore anything.
+
+## Support and status
+
+- [Help Center](https://help.lever.co/)
+- [Status page](https://status.lever.co/)
+- [Security and compliance](https://www.lever.co/security): SOC 2, ISO 27001, PCI DSS, GDPR.
+- Vulnerability disclosure: security@employinc.com ([policy](https://github.com/lever/postings-api/blob/master/SECURITY.md)). No bug bounty.
+
+## Optional
+
+- [Integrator Resources](https://github.com/lever/integrator-resources): the official Postman collection and an example OAuth app. Note Lever's own warning — the collection's auth tab omits the `audience` parameter and therefore only works against sandbox.
+- [Postings API repo](https://github.com/lever/postings-api): documentation and a Node example for the public v0 Postings API.
+- [Lever GitHub organization](https://github.com/lever)
+- [Lever Blog](https://www.lever.co/blog)
+- [Pricing](https://www.lever.co/pricing): contact sales; no published price list. API access is included with the platform and is not metered per call.
