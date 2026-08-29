@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Lever Data Applications Webhooks API
+  title: Lever Data Webhooks API
   description: 'The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at
 
     `https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,

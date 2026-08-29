@@ -1,24 +1,8 @@
 {
   "provider": "lever-co",
   "sources": [
-    "lever-co-applications-api-openapi.yml",
-    "lever-co-archive-reasons-api-openapi.yml",
-    "lever-co-audit-events-api-openapi.yml",
-    "lever-co-eeo-responses-api-openapi.yml",
-    "lever-co-feedback-api-openapi.yml",
-    "lever-co-files-api-openapi.yml",
-    "lever-co-interviews-api-openapi.yml",
-    "lever-co-notes-api-openapi.yml",
-    "lever-co-offers-api-openapi.yml",
-    "lever-co-opportunities-api-openapi.yml",
-    "lever-co-panels-api-openapi.yml",
-    "lever-co-postings-api-openapi.yml",
-    "lever-co-requisitions-api-openapi.yml",
-    "lever-co-sources-api-openapi.yml",
-    "lever-co-stages-api-openapi.yml",
-    "lever-co-tags-api-openapi.yml",
-    "lever-co-users-api-openapi.yml",
-    "lever-co-webhooks-api-openapi.yml"
+    "_original/lever-data-api-openapi.yml",
+    "_original/lever-postings-api-openapi.yml"
   ],
   "outputs": [
     "lever-co-applications-api-openapi.yml",
@@ -43,6 +27,31 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "lever-data-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "lever-postings-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "tag 'Applications' spans 2 source specs (lever-data-api-openapi.yml, lever-postings-api-openapi.yml): per-path servers applied",
+    "tag 'Postings' spans 2 source specs (lever-data-api-openapi.yml, lever-postings-api-openapi.yml): per-path servers applied"
+  ],
+  "skipped": [
+    "lever-co-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-archive-reasons-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-audit-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-eeo-responses-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-feedback-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-files-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-interviews-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-notes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-offers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-opportunities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-panels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-postings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-requisitions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-sources-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-stages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-tags-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "lever-co-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

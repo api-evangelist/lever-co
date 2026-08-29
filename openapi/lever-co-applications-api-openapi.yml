@@ -1,32 +1,15 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Lever Data Applications API
-  description: 'The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at
-
-    `https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,
-
-    Applications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,
-
-    EEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or
-
-    OAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state
-
-    per key with a burst of 20 req/s.
-
-    '
-  version: 1.0.0
-  contact:
-    name: Lever
-    url: https://hire.lever.co/developer
-  license:
-    name: Lever Terms of Service
-    url: https://www.lever.co/legal/terms-of-service
+  title: Lever Co Applications API
+  version: '1.0'
+  description: 'Operations tagged Applications across 2 of this provider''s published API definitions: lever-data-api-openapi.yml, lever-postings-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.lever.co/v1
   description: Lever Data API production
-security:
-- BasicAuth: []
-- OAuth2: []
+- url: https://api.lever.co/v0/postings
+  description: Lever Postings API (global)
+- url: https://api.eu.lever.co/v0/postings
+  description: Lever Postings API (EU region)
 tags:
 - name: Applications
   description: A candidate's application to a specific posting on an opportunity.
@@ -42,6 +25,12 @@ paths:
       responses:
         '200':
           description: Applications for the opportunity.
+      security:
+      - BasicAuth: []
+      - OAuth2: []
+    servers:
+    - url: https://api.lever.co/v1
+      description: Lever Data API production
   /{site}/{postingId}:
     parameters:
     - name: site
@@ -152,6 +141,11 @@ paths:
           description: Application submitted.
         '429':
           description: Rate-limited (max 2 POST per second per site).
+    servers:
+    - url: https://api.lever.co/v0/postings
+      description: Lever Postings API (global)
+    - url: https://api.eu.lever.co/v0/postings
+      description: Lever Postings API (EU region)
 components:
   parameters:
     OpportunityId:
@@ -194,3 +188,6 @@ components:
             eeo_responses:read:admin: Read EEO survey responses.
             eeo_responses_pii:read:admin: Read EEO survey responses with PII.
             confidential:access:admin: Access confidential records.
+x-refined-from:
+- lever-data-api-openapi.yml
+- lever-postings-api-openapi.yml
