@@ -49,9 +49,7 @@ paths:
       summary: Submit An Application
       description: 'Submit an application against a posting. Accepts either JSON or multipart/form-data.
 
-        Requires a posting-form API key passed via `?key=`.
-
-        '
+        Requires a posting-form API key passed via `?key=`.'
       operationId: submitApplication
       parameters:
       - name: key

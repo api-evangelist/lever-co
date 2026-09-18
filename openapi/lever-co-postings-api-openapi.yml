@@ -103,9 +103,7 @@ paths:
       summary: List Public Postings
       description: 'Returns a paginated list of published postings for the given Lever site. Supports JSON (default),
 
-        HTML, and iframe response modes via the `mode` query parameter.
-
-        '
+        HTML, and iframe response modes via the `mode` query parameter.'
       operationId: listPublicPostings
       parameters:
       - name: skip
@@ -198,12 +196,6 @@ paths:
       description: Lever Postings API (EU region)
 components:
   parameters:
-    Offset:
-      name: offset
-      in: query
-      description: Opaque cursor returned in the previous response's `next` field.
-      schema:
-        type: string
     Limit:
       name: limit
       in: query
@@ -213,6 +205,12 @@ components:
         minimum: 1
         maximum: 100
         default: 100
+    Offset:
+      name: offset
+      in: query
+      description: Opaque cursor returned in the previous response's `next` field.
+      schema:
+        type: string
   schemas:
     PostingCreate:
       type: object
@@ -226,6 +224,17 @@ components:
         categories:
           type: object
         owner:
+          type: string
+    PostingList:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Posting'
+        hasNext:
+          type: boolean
+        next:
           type: string
     Posting:
       type: object
@@ -287,17 +296,6 @@ components:
             interval:
               type: string
         owner:
-          type: string
-    PostingList:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Posting'
-        hasNext:
-          type: boolean
-        next:
           type: string
   securitySchemes:
     BasicAuth:

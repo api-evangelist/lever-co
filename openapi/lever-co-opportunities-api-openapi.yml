@@ -3,17 +3,7 @@ info:
   title: Lever Data Opportunities API
   description: 'The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at
 
-    `https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,
-
-    Applications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,
-
-    EEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or
-
-    OAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state
-
-    per key with a burst of 20 req/s.
-
-    '
+    `https://api.lever.co/v1`.'
   version: 1.0.0
   contact:
     name: Lever
@@ -130,76 +120,7 @@ paths:
         '200':
           description: Referrals.
 components:
-  parameters:
-    Offset:
-      name: offset
-      in: query
-      description: Opaque cursor returned in the previous response's `next` field.
-      schema:
-        type: string
-    Expand:
-      name: expand
-      in: query
-      description: Comma-separated list of nested fields to expand inline (e.g. `applications,owner,stage`).
-      schema:
-        type: string
-    Limit:
-      name: limit
-      in: query
-      description: Number of records to return (1-100, default 100).
-      schema:
-        type: integer
-        minimum: 1
-        maximum: 100
-        default: 100
-    OpportunityId:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
   schemas:
-    OpportunityCreate:
-      type: object
-      required:
-      - name
-      - emails
-      properties:
-        name:
-          type: string
-        emails:
-          type: array
-          items:
-            type: string
-        headline:
-          type: string
-        location:
-          type: string
-        postings:
-          type: array
-          items:
-            type: string
-        owner:
-          type: string
-        sources:
-          type: array
-          items:
-            type: string
-    OpportunityUpdate:
-      type: object
-      properties:
-        name:
-          type: string
-        headline:
-          type: string
-        location:
-          type: string
-        owner:
-          type: string
-        followers:
-          type: array
-          items:
-            type: string
     Opportunity:
       type: object
       properties:
@@ -257,6 +178,47 @@ components:
           type: array
           items:
             type: string
+    OpportunityCreate:
+      type: object
+      required:
+      - name
+      - emails
+      properties:
+        name:
+          type: string
+        emails:
+          type: array
+          items:
+            type: string
+        headline:
+          type: string
+        location:
+          type: string
+        postings:
+          type: array
+          items:
+            type: string
+        owner:
+          type: string
+        sources:
+          type: array
+          items:
+            type: string
+    OpportunityUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        headline:
+          type: string
+        location:
+          type: string
+        owner:
+          type: string
+        followers:
+          type: array
+          items:
+            type: string
     OpportunityList:
       type: object
       properties:
@@ -268,6 +230,34 @@ components:
           type: boolean
         next:
           type: string
+  parameters:
+    Limit:
+      name: limit
+      in: query
+      description: Number of records to return (1-100, default 100).
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 100
+        default: 100
+    OpportunityId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    Expand:
+      name: expand
+      in: query
+      description: Comma-separated list of nested fields to expand inline (e.g. `applications,owner,stage`).
+      schema:
+        type: string
+    Offset:
+      name: offset
+      in: query
+      description: Opaque cursor returned in the previous response's `next` field.
+      schema:
+        type: string
   securitySchemes:
     BasicAuth:
       type: http

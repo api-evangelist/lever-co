@@ -21,8 +21,8 @@ apis:
   - Postings
   - Job
   - XML
-  - Job Boards
-  - Feeds
+  - Job Board
+  - Feed
   tags_raw:
   - Postings
   - Jobs
@@ -528,7 +528,6 @@ tags:
   - Hiring
   - Talent Acquisition
   - Human Resources
-  - HR Tech
   - Postings
   - Webhook
   - Authentication

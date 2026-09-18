@@ -3,17 +3,7 @@ info:
   title: Lever Data Panels API
   description: 'The Lever Data API exposes the full Lever ATS / CRM recruiting workflow over a JSON REST surface at
 
-    `https://api.lever.co/v1`. It is the integration backbone for Opportunities (candidates), Postings,
-
-    Applications, Interviews, Feedback, Notes, Offers, Requisitions, Stages, Sources, Files, Tags, Users,
-
-    EEO Responses, Audit Events, and Webhooks. Authentication is HTTP Basic with a personal API key or
-
-    OAuth 2.0 Authorization Code Grant. Rate-limited via a token-bucket at 10 requests/second steady-state
-
-    per key with a burst of 20 req/s.
-
-    '
+    `https://api.lever.co/v1`.'
   version: 1.0.0
   contact:
     name: Lever
